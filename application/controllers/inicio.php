@@ -6,7 +6,8 @@ class inicio extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('inicio');
+		$this->load->model('iniciar');
+		$this->load->library(array('session'));
 	}
 
 	/**
@@ -26,8 +27,14 @@ class inicio extends CI_Controller {
 	 */ 
 	public function index()
 	{
-		$this->load->view('helpers/navbarUsuario');
+		$arreglo = $this->iniciar->iniciar('abc', '123');
+		$this->load->view('helpers/navbarUsuario', $arreglo);
 	}
 
-	
+	public function ingresar()
+	{
+		$correo = $this->input->post('correo');
+		$passwd = $this->input->post('passwd');
+		echo $passwd;
+	}
 }

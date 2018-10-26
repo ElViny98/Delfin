@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class inicio extends CI_Model
+class iniciar extends CI_Model
 {
     public function __construct()
     {
@@ -21,8 +21,8 @@ class inicio extends CI_Model
         $sql = 'SELECT * FROM Usuarios WHERE Correo = "'. $user . '" AND Password = "' . $pass . '";';
         $query = $this->db->query($sql);
         if($query->num_rows() > 0)
-            return $query->result_array();
-            
+            return $query->row();
+
         else
             return null;
     }
