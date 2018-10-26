@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class inicio extends CI_Model
+class iniciar extends CI_Model
 {
     public function __construct()
     {
@@ -22,7 +22,7 @@ class inicio extends CI_Model
         $query = $this->db->query($sql);
         if($query->num_rows() > 0)
             return $query->result_array();
-            
+
         else
             return null;
     }

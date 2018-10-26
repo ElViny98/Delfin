@@ -1,0 +1,18 @@
+#iniciarSesion{
+    display: none;
+    padding: 25px;
+    width: 100%;
+    text-align: center;
+}
+#inputEmail, #inputPassword, #btnIniciar{
+    width: 30%;
+}
+#btnBuscar{
+    border: 1px solid #0069D9;
+    color: #0069D9;
+}
+#btnBuscar:hover{
+    border: 1px solid #0069D9;
+    background-color: #0069D9;
+    color: white;
+}
