@@ -16,7 +16,7 @@ class inicio extends CI_Controller {
 		$this->load->view('inicio');
 		$this->load->view('helpers/footerInicio');
 	}
-	public function mostrarAcerdaDe()
+	public function AcercaDe()
 	{
 		$this->load->view('helpers/headerInicio');
 		$this->load->view('acerca');
