@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      function iniciarSesion(){
 		 $("#iniciarSesionModal").modal('show');
 	 }
-	 
+   
 	 $("#btnIniciar").on('click', function() {
 		 $("#formInicio").submit();
 	 });
