@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <ul class="navbar-nav mr-auto">
             <!--<li class="nav-item active">-->
             <li class="nav-item">
-                <a class="nav-link" onclick="iniciarSesion()" >Iniciar Sesión <span class="sr-only">(current)</span></a>
-            </li>
+                <a class="nav-link" onclick="iniciarSesion()" href="#" >Iniciar Sesión <span class="sr-only">(current)</span></a>
+
             <li class="nav-item">
                 <a class="nav-link" href="#">Acerca de </a>
             </li>
