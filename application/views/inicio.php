@@ -57,12 +57,27 @@
 
   </body>
   <script type="text/javascript">
-     function iniciarSesion(){
-		 $("#iniciarSesionModal").modal('show');
-	 }
+	function iniciarSesion(){
+		$("#iniciarSesionModal").modal('show');
+	}
 
-	 $("#btnIniciar").on('click', function() {
-		 $("#formInicio").submit();
-	 });
+	$("#btnIniciar").on('click', function() {
+		var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
+		console.log(pass.toString());
+		var data = 'email=' + $("#inputEmail").val() + '&password=' + pass.toString();
+		var init = new XMLHttpRequest();
+		init.onreadystatechange = function() {
+			if(init.readyState == 4 && init.status == 200) {
+				if(init.responseText == "0")
+					alert('Contraseña o correo incorrectos');
+				else
+					alert('Inicio de sesión correcto');
+			}
+		}
+		init.open('POST', '<?php echo base_url('index.php/inicio/ingresar'); ?>', true);
+		init.setRequestHeader('Content-type', 'applitcation/x-www-form-urlenconded');
+		init.send(data);
+		console.log(pass.toString());
+	});
   </script>
 </html>
