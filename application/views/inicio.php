@@ -11,14 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('assets/js/bootstrap-dialog.min.js');?>"></script>
 	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
-       <script type="text/javascript">
-       /*
-       function mostrarIniciarSesion(){
-            $('#iniciarSesion').css({'display':'block'});
-            $('#iniciarSesion').addClass("active");
-        }*/
 
-       </script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <ul class="navbar-nav mr-auto">
             <!--<li class="nav-item active">-->
             <li class="nav-item">
-                <a class="nav-link" onclick="iniciarSesion()" >Iniciar Sesión <span class="sr-only">(current)</span></a>
-            </li>
+                <a class="nav-link" onclick="iniciarSesion()" href="#" >Iniciar Sesión <span class="sr-only">(current)</span></a>
+
             <li class="nav-item">
                 <a class="nav-link" href="#">Acerca de </a>
             </li>
@@ -44,51 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </nav>
 
-    <div class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Iniciar Sesión</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Iniciar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<!--
-    <div id="iniciarSesion">
-        <div class="form">
-            <form class="form-signin">
-              <h1 class="h3 mb-3 font-weight-normal">Usuario</h1>
-              <label for="inputEmail" class="sr-only">Correo</label>
-              <center><input type="email" id="inputEmail" class="form-control" placeholder="Correo" required="" autofocus=""></center>
-
-              <label for="inputPassword" class="sr-only">Contraseña</label>
-              <center><input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""></center>
-
-              <div class="checkbox mb-3">
-                  <label>
-                      <input type="checkbox" value="remember-me"> Remember me
-                  </label>
-              </div>
-
-                <br>
-              <center><button id="btnIniciar" class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button></center>
-              <p class="mt-5 mb-3 text-muted">© 2018</p>
-            </form>
-        </div>
-    </div>
-    -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog" role="document">
     	<div class="modal-content">
 			<div class="modal-header">
@@ -98,19 +47,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</button>
 			</div>
 		<div class="modal-body">
-			<form class="form-signin">
+			<form class="form-signin" method="post" id="formInicio" action="<?php echo base_url('index.php/inicio/ingresar'); ?>">
 				<h1 class="h3 mb-3 font-weight-normal">Usuario</h1>
 				<label for="inputEmail" class="sr-only">Correo</label>
-				<input type="email" id="inputEmail" class="form-control" placeholder="Correo" required="" autofocus="">
-
+				<center><input type="email" id="inputEmail" name="email" class="form-control" placeholder="Correo" required="" autofocus=""></center>
+                <br>
 				<label for="inputPassword" class="sr-only">Contraseña</label>
-				<input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
+				<center><input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required=""></center>
 				<br>
 			</form>
 		</div>
 		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        	<button type="button" class="btn btn-primary">Iniciar sesión</button>
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        	<button type="button" class="btn btn-primary" id="btnIniciar">Iniciar sesión</button>
 		</div>
 	</div>
 </div>
@@ -119,7 +68,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </body>
   <script type="text/javascript">
      function iniciarSesion(){
-		 $("#exampleModal").modal('show');
-     }
+		 $("#iniciarSesionModal").modal('show');
+	 }
+	 
+	 $("#btnIniciar").on('click', function() {
+		 $("#formInicio").submit();
+	 });
   </script>
 </html>

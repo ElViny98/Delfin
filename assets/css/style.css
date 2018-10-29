@@ -1,11 +1,11 @@
-#iniciarSesion{
+#iniciarSesionModal{
     display: none;
     padding: 25px;
     width: 100%;
     text-align: center;
 }
 #inputEmail, #inputPassword, #btnIniciar{
-    width: 30%;
+    width: 70%;
 }
 #btnBuscar{
     border: 1px solid #0069D9;
