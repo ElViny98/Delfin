@@ -12,7 +12,15 @@ class inicio extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('helpers/headerInicio');
 		$this->load->view('inicio');
+		$this->load->view('helpers/footerInicio');
+	}
+	public function mostrarAcerdaDe()
+	{
+		$this->load->view('helpers/headerInicio');
+		$this->load->view('acerca');
+		$this->load->view('helpers/footerInicio');
 	}
 
 	public function ingresar()
