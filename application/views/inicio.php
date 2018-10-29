@@ -9,8 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-dialog.min.js');?>"></script>
-	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
-       <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
+	<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 
   </head>
   <body>
@@ -67,12 +68,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   </body>
   <script type="text/javascript">
-     function iniciarSesion(){
-		 $("#iniciarSesionModal").modal('show');
-	 }
+	function iniciarSesion(){
+		$("#iniciarSesionModal").modal('show');
+	}
 	 
-	 $("#btnIniciar").on('click', function() {
-		 $("#formInicio").submit();
-	 });
+	$("#btnIniciar").on('click', function() {
+		var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
+		console.log(pass.toString());
+		var data = 'email=' + $("#inputEmail").val() + '&password=' + pass.toString();
+		var init = new XMLHttpRequest();
+		init.onreadystatechange = function() {
+			if(init.readyState == 4 && init.status == 200) {
+				if(init.responseText == "0")
+					alert('Contraseña o correo incorrectos');
+				else
+					alert('Inicio de sesión correcto');
+			}
+		}
+		init.open('POST', '<?php echo base_url('index.php/inicio/ingresar'); ?>', true);
+		init.setRequestHeader('Content-type', 'applitcation/x-www-form-urlenconded');
+		init.send(data);
+		console.log(pass.toString());
+	});
   </script>
 </html>

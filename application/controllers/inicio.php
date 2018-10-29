@@ -18,6 +18,12 @@ class inicio extends CI_Controller {
 	public function ingresar()
 	{
 		$data = $this->iniciar->iniciar($this->input->post('email'), $this->input->post('password'));
+		//Respuesta del servidor en caso de contraseña o correo incorrectos.
+		if($data == null)
+		{
+			echo '0';
+			return;
+		}
 		switch($data->Privilegio)
 		{
 			//Inicio de administrador/lider
