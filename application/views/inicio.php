@@ -1,7 +1,7 @@
 
   </head>
   <body>
-  
+
     <div class="Imagen" >
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
     </div>
@@ -27,7 +27,7 @@
     			</form>
     		</div>
     		<div class="modal-footer">
-            	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
             	<button type="button" class="btn btn-primary" id="btnIniciar">Iniciar sesión</button>
     		</div>
 	   </div>

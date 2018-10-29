@@ -13,9 +13,4 @@
     </footer>
     <!-- Footer -->
 </body>
-<script type="text/javascript">
-   function iniciarSesion(){
-       $("#iniciarSesionModal").modal('show');
-   }
-</script>
 </html>
