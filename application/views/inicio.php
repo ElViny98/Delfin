@@ -36,6 +36,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </form>
       </div>
     </nav>
+    <div class="Imagen" > 
+    <img src="<?php echo base_url('assets/img/logolargo.png');?>">    
+    </div>
 
 <div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog" role="document">
