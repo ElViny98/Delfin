@@ -35,6 +35,7 @@
 </div>
 
 <script type="text/javascript">
+var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
 function iniciarSesion(){
 	$("#iniciarSesionModal").modal('show');
 }
@@ -42,19 +43,16 @@ function iniciarSesion(){
 $("#btnIniciar").on('click', function() {
 	var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
 	console.log(pass.toString());
-	var data = 'email=' + $("#inputEmail").val() + '&password=' + pass.toString();
-	var init = new XMLHttpRequest();
-	init.onreadystatechange = function() {
-		if(init.readyState == 4 && init.status == 200) {
-			if(init.responseText == "0")
-				alert('Contraseña o correo incorrectos');
-			else
-				alert('Inicio de sesión correcto');
-		}
+	var data = {
+		email: $("#inputEmail").val(),
+		password: pass.toString()
 	}
-	init.open('POST', '<?php echo base_url('index.php/inicio/ingresar'); ?>', true);
-	init.setRequestHeader('Content-type', 'applitcation/x-www-form-urlenconded');
-	init.send(data);
-	console.log(pass.toString());
+	$.post(url, data, function(data) {
+		if(data == "0")
+			alert('Datos incorrectos');
+
+		else
+			alert('Inicio correcto');
+	});
 });
 </script>
