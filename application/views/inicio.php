@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,13 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </form>
       </div>
     </nav>
-    <div class="Imagen" > 
-    <img src="<?php echo base_url('assets/img/logolargo.png');?>">    
-    </div>
 
 <div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
+    	<div class="modal-content">4
 			<div class="modal-header">
 				<h6 class="modal-title" id="exampleModalLabel">Iniciar sesión</h6>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -73,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      function iniciarSesion(){
 		 $("#iniciarSesionModal").modal('show');
 	 }
-   
+
 	 $("#btnIniciar").on('click', function() {
 		 $("#formInicio").submit();
 	 });
