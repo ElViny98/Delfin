@@ -17,9 +17,5 @@
    function iniciarSesion(){
        $("#iniciarSesionModal").modal('show');
    }
-
-   $("#btnIniciar").on('click', function() {
-       $("#formInicio").submit();
-   });
 </script>
 </html>

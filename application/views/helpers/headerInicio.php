@@ -9,8 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-dialog.min.js');?>"></script>
-	   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
-       <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
+    <script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 
   </head>
   <body>
