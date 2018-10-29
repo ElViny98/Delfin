@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</button>
 			</div>
 		<div class="modal-body">
-			<form class="form-signin">
+			<form class="form-signin" method="post" id="formInicio" action="<?php echo base_url('index.php/inicio/ingresar'); ?>">
 				<h1 class="h3 mb-3 font-weight-normal">Usuario</h1>
 				<label for="inputEmail" class="sr-only">Correo</label>
 				<center><input type="email" id="inputEmail" name="email" class="form-control" placeholder="Correo" required="" autofocus=""></center>
@@ -58,8 +58,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</form>
 		</div>
 		<div class="modal-footer">
-        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        	<button type="button" class="btn btn-primary">Iniciar sesión</button>
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        	<button type="button" class="btn btn-primary" id="btnIniciar">Iniciar sesión</button>
 		</div>
 	</div>
 </div>
@@ -69,6 +69,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script type="text/javascript">
      function iniciarSesion(){
 		 $("#iniciarSesionModal").modal('show');
-     }
+	 }
+	 
+	 $("#btnIniciar").on('click', function() {
+		 $("#formInicio").submit();
+	 });
   </script>
 </html>
