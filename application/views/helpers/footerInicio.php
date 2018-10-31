@@ -44,13 +44,4 @@
     </footer>
     <!-- Footer -->
 </body>
-<script type="text/javascript">
-   function iniciarSesion(){
-       $("#iniciarSesionModal").modal('show');
-   }
-
-   $("#btnIniciar").on('click', function() {
-       $("#formInicio").submit();
-   });
-</script>
 </html>

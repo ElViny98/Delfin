@@ -1,14 +1,14 @@
 
   </head>
   <body>
-  
+
     <div class="Imagen" >
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
     </div>
 
 <div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog" role="document">
-    	<div class="modal-content">4
+    	<div class="modal-content">
 			<div class="modal-header">
 				<h6 class="modal-title" id="exampleModalLabel">Iniciar sesión</h6>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -27,36 +27,32 @@
     			</form>
     		</div>
     		<div class="modal-footer">
-            	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
             	<button type="button" class="btn btn-primary" id="btnIniciar">Iniciar sesión</button>
     		</div>
 	   </div>
     </div>
 </div>
 
-  </body>
-  <script type="text/javascript">
-	function iniciarSesion(){
-		$("#iniciarSesionModal").modal('show');
-	}
+<script type="text/javascript">
+var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
+function iniciarSesion(){
+	$("#iniciarSesionModal").modal('show');
+}
 
-	$("#btnIniciar").on('click', function() {
-		var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
-		console.log(pass.toString());
-		var data = 'email=' + $("#inputEmail").val() + '&password=' + pass.toString();
-		var init = new XMLHttpRequest();
-		init.onreadystatechange = function() {
-			if(init.readyState == 4 && init.status == 200) {
-				if(init.responseText == "0")
-					alert('Contraseña o correo incorrectos');
-				else
-					alert('Inicio de sesión correcto');
-			}
-		}
-		init.open('POST', '<?php echo base_url('index.php/inicio/ingresar'); ?>', true);
-		init.setRequestHeader('Content-type', 'applitcation/x-www-form-urlenconded');
-		init.send(data);
-		console.log(pass.toString());
+$("#btnIniciar").on('click', function() {
+	var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
+	console.log(pass.toString());
+	var data = {
+		email: $("#inputEmail").val(),
+		password: pass.toString()
+	}
+	$.post(url, data, function(data) {
+		if(data == "0")
+			alert('Datos incorrectos');
+
+		else
+			alert('Inicio correcto');
 	});
-  </script>
-</html>
+});
+</script>

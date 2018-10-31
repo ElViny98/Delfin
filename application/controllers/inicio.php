@@ -16,7 +16,7 @@ class inicio extends CI_Controller {
 		$this->load->view('inicio');
 		$this->load->view('helpers/footerInicio');
 	}
-	public function mostrarAcerdaDe()
+	public function AcercaDe()
 	{
 		$this->load->view('helpers/headerInicio');
 		$this->load->view('acerca');
@@ -25,7 +25,7 @@ class inicio extends CI_Controller {
 
 	public function ingresar()
 	{
-		$data = $this->iniciar->iniciar($this->input->post('email'), $this->input->post('password'));
+		$data = $this->iniciar->iniciar($_POST['email'], $_POST['password']);
 		//Respuesta del servidor en caso de contraseña o correo incorrectos.
 		if($data == null)
 		{
