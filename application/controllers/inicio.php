@@ -32,6 +32,7 @@ class inicio extends CI_Controller {
 			echo '0';
 			return;
 		}
+
 		switch($data->Privilegio)
 		{
 			//Inicio de administrador/lider
@@ -45,6 +46,7 @@ class inicio extends CI_Controller {
 					'nivel'		=> $data->Privilegio
 				);
 				$this->session->set_userdata($userData);
+				echo $data->Privilegio;
 				break;
 
 			//Inicio de usuario
@@ -58,6 +60,7 @@ class inicio extends CI_Controller {
 					'nivel'		=> $data->Privilegio
 				);
 				$this->session->set_userdata($userData);
+				echo $data->Privilegio;
 				break;
 		}
 	}
