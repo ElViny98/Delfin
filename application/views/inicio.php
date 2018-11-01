@@ -48,11 +48,24 @@ $("#btnIniciar").on('click', function() {
 		password: pass.toString()
 	}
 	$.post(url, data, function(data) {
-		if(data == "0")
-			alert('Datos incorrectos');
+		switch(data)
+		{
+			case "0":
+				alert('Datos incorrectos');
+				break;
+			
+			case "1":
+				location.href = '<?php echo base_url('index.php/admin'); ?>';
+				break;
 
-		else
-			alert('Inicio correcto');
+			case "2": 
+				location.href = '<?php echo base_url('index.php/user'); ?>';
+				break;
+
+			default:
+				alert('Error de conexión');
+				break;
+		}
 	});
 });
 </script>

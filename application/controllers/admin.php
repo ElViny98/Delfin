@@ -1,7 +1,7 @@
-<?php
+<?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class user extends CI_Controller
+class admin extends CI_Controller
 {
     public function __construct()
     {
@@ -11,14 +11,16 @@ class user extends CI_Controller
 
     public function index()
     {
-        if($this->session->userdata('nivel') == 2)
+        if($this->session->userdata('nivel') == 1)
         {
-            echo "Usuario";
+            echo "Administrador";
             $this->load->view('helpers/headerInicio');
         }
-        else 
+        else
         {
             redirect(base_url());
         }
     }
 }
+
+?>
