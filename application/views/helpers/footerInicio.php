@@ -14,8 +14,8 @@
                             <label class="control-label col-lg text-left" for="cnombre">Nombre Completo:</label>
                             <input type="cnombre" class="form-control" id="cnombre" placeholder="Nombre y Apellidos">
 
-                            <label class="control-label col-lg text-left" for="cnombre">Asunto:</label>
-                            <input type="cnombre" class="form-control" id="cnombre" placeholder="Asunto">
+                            <label class="control-label col-lg text-left" for="casunto">Asunto:</label>
+                            <input type="cnombre" class="form-control" id="casunto" placeholder="Asunto">
                           </div>
                       </div>
                   </div>
@@ -41,4 +41,38 @@
     </footer>
     <!-- Footer -->
   </body>
+  <script type="text/javascript">
+		var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
+		function iniciarSesion(){
+			$("#iniciarSesionModal").modal('show');
+		}
+
+		$("#btnIniciar").on('click', function() {
+			var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
+			console.log(pass.toString());
+			var data = {
+				email: $("#inputEmail").val(),
+				password: pass.toString()
+			}
+			$.post(url, data, function(data) {
+				switch(data) {
+					case "0":
+						alert('Usuario y/o contraseña incorrectos.');
+						break;
+
+					case "1":
+						location.href = '<?php echo base_url('index.php/admin'); ?>';
+						break;
+
+					case "2":
+						location.href = '<?php echo base_url('index.php/user'); ?>';
+						break;
+
+					default:
+						alert('Error de conexión');
+						break;
+				}
+			});
+		});
+	</script>
 </html>
