@@ -19,53 +19,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
+		<a class="navbar-brand" href="#">
+		    <img src="<?php echo base_url('assets/img/LogoDel.png');?>" width="40" height="40" class="d-inline-block align-top" alt="">
+		</a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-			<!--<li class="nav-item active">-->
-				<li class="nav-item">
-					<a class="nav-link" href="#">Usuarios</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Otra opcion</a>
-				</li>
-				<div id="salir">
-						<li class="nav-item">
-							<a class="nav-link" onclick="" href="#">Salir</a>
-						</li>
-				</div>
-			</ul>
-
-		</div>
-	</nav>
-	<div class="Imagen" >
-		<img src="<?php echo base_url('assets/img/logolargo.png');?>">
-	</div>
-
-	<div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h6 class="modal-title" id="exampleModalLabel">Iniciar sesión</h6>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form class="form-signin" method="post" id="formInicio" action="<?php echo base_url('index.php/inicio/ingresar'); ?>">
-						<h1 class="h3 mb-3 font-weight-normal">Usuario</h1>
-						<label for="inputEmail" class="sr-only">Correo</label>
-						<center><input type="email" id="inputEmail" name="email" class="form-control" placeholder="Correo" required="" autofocus=""></center>
-						<br>
-						<label for="inputPassword" class="sr-only">Contraseña</label>
-						<center><input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required=""></center>
-						<br>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
-					<button type="button" class="btn btn-primary" id="btnIniciar">Iniciar sesión</button>
-				</div>
+			<div id="opcionesMenu">
+				<ul class="navbar-nav mr-auto" >
+				<!--<li class="nav-item active">-->
+					<li class="nav-item">
+						<a class="nav-link" href="#">Usuarios</a>
+					</li>
+				</ul>
+			</div>
+			<div id="salir">
+				<ul class="navbar-nav mr-auto" >
+					<li class="nav-item">
+						<a class="nav-link"  href="#">Salir</a>
+					</li>
+				</ul>
 			</div>
 		</div>
+	</nav>
+	<div style="height:400px;">
+		<p>prueba</p>
 	</div>

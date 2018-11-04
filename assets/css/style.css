@@ -16,10 +16,13 @@
     background-color: #0069D9;
     color: white;
 }
-#salir{
-    text-align: right;
-    width: 100%
+#opcionesMenu{
+    width: 100%;
 }
+#salir{
+    width: 5%;
+}
+
 .Imagen {
     padding: 20px;
 }
