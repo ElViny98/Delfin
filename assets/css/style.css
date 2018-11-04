@@ -11,10 +11,14 @@
     border: 1px solid #0069D9;
     color: #0069D9;
 }
-#btnBuscar:hover{
+#btnBuscar:hover, #btnEnviar:hover{
     border: 1px solid #0069D9;
     background-color: #0069D9;
     color: white;
+}
+#salir{
+    text-align: right;
+    width: 100%
 }
 .Imagen {
     padding: 20px;

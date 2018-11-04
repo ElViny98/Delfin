@@ -24,20 +24,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<ul class="navbar-nav mr-auto">
 			<!--<li class="nav-item active">-->
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo base_url('index.php/inicio/index');?>">Inicio</a>
+					<a class="nav-link" href="#">Usuarios</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo base_url('index.php/inicio/AcercaDe');?>">Acerca de </a>
+					<a class="nav-link" href="#">Otra opcion</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" onclick="iniciarSesion()" href="#">Iniciar Sesión</a>
-				</li>
+				<div id="salir">
+						<li class="nav-item">
+							<a class="nav-link" onclick="" href="#">Salir</a>
+						</li>
+				</div>
 			</ul>
-			
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="buscar" placeholder="Buscar" aria-label="Buscar">
-				<button id="btnBuscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
+
 		</div>
 	</nav>
 	<div class="Imagen" >

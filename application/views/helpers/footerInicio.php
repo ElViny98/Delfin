@@ -8,8 +8,8 @@
                   <div class="col-lg-6 col-md-6 col-sm-6" >
                       <div class="row">
                           <div class="col-lg-12">
-                            <label class="control-label col-lg text-left" for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                            <label class="control-label col-lg text-left" for="email">Correo:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Correo">
 
                             <label class="control-label col-lg text-left" for="cnombre">Nombre Completo:</label>
                             <input type="cnombre" class="form-control" id="cnombre" placeholder="Nombre y Apellidos">
@@ -23,7 +23,7 @@
                       <div class="row">
                           <div class="col-lg-12">
                             <label class="control-label col-lg text-left" for="mensaje">Mensaje:</label>
-                            <textarea class="form-control" rows="7" id="cmensaje"></textarea>
+                            <textarea class="form-control" rows="7" id="cmensaje" placeholder="Mensaje"></textarea>
                           </div>
                       </div>
                   </div>

@@ -23,6 +23,17 @@ class inicio extends CI_Controller {
 		$this->load->view('helpers/footerInicio');
 	}
 
+	public function iniciarUsuario(){
+		$this->load->view('helpers/headerUsuario');
+		//$this->load->view('acerca');
+		$this->load->view('helpers/footer');
+	}
+	public function iniciarAdmin(){
+		$this->load->view('helpers/headerAdmin');
+		//$this->load->view('acerca');
+		$this->load->view('helpers/footer');
+	}
+
 	public function ingresar()
 	{
 		$data = $this->iniciar->iniciar($_POST['email'], $_POST['password']);
