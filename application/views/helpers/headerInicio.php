@@ -79,6 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     	   </div>
         </div>
     </div>
+    
 
     <script type="text/javascript">
     var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
