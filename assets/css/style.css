@@ -11,11 +11,18 @@
     border: 1px solid #0069D9;
     color: #0069D9;
 }
-#btnBuscar:hover{
+#btnBuscar:hover, #btnEnviar:hover{
     border: 1px solid #0069D9;
     background-color: #0069D9;
     color: white;
 }
+#opcionesMenu{
+    width: 100%;
+}
+#salir{
+    width: 5%;
+}
+
 .Imagen {
     padding: 20px;
 }
