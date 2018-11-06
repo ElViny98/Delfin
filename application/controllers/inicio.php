@@ -36,6 +36,24 @@ class inicio extends CI_Controller {
 		//$this->load->view('acerca');
 		$this->load->view('helpers/footer');
 	}
+	public function contacto(){
+		$datos = array(
+			'correo' => $this->input->post('txtEmail'),
+			'nombre' => $this->input->post('txtNombre'),
+			'asunto' => $this->input->post('txtAsunto'),
+			'mensaje' => $this->input->post('txtMensaje')
+		);
+		$this->load->library('email');
+		$this->email->from('viny.mtz@gmail.com', $datos['nombre']);
+		$this->email->to('angelesleva.r@gmail.com');
+		$this->email->subject($datos['asunto']);
+		$this->email->message($datos['mensaje']);
+		if ($this->email->send()) {
+			$this->index();
+		}else {
+			$this->AcercaDe();
+		}
+	}
 
 	public function ingresar()
 	{

@@ -40,8 +40,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</form>
 		</div>
 	</nav>
-  </head>
-  <body>
 
     <div class="Imagen" >
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">

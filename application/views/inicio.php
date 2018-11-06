@@ -2,9 +2,8 @@
   <div class="container">
 
     <!-- Page Heading -->
-    <h1 class="my-4" style="text-align:center; background-color:#343A40; color: white;">
-      <small>Noticias</small>
-    </h1>
+    <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white; ">Noticias
+    </h2>
 
     <?php 
         $x = 0;
