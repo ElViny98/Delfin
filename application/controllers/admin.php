@@ -13,8 +13,7 @@ class admin extends CI_Controller
     {
         if($this->session->userdata('nivel') == 1)
         {
-            echo "Administrador";
-            $this->load->view('helpers/headerInicio');
+            $this->load->view('helpers/headerAdmin');
         }
         else
         {

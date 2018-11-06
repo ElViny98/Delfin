@@ -13,7 +13,10 @@ class inicio extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('helpers/headerInicio');
-		$this->load->view('inicio');
+
+		$data['noticias'] = $this->iniciar->noticias();
+		
+		$this->load->view('inicio', $data);
 		$this->load->view('helpers/footerInicio');
 	}
 	public function AcercaDe()

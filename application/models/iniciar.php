@@ -26,5 +26,16 @@ class iniciar extends CI_Model
         else
             return null;
     }
+
+    public function noticias()
+    {
+        $sql = 'SELECT * FROM noticias';
+        $query = $this->db->query($sql);
+        if($query->num_rows() > 0)
+            return $query;
+
+        else
+            return null;
+    }
 }
 ?>
