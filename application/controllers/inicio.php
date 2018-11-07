@@ -7,7 +7,7 @@ class inicio extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('iniciar');
-		$this->load->library(array('session'));
+		$this->load->library(array('session', 'email'));
 	}
 
 	public function index()
@@ -37,22 +37,29 @@ class inicio extends CI_Controller {
 		$this->load->view('helpers/footer');
 	}
 	public function contacto(){
+		$this->email->initialize(array(
+			'protocol' 		=> 'sendmail',
+			'wordwrap'		=> TRUE,
+			'mailpath'		=> 'c:/xampp/sendmail/sendmail.exe',
+			'smtp_crypto'	=> 'ssl'
+		));
 		$datos = array(
 			'correo' => $this->input->post('txtEmail'),
 			'nombre' => $this->input->post('txtNombre'),
 			'asunto' => $this->input->post('txtAsunto'),
 			'mensaje' => $this->input->post('txtMensaje')
 		);
-		$this->load->library('email');
-		$this->email->from('viny.mtz@gmail.com', $datos['nombre']);
-		$this->email->to('angelesleva.r@gmail.com');
+		$this->email->from('valerialopez40@gmail.com', $datos['nombre']);
+		$this->email->to('2016030004@upsin.edu.mx');
 		$this->email->subject($datos['asunto']);
 		$this->email->message($datos['mensaje']);
+		echo $this->email->send();
 		if ($this->email->send()) {
 			$this->index();
 		}else {
 			$this->AcercaDe();
 		}
+		$this->email->print_debugger(array('headers', 'subject', 'body'));
 	}
 
 	public function ingresar()
