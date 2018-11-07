@@ -7,7 +7,7 @@ class inicio extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('iniciar');
-		$this->load->library(array('session','email'));
+		$this->load->library(array('session', 'email'));
 	}
 
 	public function index()
@@ -37,85 +37,28 @@ class inicio extends CI_Controller {
 		$this->load->view('helpers/footer');
 	}
 	public function contacto(){
+		$this->email->initialize(array(
+			'protocol' 		=> 'sendmail',
+			'wordwrap'		=> TRUE,
+			'mailpath'		=> 'c:/xampp/sendmail/sendmail.exe',
+			'smtp_crypto'	=> 'ssl'
+		));
 		$datos = array(
 			'correo' => $this->input->post('txtEmail'),
 			'nombre' => $this->input->post('txtNombre'),
 			'asunto' => $this->input->post('txtAsunto'),
 			'mensaje' => $this->input->post('txtMensaje')
 		);
-		/*
-		$this->load->library('email');
-		$this->email->from('viny.mtz@gmail.com', $datos['nombre']);
-		$this->email->to('angelesleva.r@gmail.com');
+		$this->email->from('valerialopez40@gmail.com', $datos['nombre']);
+		$this->email->to('2016030004@upsin.edu.mx');
 		$this->email->subject($datos['asunto']);
 		$this->email->message($datos['mensaje']);
 		if ($this->email->send()) {
-			$this->index();
+			 $this->session->set_flashdata("email","Mensaje Enviado");
 		}else {
-			$this->AcercaDe();
+			 $this->session->set_flashdata("email","Error: Mensaje NO Enviado");
 		}
-		*/
-		//Indicamos el protocolo a utilizar
-        $config['protocol'] = 'smtp';
-
-       //El servidor de correo que utilizaremos
-        $config["smtp_host"] = 'smtp.gmail.com';
-
-       //Nuestro usuario
-        $config["smtp_user"] = 'angelesleva.r@gmail.com';
-
-       //Nuestra contraseña
-        $config["smtp_pass"] = 'therose15*';
-
-       //El puerto que utilizará el servidor smtp
-        $config["smtp_port"] = '587';
-
-       //El juego de caracteres a utilizar
-        $config['charset'] = 'utf-8';
-
-       //Permitimos que se puedan cortar palabras
-        $config['wordwrap'] = TRUE;
-
-       //El email debe ser valido
-       $config['validate'] = true;
-	   $config['mailtype'] = html;
-
-
-      //Establecemos esta configuración
-        $this->email->initialize($config);
-
-      //Ponemos la dirección de correo que enviará el email y un nombre
-        $this->email->from('angelesleva.r@gmail.com', $datos['nombre']);
-
-      /*
-       * Ponemos el o los destinatarios para los que va el email
-       * en este caso al ser un formulario de contacto te lo enviarás a ti
-       * mismo
-       */
-        $this->email->to('angelesleva.r@gmail.com', 'Admin');
-
-      //Definimos el asunto del mensaje
-        $this->email->subject($datos['asunto']);
-
-      //Definimos el mensaje a enviar
-        $this->email->message(
-                "Email: ".$datos['correo'],
-				"Nombre: " .$datos['nombre'],
-                " Mensaje: ".$datos['mensaje']
-                );
-
-        //Enviamos el email y si se produce bien o mal que avise con una flasdata
-        if($this->email->send()){
-            $this->session->set_flashdata('envio', 'Email enviado correctamente');
-			redirect(base_url("index.php/inicio/index"));
-        }else{
-            $this->session->set_flashdata('envio', 'No se a enviado el email');
-			redirect(base_url("index.php/inicio/AcercaDe"));
-        }
-
-
-
-
+		redirect(base_url(''));
 	}
 
 	public function ingresar()
