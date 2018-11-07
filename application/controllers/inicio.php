@@ -15,7 +15,7 @@ class inicio extends CI_Controller {
 		$this->load->view('helpers/headerInicio');
 
 		$data['noticias'] = $this->iniciar->noticias();
-		
+
 		$this->load->view('inicio', $data);
 		$this->load->view('helpers/footerInicio');
 	}
@@ -54,9 +54,9 @@ class inicio extends CI_Controller {
 		$this->email->subject($datos['asunto']);
 		$this->email->message($datos['mensaje']);
 		if ($this->email->send()) {
-			$this->index();
+			 $this->session->set_flashdata("email","Mensaje Enviado");
 		}else {
-			$this->AcercaDe();
+			 $this->session->set_flashdata("email","Error: Mensaje NO Enviado");
 		}
 	}
 

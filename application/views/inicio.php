@@ -5,12 +5,12 @@
     <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white; ">Noticias
     </h2>
 
-    <?php 
+    <?php
         $x = 0;
         $container = '<div class="news-container">';
         echo $container;
         foreach($noticias->result() as $n)
-        {    
+        {
             if($x % 4 == 0 && $x != 0)
                 echo '<div class="news-container">';
         
