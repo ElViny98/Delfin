@@ -53,7 +53,6 @@ class inicio extends CI_Controller {
 		$this->email->to('2016030004@upsin.edu.mx');
 		$this->email->subject($datos['asunto']);
 		$this->email->message($datos['mensaje']);
-		echo $this->email->send();
 		if ($this->email->send()) {
 			$this->index();
 		}else {
