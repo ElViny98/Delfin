@@ -58,7 +58,6 @@ class inicio extends CI_Controller {
 		}else {
 			$this->AcercaDe();
 		}
-		$this->email->print_debugger(array('headers', 'subject', 'body'));
 	}
 
 	public function ingresar()

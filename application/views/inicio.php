@@ -7,12 +7,12 @@
 
     <?php 
         $x = 0;
-        $container = '<div id="news-container">';
+        $container = '<div class="news-container">';
         echo $container;
         foreach($noticias->result() as $n)
         {    
             if($x % 4 == 0 && $x != 0)
-                echo '<div id="news-container">';
+                echo '<div class="news-container">';
         
             echo '
                 <div class="row">
@@ -37,33 +37,35 @@
         }
         if($x % 4 != 1)
             echo '</div>
-            ';
-
+            ';	
     ?>
 
     <!-- Pagination -->
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">1</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
+	<ul class="pagination justify-content-center">
+		<li class="page-item">
+			<a class="page-link" href="#" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				<span class="sr-only">Previous</span>
+			</a>
+		</li>
+		<?php 
+			$p = 0.0;
+			$p = $x / 4;
+			for($i = 0; $i<$p; $i++)
+			{
+				echo '
+					<li class="page-item">
+						<a class="page-link" onclick="mostrar('.$i.')">'.($i + 1).'</a>
+					</li>
+				';
+			}
+		?>
+		<li class="page-item">
+			<a class="page-link" href="#" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				<span class="sr-only">Next</span>
+			</a>
+		</li>
+	</ul>
 
-  </div>
+	</div>
