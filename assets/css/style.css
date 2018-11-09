@@ -45,7 +45,7 @@
 .row{
   margin: 1%;
 }
-#btnEnviar{
+#btnEnviar, #btnGenerarNot{
   width: 150px;
   float: right;
 }

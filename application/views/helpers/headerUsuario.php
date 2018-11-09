@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
+
 	</head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -34,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-link" href="#">Investigaciones</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link"  href="#">Noticias</a>
+						<a class="nav-link"  href="<?php echo base_url('index.php/user/Noticias');?>">Noticias</a>
 					</li>
 				</ul>
 			</div>
@@ -47,4 +48,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</nav>
-	
