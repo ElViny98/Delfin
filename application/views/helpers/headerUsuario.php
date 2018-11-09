@@ -47,6 +47,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 	</nav>
-	<div style="height:400px;">
-		<p>prueba</p>
-	</div>
+	

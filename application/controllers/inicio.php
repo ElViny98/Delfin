@@ -8,6 +8,8 @@ class inicio extends CI_Controller {
 		parent::__construct();
 		$this->load->model('iniciar');
 		$this->load->library(array('session'));
+		$this->load->library('upload');
+		$this->load->helper(array('form', 'url'));
 	}
 
 	public function index()
@@ -25,7 +27,7 @@ class inicio extends CI_Controller {
 
 	public function iniciarUsuario(){
 		$this->load->view('helpers/headerUsuario');
-		//$this->load->view('acerca');
+		$this->load->view('perfilUsuario',array('error'=>''));
 		$this->load->view('helpers/footer');
 	}
 	public function iniciarAdmin(){
@@ -75,4 +77,26 @@ class inicio extends CI_Controller {
 				break;
 		}
 	}
+	//$this->load->view('perfilUsuario',array('error'=>''));
+	public function do_upload(){
+		$config['upload_path'] = 'assets/uploads'; //yo might want to comeback to this if theres an error about path upload
+		$config['allowed_types'] = 'jpg|jpeg|gif|png';
+		$config['max_size'] = '900';
+$config['max_width'] = '400';
+$config['max_height'] = '400';
+		$this->load->library('upload',$config);
+		$this->upload->initialize($config);
+		if( ! $this->upload->do_upload('userfile'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			$this->load->view('perfilUsuario',$error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			$this->iniciar->Fileupload($data);
+  		$this->load->view('perfilUsuario', $data);
+		}
+	}
 }
+?>

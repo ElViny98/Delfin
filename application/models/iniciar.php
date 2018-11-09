@@ -7,9 +7,8 @@ class iniciar extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+
     }
-
-
     /**
      * Función que se encarga de la lógica de inicio de sesión.
      * Los parámetros que recibe son el correo electrónico y la contraseña
@@ -26,5 +25,10 @@ class iniciar extends CI_Model
         else
             return null;
     }
-}
+
+
+  public function Fileupload($data) {
+    $this->db->insert('usuarios', $data);
+    }
+  }
 ?>
