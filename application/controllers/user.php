@@ -27,15 +27,6 @@ class user extends CI_Controller
         $this->load->view('helpers/footer');
     }
     public function datosNoticia(){
-        $fechaActual = date('Y-m-d');
-        $datos = array(
-            'id' => $this->session->userdata('idUsuario'),
-			'titulo' => $this->input->post('txtTitulo'),
-            'contenido' => $this->input->post('content'),
-            'imagen' => $this->input->post('pic'),
-            'fecha' => $fechaActual
-		);
-        echo $_POST['pic'];
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
@@ -45,6 +36,16 @@ class user extends CI_Controller
         $this->load->library('upload', $config);
         if($this->upload->do_upload('pic'))
         {
+            $data_upload_files = $this->upload->data();
+            $image_path = $this->upload->data();
+            $fechaActual = date('Y-m-d');
+            $datos = array(
+                'id' => $this->session->userdata('idUsuario'),
+    			'titulo' => $this->input->post('txtTitulo'),
+                'contenido' => $this->input->post('content'),
+                'imagen' => $image_path['full_path'],
+                'fecha' => $fechaActual
+    		);
             $this->user_model->altaNoticia($datos);
         }
         else
