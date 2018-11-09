@@ -14,4 +14,5 @@ function mostrar(index) {
     }
     
     containers[index].removeAttribute('style');
+    $('html, body').animate({scrollTop: $("#new-container").offset().top}, 200);
 }

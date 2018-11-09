@@ -2,7 +2,7 @@
   <div class="container">
 
     <!-- Page Heading -->
-    <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white; ">Noticias
+    <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white;" id="new-container">Noticias
     </h2>
 
     <?php
@@ -23,8 +23,8 @@
                     </div>
                     <div class="col-md-5">
                         <h3>'.$n->Titulo.'</h3>
-                        <p>'.$n->Descripcion.'</p>
-                        <a class="btn btn-primary" href="'.base_url('index.php/inicio/noticia?id='.$n->idNoticias).'">Ver noticia</a>
+                        <p>'.word_limiter($n->Descripcion, 50).'</p>
+                        <a class="btn btn-primary" href="'.base_url('index.php/inicio/noticia?id='.$n->idNoticias).'">Continuar leyendo</a>
                     </div>
                 </div>
                 <hr>

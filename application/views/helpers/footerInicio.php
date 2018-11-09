@@ -1,7 +1,7 @@
     <!-- Footer -->
     <footer class="page-footer font-small footer-dark">
       <br>
-      <h2>Contactanos</h2><!---->
+      <h2>Contáctanos</h2><!---->
       <form class="form-horizontal" action="<?php echo base_url('index.php/inicio/contacto');?>" method="post">
           <div class="form-group" >
               <div class="row">

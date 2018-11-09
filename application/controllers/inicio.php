@@ -7,6 +7,7 @@ class inicio extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('iniciar');
+		$this->load->helper('text');
 		$this->load->library(array('session', 'email'));
 	}
 
@@ -100,5 +101,21 @@ class inicio extends CI_Controller {
 				echo $data->Privilegio;
 				break;
 		}
+	}
+
+	public function noticia()
+	{
+		$noticia = $this->iniciar->getNoticia($this->input->get('id'));
+		$data = array(
+			'titulo'		=> $noticia->Titulo,
+			'descripcion'	=> $noticia->Descripcion,
+			'fecha'			=> $noticia->Fecha
+		);
+		$this->load->view('noticia', $data);
+	}
+
+	public function buscarNoticia()
+	{
+		$this->iniciar->buscarNoticia($this->input->post('buscar'));
 	}
 }
