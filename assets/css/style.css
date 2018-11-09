@@ -45,7 +45,18 @@
 .row{
   margin: 1%;
 }
-#btnEnviar{
+#btnEnviar, #btnGenerarNot{
   width: 150px;
   float: right;
+}
+#titulo{
+    padding: 2%;
+}
+hr{
+    background-color: orange;
+    height: 3px;
+}
+#btnGenerarNot:hover{
+    background-color: orange;
+    color: white;
 }
