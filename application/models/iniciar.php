@@ -27,8 +27,34 @@ class iniciar extends CI_Model
     }
 
 
-  public function Fileupload($data) {
-    $this->db->insert('usuarios', $data);
+  public function File_upload($data) {
+    $this->db->insert('usuarios',$data);
     }
-  }
+
+    public function noticias()
+    {
+        $sql = 'SELECT * FROM noticias ORDER BY Fecha DESC';
+        $query = $this->db->query($sql);
+        if($query->num_rows() > 0)
+            return $query;
+
+        else
+            return null;
+    }
+
+    public function getNoticia($id)
+    {
+        $sql = 'SELECT * FROM noticias WHERE idNoticias = '.$id.';';
+        $query = $this->db->query($sql);
+        return $query->row();
+    }
+
+    public function buscarNoticia($param)
+    {
+        $sql = 'SELECT DISTINCT Titulo, Descripcion FROM noticias WHERE Titulo LIKE "%'.$param.'%"
+        OR Descripcion LIKE "%'.$param.'";';
+        $query = $this->db->query($sql);
+        return $query;
+    }
+}
 ?>

@@ -35,36 +35,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="buscar" placeholder="Buscar" aria-label="Buscar">
+				<input class="form-control mr-sm-2" id="txtBuscar" type="buscar" placeholder="Buscar" aria-label="Buscar">
 				<button id="btnBuscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 	</nav>
-	<div class="Imagen" >
-		<img src="<?php echo base_url('assets/img/logolargo.png');?>">
-	</div>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item active">-->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('index.php/inicio/index');?>">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url('index.php/inicio/AcercaDe');?>">Acerca de </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" onclick="iniciarSesion()" href="#">Iniciar Sesión</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="buscar" placeholder="Buscar" aria-label="Buscar">
-          <button id="btnBuscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-      </div>
-    </nav>
-  </head>
-  <body>
 
     <div class="Imagen" >
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
@@ -89,6 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         				<center><input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required=""></center>
         				<br>
         			</form>
+					<a href="#">¿Olvidó su contraseña?</a>
         		</div>
         		<div class="modal-footer">
                 	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>
@@ -97,27 +73,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     	   </div>
         </div>
     </div>
-
-
-    <script type="text/javascript">
-    var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
-    function iniciarSesion(){
-    	$("#iniciarSesionModal").modal('show');
-    }
-
-    $("#btnIniciar").on('click', function() {
-    	var pass = CryptoJS.MD5(document.getElementById('inputPassword').value);
-    	console.log(pass.toString());
-    	var data = {
-    		email: $("#inputEmail").val(),
-    		password: pass.toString()
-    	}
-    	$.post(url, data, function(data) {
-    		if(data == "0")
-    			alert('Datos incorrectos');
-
-    		else
-    			alert('Inicio correcto');
-    	});
-    });
-    </script>

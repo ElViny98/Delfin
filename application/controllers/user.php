@@ -13,8 +13,7 @@ class user extends CI_Controller
     {
         if($this->session->userdata('nivel') == 2)
         {
-            echo "Usuario";
-            $this->load->view('helpers/headerInicio');
+            $this->load->view('helpers/headerUsuario');
         }
         else 
         {

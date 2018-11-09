@@ -10,12 +10,18 @@ class inicio extends CI_Controller {
 		$this->load->library(array('session'));
 		$this->load->library('upload');
 		$this->load->helper(array('form', 'url'));
+		$this->load->helper('text');
+		$this->load->library(array('session', 'email'));
+
 	}
 
 	public function index()
 	{
 		$this->load->view('helpers/headerInicio');
-		$this->load->view('inicio');
+
+		$data['noticias'] = $this->iniciar->noticias();
+
+		$this->load->view('inicio', $data);
 		$this->load->view('helpers/footerInicio');
 	}
 	public function AcercaDe()
@@ -34,6 +40,29 @@ class inicio extends CI_Controller {
 		$this->load->view('helpers/headerAdmin');
 		//$this->load->view('acerca');
 		$this->load->view('helpers/footer');
+	}
+	public function contacto(){
+		$this->email->initialize(array(
+			'protocol' 		=> 'sendmail',
+			'wordwrap'		=> TRUE,
+			'mailpath'		=> 'c:/xampp/sendmail/sendmail.exe',
+			'smtp_crypto'	=> 'ssl'
+		));
+		$datos = array(
+			'correo' => $this->input->post('txtEmail'),
+			'nombre' => $this->input->post('txtNombre'),
+			'asunto' => $this->input->post('txtAsunto'),
+			'mensaje' => $this->input->post('txtMensaje')
+		);
+		$this->email->from('valerialopez40@gmail.com', $datos['nombre']);
+		$this->email->to('2016030004@upsin.edu.mx');
+		$this->email->subject($datos['asunto']);
+		$this->email->message($datos['mensaje']);
+		if ($this->email->send()) {
+			 $this->session->set_flashdata("email","Mensaje Enviado");
+		}else {
+			 $this->session->set_flashdata("email","Error: Mensaje NO Enviado");
+		}
 	}
 
 	public function ingresar()
@@ -78,25 +107,23 @@ class inicio extends CI_Controller {
 		}
 	}
 	//$this->load->view('perfilUsuario',array('error'=>''));
-	public function do_upload(){
-		$config['upload_path'] = 'assets/uploads'; //yo might want to comeback to this if theres an error about path upload
-		$config['allowed_types'] = 'jpg|jpeg|gif|png';
-		$config['max_size'] = '900';
-$config['max_width'] = '400';
-$config['max_height'] = '400';
-		$this->load->library('upload',$config);
-		$this->upload->initialize($config);
-		if( ! $this->upload->do_upload('userfile'))
-		{
-			$error = array('error' => $this->upload->display_errors());
-			$this->load->view('perfilUsuario',$error);
-		}
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
-			$this->iniciar->Fileupload($data);
-  		$this->load->view('perfilUsuario', $data);
-		}
+
+
+	public function noticia()
+	{
+		$noticia = $this->iniciar->getNoticia($this->input->get('id'));
+		$data = array(
+			'titulo'		=> $noticia->Titulo,
+			'descripcion'	=> $noticia->Descripcion,
+			'fecha'			=> $noticia->Fecha
+		);
+		$this->load->view('noticia', $data);
+	}
+
+	public function buscarNoticia()
+	{
+		$this->iniciar->buscarNoticia($this->input->post('buscar'));
 	}
 }
+
 ?>
