@@ -108,7 +108,6 @@ class inicio extends CI_Controller {
 	}
 	//$this->load->view('perfilUsuario',array('error'=>''));
 
-
 	public function noticia()
 	{
 		$noticia = $this->iniciar->getNoticia($this->input->get('id'));

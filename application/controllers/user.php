@@ -26,6 +26,12 @@ class user extends CI_Controller
         $this->load->view('altaNoticia');
         $this->load->view('helpers/footer');
     }
+    public function Noticias_MisNoticias(){
+        $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('misNoticias',$datos);
+        $this->load->view('helpers/footer');
+    }
     public function datosNoticia(){
 
         $this->load->library('upload');
@@ -36,14 +42,16 @@ class user extends CI_Controller
         $this->load->library('upload', $config);
         if($this->upload->do_upload('pic'))
         {
-            $data_upload_files = $this->upload->data();
             $image_path = $this->upload->data();
             $fechaActual = date('Y-m-d');
             $datos = array(
                 'id' => $this->session->userdata('idUsuario'),
     			'titulo' => $this->input->post('txtTitulo'),
                 'contenido' => $this->input->post('content'),
-                'imagen' => $image_path['full_path'],
+                //guarda toda la ubicacion
+                //'imagen' => $image_path['full_path'],
+                //solo guardar el nombre
+                'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
             $this->user_model->altaNoticia($datos);
