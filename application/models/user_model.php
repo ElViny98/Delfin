@@ -13,6 +13,12 @@ class User_model extends CI_Model
       'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
       'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
+    public function misNoticias($id){
+        $this->db->select('Titulo')->from('noticias')->where('idUsuarios >=', $id);
+        $query = $this->db->get();
+        if($query->num_rows() > 0 ) return $query;
+        else return false;
+    }
 
 }
 ?>

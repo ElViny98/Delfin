@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a class="nav-link" href="#">Investigaciones</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link"  href="<?php echo base_url('index.php/user/Noticias');?>">Noticias</a>
+						<a class="nav-link"  href="<?php echo base_url('index.php/user/Noticias_MisNoticias');?>">Noticias</a>
 					</li>
 				</ul>
 			</div>

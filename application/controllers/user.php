@@ -27,8 +27,14 @@ class user extends CI_Controller
         $this->load->view('altaNoticia');
         $this->load->view('helpers/footer');
     }
-    public function datosNoticia()
-    {
+    public function Noticias_MisNoticias(){
+        $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('misNoticias',$datos);
+        $this->load->view('helpers/footer');
+    }
+    public function datosNoticia(){
+
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
         $config['allowed_types'] = 'jpg|png';
