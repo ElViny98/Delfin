@@ -19,6 +19,11 @@ class User_model extends CI_Model
     public function get_user_data($id){
       $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
       return $q->row();
+    public function misNoticias($id){
+        $this->db->select('Titulo')->from('noticias')->where('idUsuarios >=', $id);
+        $query = $this->db->get();
+        if($query->num_rows() > 0 ) return $query;
+        else return false;
     }
 
 }

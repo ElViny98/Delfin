@@ -49,7 +49,11 @@
   width: 150px;
   float: right;
 }
-
+#btnGenerarNot:hover{
+    border: 1px solid orange;
+    background-color: orange;
+    color: white;
+}
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
@@ -141,4 +145,8 @@
 .profile-tab p{
     font-weight: 600;
     color: #0062cc;
+}
+#file-preview-zone img{
+    max-width: 700px;
+    max-height: 300px;
 }

@@ -110,7 +110,6 @@ class inicio extends CI_Controller {
 	}
 	//$this->load->view('perfilUsuario',array('error'=>''));
 
-
 	public function noticia()
 	{
 		$noticia = $this->iniciar->getNoticia($this->input->get('id'));
@@ -125,6 +124,13 @@ class inicio extends CI_Controller {
 	public function buscarNoticia()
 	{
 		$this->iniciar->buscarNoticia($this->input->post('buscar'));
+	}
+
+	private function createHash()
+	{
+		for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != 24; $x = rand(0, $z), $s .= $a{$x}, $i++);
+
+		return $s;
 	}
 }
 

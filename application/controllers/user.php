@@ -21,9 +21,16 @@ class user extends CI_Controller
             redirect(base_url());
         }
     }
-    public function Noticias(){
+    public function Noticias()
+    {
         $this->load->view('helpers/headerUsuario');
         $this->load->view('altaNoticia');
+        $this->load->view('helpers/footer');
+    }
+    public function Noticias_MisNoticias(){
+        $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('misNoticias',$datos);
         $this->load->view('helpers/footer');
     }
     public function datosNoticia(){
@@ -31,19 +38,19 @@ class user extends CI_Controller
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
         $config['allowed_types'] = 'jpg|png';
-        $config['overwrite'] =TRUE;
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
         $this->load->library('upload', $config);
         if($this->upload->do_upload('pic'))
         {
-            $data_upload_files = $this->upload->data();
             $image_path = $this->upload->data();
             $fechaActual = date('Y-m-d');
             $datos = array(
                 'id' => $this->session->userdata('idUsuario'),
     			'titulo' => $this->input->post('txtTitulo'),
                 'contenido' => $this->input->post('content'),
-                'imagen' => $image_path['full_path'],
+                'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
             $this->user_model->altaNoticia($datos);
@@ -78,6 +85,15 @@ class user extends CI_Controller
 
     }
 
+
+    //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
+    private function createHash()
+	{
+        $len = 24;
+		for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
+
+		return $s;
+	}
 
 
 }
