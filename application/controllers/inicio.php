@@ -32,8 +32,10 @@ class inicio extends CI_Controller {
 	}
 
 	public function iniciarUsuario(){
+		$this->load->model('user_model');
+		$data = $this->user_model->get_user_data(2);
 		$this->load->view('helpers/headerUsuario');
-		$this->load->view('perfilUsuario',array('error'=>''));
+		$this->load->view('perfilUsuario',array('user_data' => $data));
 		$this->load->view('helpers/footer');
 	}
 	public function iniciarAdmin(){

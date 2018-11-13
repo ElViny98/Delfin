@@ -54,6 +54,30 @@ class user extends CI_Controller
         }
 
     }
+    public function upload_img(){
+
+        $this->load->library('upload');
+        $config['upload_path'] = 'assets/img/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['overwrite'] =TRUE;
+        $this->upload->initialize($config);
+        if($this->upload->do_upload('userfile'))
+        {
+            $data_upload_files = $this->upload->data();
+            $image_path = $this->upload->data();
+            $datos = array(
+                'imagen' => $config['upload_path'].$image_path['file_name'],
+              );
+            $this->user_model->uploadimg($datos);
+            redirect('/inicio/iniciarUsuario', 'refresh');
+        }
+        else
+        {
+            echo $this->upload->display_errors();
+        }
+
+    }
+
 
 
 }
