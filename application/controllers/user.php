@@ -54,7 +54,7 @@ class user extends CI_Controller
                 'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
-            $this->user_model->altaNoticia($datos);
+                $this->user_model->altaNoticia($datos);
         }
         else
         {
@@ -62,6 +62,54 @@ class user extends CI_Controller
         }
 
     }
+    public function eliminarNoticia(){
+        $id = $this->uri->segment(3);
+        $this->user_model->eliminar($id);
+    }
+    public function datosEditarNoticia(){
+        if ($this->input->post('pic')!="") {
+            $this->load->library('upload');
+            $config['upload_path'] = 'assets/img/';
+            $config['allowed_types'] = 'jpg|png';
+            $config['overwrite'] =TRUE;
+            $this->upload->initialize($config);
+            $this->load->library('upload', $config);
+            if($this->upload->do_upload('pic'))
+            {
+                $image_path = $this->upload->data();
+                $datos = array(
+                    'id' => $this->session->userdata('idUsuario'),
+                    'titulo' => $this->input->post('txtTitulo'),
+                    'contenido' => $this->input->post('content'),
+                    //guarda toda la ubicacion
+                    //'imagen' => $image_path['full_path'],
+                    //solo guardar el nombre
+                    'imagen' => $image_path['file_name']
+                );
 
+            }
+            else
+            {
+                echo $this->upload->display_errors();
+            }
+        }
+        else {
+            $fechaActual = date('Y-m-d');
+            $datos = array(
+                'id' => $this->session->userdata('idUsuario'),
+                'titulo' => $this->input->post('txtTitulo'),
+                'contenido' => $this->input->post('content'),
+            );
+        }
+
+
+    }
+    public function editarNoticia(){
+        $id = $this->uri->segment(3);
+        $datos['consulta'] = $this->user_model->obtenerNoticia($id);
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('editarNoticia',$datos);
+        $this->load->view('helpers/footer');
+    }
 
 }
