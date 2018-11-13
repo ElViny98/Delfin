@@ -32,8 +32,10 @@ class inicio extends CI_Controller {
 	}
 
 	public function iniciarUsuario(){
+		$this->load->model('user_model');
+		$data = $this->user_model->get_user_data(2);
 		$this->load->view('helpers/headerUsuario');
-		$this->load->view('perfilUsuario',array('error'=>''));
+		$this->load->view('perfilUsuario',array('user_data' => $data));
 		$this->load->view('helpers/footer');
 	}
 	public function iniciarAdmin(){
@@ -122,6 +124,13 @@ class inicio extends CI_Controller {
 	public function buscarNoticia()
 	{
 		$this->iniciar->buscarNoticia($this->input->post('buscar'));
+	}
+
+	private function createHash()
+	{
+		for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != 24; $x = rand(0, $z), $s .= $a{$x}, $i++);
+
+		return $s;
 	}
 }
 
