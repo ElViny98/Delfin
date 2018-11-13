@@ -45,13 +45,21 @@
 .row{
   margin: 1%;
 }
-#btnEnviar, #btnGenerarNot{
+#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot{
   width: 150px;
   float: right;
 }
-#btnGenerarNot:hover{
+#btnGenerarNot:hover, #btnNuevaNot:hover, #btnEditNot:hover{
     border: 1px solid orange;
     background-color: orange;
+    color: white;
+}
+#btnNuevaNot a:link, #btnNuevaNot a:visited{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+#btnNuevaNot a:hover{
     color: white;
 }
 .emp-profile{
@@ -146,7 +154,88 @@
     font-weight: 600;
     color: #0062cc;
 }
+#file-preview-zone{
+    border: 1px solid #CED4DA;
+    border-radius: 2px;
+    width: 700px;
+    height: 300px;
+}
 #file-preview-zone img{
     max-width: 700px;
     max-height: 300px;
+
+}
+#tablaNoticias{
+  font-family: Arial, Helvetica;
+  border-collapse: collapse;
+  width: 100%;
+}
+#tablaNoticias td, #tablaNoticias th{
+  border: 1px solid black;
+  padding: 8px;
+}
+#tablaNoticias th{
+  padding-top: 12px;
+  padding-top: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
+}
+
+#btnEditar,#btnEliminar{
+  width: 80px;
+  color: white;
+  padding: 5px 11px;
+  margin: 3px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#btnEditar{
+  background-color: darkgreen;
+}
+#btnEliminar{
+  background-color: darkred;
+}
+#btnEditar:hover{
+  background-color: green;
+}
+#btnEliminar:hover{
+  background-color: red;
+}
+#btnEditar a:link, #btnEditar a:visited, #btnEliminar a:link, #btnEliminar a:visited{
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+div.bodyTablaMisNoticias{
+  overflow-y: scroll;
+  height: 350px;
+}
+#divVerMisNoticias{
+    padding: 2% 5% 5% 5%;
+    height: 580px;
+}
+div.scrollTabla{
+  background-color: white;
+  overflow-y: scroll;
+  width: 100%;
+  height: 480px;
+  max-height: 480px;
+}
+#picChange, #cancelar{
+    border-radius: 5px;
+    background-color: #DDDDDD;
+    border: 1px solid #DDDDDD;
+    width: 150px;
+    padding: 1%;
+}
+#picChange:hover, #cancelar:hover{
+    color: white;
+    background-color: blue;
+    border: 1px solid blue;
+}
+#nota{
+    padding: 0% 2% 2% 2%;
+    text-align: justify;
 }
