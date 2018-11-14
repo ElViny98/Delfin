@@ -150,6 +150,61 @@ class inicio extends CI_Controller {
 
 		return $s;
 	}
+
+	public function recoverPass()
+	{
+		$this->load->view('recover');
+	}
+
+	public function recuperar()
+	{
+		$token = $this->createHash();
+		$id = $this->iniciar->generarToken($this->input->post('correo'), $token);
+		if($id == null)
+		{
+			echo 'No existe el correo';
+		}
+		else
+		{
+			$this->email->initialize(array(
+				'protocol'		=> 'sendmail',
+				'wordwrap'		=> TRUE,
+				'mailpath'		=> 'c:/xampp/sendmail/sendmail.exe',
+				'smtp_crypto'	=> 'ssl',
+				'mailtype'		=> 'html'
+			));
+
+			$this->email->from('null', 'Administrador Delfin');
+			$this->email->subject('Recuperación de contraseña');
+			$this->email->to($this->input->post('correo'));
+			$this->email->message('<h1>Solicitud de recuperación de contraseña</h1><br><br>
+			<p>Se solicitó una recuperación de contraseña para la cuenta DELFIN vinculada 
+			a este correo electrónico. Si usted solicitó esta modificación, dé clic en el 
+			enlace que aparece a continuación: <br><br><center><i>
+			<a href="'. base_url('index.php/inicio/passwordrecovery?token='.$token).'">
+			Recuperar contraseña</a></i></center>');
+			if($this->email->send())
+			{
+				echo 'Se envió';
+			}
+		}
+	}
+
+	public function passwordrecovery()
+	{	
+		$token = '';
+		if(isset($_GET['token']))
+		{
+			$data['token'] = $_GET['token'];
+			$token = $_GET['token'];
+			$this->load->view('newpass', $data);
+		}
+
+		else
+		{
+			$this->iniciar->updatePass($this->input->post('token'), $this->input->post('newpass'));
+		}
+	}
 }
 
 ?>

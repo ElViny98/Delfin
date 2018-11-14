@@ -56,5 +56,33 @@ class iniciar extends CI_Model
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function generarToken($email, $token)
+    {   
+        $id = $this->db->query('SELECT idUsuarios FROM usuarios WHERE Correo = "'.$email.'";');
+        //En caso de que el correo no esté registrado
+        if($id->num_rows() == 0)
+            return null;
+        
+        else
+        {   
+            $id = $id->row();
+        }
+        $insert = 'INSERT INTO recuperacion VALUES('.$id->idUsuarios.', "'.$token.'");';
+        $this->db->query($insert);
+        return 1;
+    }
+
+    public function updatePass($token, $pass)
+    {
+        $id = $this->db->query('SELECT idUsuario FROM recuperacion WHERE Token = "'.$token.'";');
+        $id = $id->row();
+        
+        if($this->db->query('UPDATE Usuarios SET Password = "'.$pass.'" WHERE idUsuarios = '.$id->idUsuario.';'))
+            return 1;
+
+        else
+            return 0;
+    }
 }
 ?>
