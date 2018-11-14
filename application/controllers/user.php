@@ -65,7 +65,8 @@ class user extends CI_Controller
         $id = $this->uri->segment(3);
         $this->user_model->eliminar($id);
     }
-    public function datosEditarNoticia(){
+    public function datosEditarNoticia()
+    {
         if ($this->input->post('pic')!="") {
             $this->load->library('upload');
             $config['upload_path'] = 'assets/img/';
@@ -85,39 +86,7 @@ class user extends CI_Controller
                     //solo guardar el nombre
                     'imagen' => $image_path['file_name']
                 );
-    public function upload_img(){
 
-        $this->load->library('upload');
-        $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite'] =TRUE;
-        $this->upload->initialize($config);
-        if($this->upload->do_upload('userfile'))
-        {
-            $data_upload_files = $this->upload->data();
-            $image_path = $this->upload->data();
-            $datos = array(
-                'imagen' => $config['upload_path'].$image_path['file_name'],
-              );
-            $this->user_model->uploadimg($datos);
-            redirect('/inicio/iniciarUsuario', 'refresh');
-        }
-        else
-        {
-            echo $this->upload->display_errors();
-        }
-
-    }
-
-
-    //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
-    private function createHash()
-	{
-        $len = 24;
-		for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
-
-		return $s;
-	}
 
             }
             else
@@ -142,6 +111,38 @@ class user extends CI_Controller
         $this->load->view('helpers/headerUsuario');
         $this->load->view('editarNoticia',$datos);
         $this->load->view('helpers/footer');
+    }
+
+    public function upload_img(){
+
+        $this->load->library('upload');
+        $config['upload_path'] = 'assets/img/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['overwrite'] =TRUE;
+        $this->upload->initialize($config);
+        if($this->upload->do_upload('userfile'))
+        {
+            $data_upload_files = $this->upload->data();
+            $image_path = $this->upload->data();
+            $datos = array(
+                'imagen' => $config['upload_path'].$image_path['file_name'],
+              );
+            $this->user_model->uploadimg($datos);
+            redirect('/inicio/iniciarUsuario', 'refresh');
+        }
+        else
+        {
+            echo $this->upload->display_errors();
+        }
+
+    }
+    //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
+    private function createHash()
+    {
+        $len = 24;
+        for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
+
+        return $s;
     }
 
 }
