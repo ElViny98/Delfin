@@ -76,6 +76,9 @@ class iniciar extends CI_Model
     public function updatePass($token, $pass)
     {
         $id = $this->db->query('SELECT idUsuario FROM recuperacion WHERE Token = "'.$token.'";');
+        if($id->num_rows() == 0)
+            return 0;
+        
         $id = $id->row();
         
         if($this->db->query('UPDATE Usuarios SET Password = "'.$pass.'" WHERE idUsuarios = '.$id->idUsuario.';'))

@@ -32,9 +32,10 @@
         switch(ans) {
             case "1":
                 alert('Contraseña cambiada');
+                location.href = '<?php echo base_url(); ?>';
                 break;
 
-            case "2":
+            case "0":
                 alert('Error :(');
                 break;
         }
