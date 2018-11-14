@@ -202,7 +202,8 @@ class inicio extends CI_Controller {
 
 		else
 		{
-			$this->iniciar->updatePass($this->input->post('token'), $this->input->post('newpass'));
+			$x = $this->iniciar->updatePass($this->input->post('token'), $this->input->post('newpass'));
+			echo $x;
 		}
 	}
 }

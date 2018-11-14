@@ -20,13 +20,13 @@
 </body>
 <script>
     var url = '<?php echo base_url('index.php/inicio/passwordrecovery'); ?>';
-    var pass = CryptoJS.MD5(document.getElementById('newpass').value).toString();
-    var data = {
-        newpass: pass,
-        token:   '<?php echo $token; ?>'
-    };
 
     $("#btnCambiar").on('click', function() {
+        var pass = CryptoJS.MD5(document.getElementById('newpass').value);
+        var data = {
+            newpass: pass.toString(),
+            token:   '<?php echo $token; ?>'
+        };
         $.post(url, data, function(ans) {
         console.log(ans);
         switch(ans) {
