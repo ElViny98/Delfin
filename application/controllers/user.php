@@ -137,12 +137,9 @@ class user extends CI_Controller
 
     //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
     private function createHash()
-	{
+    {
         $len = 24;
-		for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
-
-		return $s;
-	}
+        for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
 
 
     public function editarNoticia(){
