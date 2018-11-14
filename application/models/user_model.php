@@ -19,6 +19,7 @@ class User_model extends CI_Model
     public function get_user_data($id){
       $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
       return $q->row();
+    }
     public function misNoticias($id){
         $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
         $query = $this->db->get();
@@ -33,6 +34,18 @@ class User_model extends CI_Model
         $query = $this->db->get();
         if($query->num_rows() > 0 ) return $query;
         else return false;
+    }
+
+    public function getImg($id)
+    {
+        $query = 'SELECT img FROM Noticias WHERE idNoticias = '.$id;
+        $q = $this->db->query($query);
+        return $q;
+    }
+
+    public function editarDatosNoticia($query)
+    {
+        $this->db->query($query);
     }
 }
 ?>

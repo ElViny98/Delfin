@@ -54,6 +54,7 @@ class user extends CI_Controller
                 'fecha' => $fechaActual
     		);
                 $this->user_model->altaNoticia($datos);
+                redirect(base_url('user/Noticias'));
         }
         else
         {
@@ -64,27 +65,9 @@ class user extends CI_Controller
     public function eliminarNoticia(){
         $id = $this->uri->segment(3);
         $this->user_model->eliminar($id);
+        redirect(base_url('index.php/user/Noticias_MisNoticias'));
     }
-    public function datosEditarNoticia(){
-        if ($this->input->post('pic')!="") {
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/img/';
-            $config['allowed_types'] = 'jpg|png';
-            $config['overwrite'] =TRUE;
-            $this->upload->initialize($config);
-            $this->load->library('upload', $config);
-            if($this->upload->do_upload('pic'))
-            {
-                $image_path = $this->upload->data();
-                $datos = array(
-                    'id' => $this->session->userdata('idUsuario'),
-                    'titulo' => $this->input->post('txtTitulo'),
-                    'contenido' => $this->input->post('content'),
-                    //guarda toda la ubicacion
-                    //'imagen' => $image_path['full_path'],
-                    //solo guardar el nombre
-                    'imagen' => $image_path['file_name']
-                );
+
     public function upload_img(){
 
         $this->load->library('upload');
@@ -109,6 +92,48 @@ class user extends CI_Controller
 
     }
 
+    public function editarDatosNoticia()
+    {
+        echo $this->input->post('pic');
+        $data = array(
+            'id' => $this->input->get('id'),
+            'titulo' => $this->input->post('txtTitulo'),
+            'contenido' => $this->input->post('content'),
+            'imagen' => $this->input->post('pic')
+        );
+        echo $data['imagen'];
+        $query = 'UPDATE Noticias SET ';
+        if($_FILES['pic']['name'] == null)
+        {
+            $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
+            $this->user_model->editarDatosNoticia($query);
+        }
+
+        else
+        {
+            $i = $this->user_model->getImg($data['id']);
+            $i = $i->row();
+            $this->load->library('upload');
+            $config['upload_path'] = 'assets/img/';
+            $config['allowed_types'] = 'jpg|png';
+            $config['overwrite'] = TRUE;
+            echo $i->img;
+            $config['file_name'] = $i->img;
+            $this->upload->initialize($config);
+            $this->load->library('upload', $config);
+            if($this->upload->do_upload('pic'))
+            {
+                $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
+                $this->user_model->editarDatosNoticia($query);
+            }
+            else
+            {
+                echo $this->upload->display_errors();
+            }
+        }
+        redirect(base_url('index.php/user/Noticias_MisNoticias'));
+
+    }
 
     //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
     private function createHash()
@@ -119,28 +144,19 @@ class user extends CI_Controller
 		return $s;
 	}
 
-            }
-            else
-            {
-                echo $this->upload->display_errors();
-            }
-        }
-        else {
-            $fechaActual = date('Y-m-d');
-            $datos = array(
-                'id' => $this->session->userdata('idUsuario'),
-                'titulo' => $this->input->post('txtTitulo'),
-                'contenido' => $this->input->post('content'),
-            );
-        }
 
-
-    }
     public function editarNoticia(){
-        $id = $this->uri->segment(3);
-        $datos['consulta'] = $this->user_model->obtenerNoticia($id);
+        $id = $_GET['id'];
+        $datos = $this->user_model->obtenerNoticia($id);
+        $d = $datos->row();
+        $data = array(
+            'id'            => $id,
+            'titulo'        => $d->Titulo,
+            'descripcion'   => $d->Descripcion,
+            'img'           => $d->img
+        );
         $this->load->view('helpers/headerUsuario');
-        $this->load->view('editarNoticia',$datos);
+        $this->load->view('editarNoticia',$data);
         $this->load->view('helpers/footer');
     }
 
