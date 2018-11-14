@@ -12,17 +12,36 @@ class inicio extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('text');
 		$this->load->library(array('session', 'email'));
-
 	}
 
 	public function index()
-	{
-		$this->load->view('helpers/headerInicio');
+	{	
+		//Si no se ha iniciado sesión, la dirección "localhost/Delfin" 
+		//Dirige a la página de inicio
+		if($this->session->userdata('nivel') == null)
+		{
+			$this->load->view('helpers/headerInicio');
 
-		$data['noticias'] = $this->iniciar->noticias();
+			$data['noticias'] = $this->iniciar->noticias();
 
-		$this->load->view('inicio', $data);
-		$this->load->view('helpers/footerInicio');
+			$this->load->view('inicio', $data);
+			$this->load->view('helpers/footerInicio');
+		}
+		//Si hay una sesión abierta, se mantendrá abierta hasta que caduque
+		//o hasta que el usuario cierre sesión
+		else
+		{
+			switch($this->session->userdata('nivel'))
+			{
+				case 1:
+					redirect(base_url('index.php/admin'));
+					break;
+
+				case 2:
+					redirect(base_url('index.php/user'));
+					break;
+			}
+		}
 	}
 	public function AcercaDe()
 	{
@@ -51,10 +70,10 @@ class inicio extends CI_Controller {
 			'smtp_crypto'	=> 'ssl'
 		));
 		$datos = array(
-			'correo' => $this->input->post('txtEmail'),
-			'nombre' => $this->input->post('txtNombre'),
-			'asunto' => $this->input->post('txtAsunto'),
-			'mensaje' => $this->input->post('txtMensaje')
+			'correo' 	=> $this->input->post('txtEmail'),
+			'nombre' 	=> $this->input->post('txtNombre'),
+			'asunto' 	=> $this->input->post('txtAsunto'),
+			'mensaje' 	=> $this->input->post('txtMensaje')
 		);
 		$this->email->from('valerialopez40@gmail.com', $datos['nombre']);
 		$this->email->to('2016030004@upsin.edu.mx');
@@ -109,7 +128,6 @@ class inicio extends CI_Controller {
 		}
 	}
 	//$this->load->view('perfilUsuario',array('error'=>''));
-
 	public function noticia()
 	{
 		$noticia = $this->iniciar->getNoticia($this->input->get('id'));

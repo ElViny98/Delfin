@@ -108,9 +108,7 @@ class user extends CI_Controller
     public function editarNoticia(){
         $id = $this->uri->segment(3);
         $datos['consulta'] = $this->user_model->obtenerNoticia($id);
-        $this->load->view('helpers/headerUsuario');
-        $this->load->view('editarNoticia',$datos);
-        $this->load->view('helpers/footer');
+        redirect(base_url());
     }
 
     public function upload_img(){
