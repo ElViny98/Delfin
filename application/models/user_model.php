@@ -20,11 +20,15 @@ class User_model extends CI_Model
     {
         $this->db->update('usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
     }
-
-    public function get_user_data($id)
-    {
-        $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
-        return $q->row();
+    public function get_user_data($id){
+      $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
+      return $q->row();
+    }
+    public function misNoticias($id){
+        $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
+        $query = $this->db->get();
+        if($query->num_rows() > 0 ) return $query;
+        else return false;
     }
 
     public function eliminar($id){
@@ -39,12 +43,16 @@ class User_model extends CI_Model
         else return false;
     }
 
-    public function misNoticias($id)
+    public function getImg($id)
     {
-        $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
-        $query = $this->db->get();
-        if($query->num_rows() > 0 ) return $query;
-        else return false;
+        $query = 'SELECT img FROM Noticias WHERE idNoticias = '.$id;
+        $q = $this->db->query($query);
+        return $q;
+    }
+
+    public function editarDatosNoticia($query)
+    {
+        $this->db->query($query);
     }
 }
 ?>

@@ -3,7 +3,7 @@
     <hr>
 </div>
 <div class="containerNoticia">
-    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/')?>user/datosEditarNoticia/<?=$noticia->idNoticias?>" method="post">
+    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post">
 
         <div class="form-group" >
             <div class="row">

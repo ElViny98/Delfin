@@ -25,7 +25,7 @@
                                                                }
                                                               }
                                                         </script>
-                                                        <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editarNoticia/<?=$noticia->idNoticias?>">Editar</a></button>
+                                                        <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editarNoticia?id=<?=$noticia->idNoticias?>">Editar</a></button>
                                                         <button id="btnEliminar" type="button"><a onclick="if(confirma() == false) return false" href="<?=base_url('index.php/')?>user/eliminarNoticia/<?=$noticia->idNoticias?>">Eliminar</a></button>
                                                       </center>
                                                     </td>
@@ -38,5 +38,5 @@
         </div>
         <br>
         <button type="button" name="button" id="btnNuevaNot" class="btn btn-default"><a href="<?php echo base_url('index.php/user/Noticias'); ?>">Nueva Noticia</a></button>
-      
+
   	</div>
