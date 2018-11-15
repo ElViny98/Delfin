@@ -16,9 +16,14 @@ class User_model extends CI_Model
     public function uploadimg($datos){
       $this->db->update('usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
     }
+    public function update_prf($id, $data){
+    $this->db->where('idUsuarios', $id);
+    $this->db->update('usuarios', $data);
+    }
     public function get_user_data($id){
       $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
       return $q->row();
+    }
     public function misNoticias($id){
         $this->db->select('Titulo')->from('noticias')->where('idUsuarios >=', $id);
         $query = $this->db->get();
