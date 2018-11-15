@@ -1,5 +1,8 @@
-<!-- Page Content -->
-  <div class="container">
+    <div class="Imagen" >
+        <img src="<?php echo base_url('assets/img/logolargo.png');?>">
+    </div>
+
+    <div class="container">
 
     <!-- Page Heading -->
     <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white;" id="new-container">Noticias
