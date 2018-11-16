@@ -82,7 +82,12 @@ class iniciar extends CI_Model
         $id = $id->row();
         
         if($this->db->query('UPDATE Usuarios SET Password = "'.$pass.'" WHERE idUsuarios = '.$id->idUsuario.';'))
+        {
+            //Para evitar llenar la base de datos de basura y por seguridad,
+            //se borran los tokens que ya se usaron anteriormente para recuperar contraseñas.
+            $this->db->query('DELETE FROM recuperacion WHERE idUsuario = '.$id->idUsuario);
             return 1;
+        }
 
         else
             return 0;

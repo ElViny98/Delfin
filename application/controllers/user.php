@@ -32,7 +32,7 @@ class user extends CI_Controller
     public function Noticias_MisNoticias(){
         $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
         $this->load->view('helpers/headerUsuario');
-        $this->load->view('misNoticias',$datos);
+        $this->load->view('user/misNoticias',$datos);
         $this->load->view('helpers/footer');
     }
 
@@ -144,7 +144,7 @@ class user extends CI_Controller
     {
         $len = 24;
         for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
-        
+
         return $s;
     }
 
