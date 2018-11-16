@@ -48,8 +48,8 @@
             </div>
         </div>
         <div class="col-md-2">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
-            <!-- aqui se redirige a una pag pa modificar datos-->
+            <!--<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>-->
+            <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editar_perfil/<?=$user_data->idUsuarios?>">Editar</a></button>
         </div>
     </div> <!--fin de primer div row-->
     <div class="row">
@@ -74,7 +74,7 @@
         <div class="col-md-8">
             <div class="tab-content profile-tab" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-md-6">
                                     <label>Id Usuario</label>
                                 </div>
@@ -126,7 +126,7 @@
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Experience</label>
+                                   <label>Experience</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p>Expert</p>
@@ -174,7 +174,9 @@
             </div>
         </div>
     </div><!--fin de segundo div row-->
-  </form>
+
 </div>
-  </body>
-</html>
+</div>
+</div>
+</div>
+</div>

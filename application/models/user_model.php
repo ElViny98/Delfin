@@ -20,6 +20,10 @@ class User_model extends CI_Model
     {
         $this->db->update('usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
     }
+    public function update_prf($id, $data){
+    $this->db->where('idUsuarios', $id);
+    $this->db->update('usuarios', $data);
+    }
     public function get_user_data($id){
       $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
       return $q->row();
