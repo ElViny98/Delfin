@@ -7,7 +7,6 @@ class inicio extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('iniciar');
-		$this->load->library(array('session'));
 		$this->load->library('upload');
 		$this->load->helper(array('form', 'url'));
 		$this->load->helper('text');
@@ -24,7 +23,7 @@ class inicio extends CI_Controller {
 
 			$data['noticias'] = $this->iniciar->noticias();
 
-			$this->load->view('inicio', $data);
+			$this->load->view('Inicio', $data);
 			$this->load->view('helpers/footerInicio');
 		}
 		//Si hay una sesión abierta, se mantendrá abierta hasta que caduque

@@ -33,7 +33,7 @@ class iniciar extends CI_Model
 
     public function noticias()
     {
-        $sql = 'SELECT * FROM noticias ORDER BY Fecha DESC';
+        $sql = 'SELECT * FROM Noticias ORDER BY Fecha DESC';
         $query = $this->db->query($sql);
         if($query->num_rows() > 0)
             return $query;
