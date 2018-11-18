@@ -19,10 +19,10 @@
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 col-xl-8" style="margin-bottom: 10px;">
 						<a href="'.base_url('index.php/user/vernoticia?id='.$q->idNoticias).'" class="link-new">'.$q->Titulo.'</a>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2" style="margin-bottom: 10px;">
 						<button type="button" class="btn btn-success btn-new" onclick="modificar('.$q->idNoticias.')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbspModificar</button>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2" style="margin-bottom: 10px;">
 						<button type="button" class="btn btn-danger btn-new" onclick="borrar('.$q->idNoticias.')"><i class="fa fa-times" aria-hidden="true"></i>&nbspEliminar</button>
 					</div>
 				</div>

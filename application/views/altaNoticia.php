@@ -64,24 +64,28 @@
                     <label class="control-label col-lg text-left" for="content">Contenido:</label>
                 </div>
                 <div class="col-lg-11 col-md-11 col-sm-11">
-                    <script src="<?php echo base_url('assets/js/ckeditor5/ckeditor.js'); ?>"></script>
+                    
                     <div id="conteinerEditor">
-                        <textarea name="content" id="editor">Descripción de la noticia</textarea>
+                        
                     </div>
+                    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
             		<script>
-            			ClassicEditor
-            				.create( document.querySelector( '#editor' ) )
-            				.then( editor => {
-            					console.log( editor );
-            				} )
-            				.catch( error => {
-            					console.error( error );
-            				} );
+                        var quill = new Quill('#conteinerEditor', {
+                            modules: { 
+                                toolbar: [
+                                    [{ header: [1, 2, 3, false] }],
+                                    [ 'bold', 'italic', 'underline' ],
+                                    [ 'image', 'code-block' ]
+                                ] 
+                            },
+                            placeholder: 'Redacción...',
+                            theme: 'snow'
+                        });
             		</script>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="padding-top: 40px;">
               <div class="col-lg">
                 <button type="submit" name='submit' value='upload' class="btn btn-default" id="btnGenerarNot">Generar Noticia</button>
               </div>

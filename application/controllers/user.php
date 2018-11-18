@@ -7,8 +7,8 @@ class user extends CI_Controller
     {
         parent::__construct();
         $this->load->model('user_model');
-        $this->load->library(array('session'));
-        $this->load->library('image_lib');
+        $this->load->library(array('session', 'image_lib'));
+        $this->load->helper('file');
     }
 
     public function index()
@@ -45,19 +45,19 @@ class user extends CI_Controller
     function update_prof() {
       $id= $this->input->post('Id');
       $data = array(
-      'Nombre' => $this->input->post('name'),
-      'Correo' => $this->input->post('mail'),
-      'Ciudad' => $this->input->post('city'),
-      'Pais' => $this->input->post('country')
-    );
-    $this->user_model->update_prf($id,$data);
+            'Nombre' => $this->input->post('name'),
+            'Correo' => $this->input->post('mail'),
+            'Ciudad' => $this->input->post('city'),
+            'Pais' => $this->input->post('country')
+        );
+        $this->user_model->update_prf($id,$data);
     }
 
     public function datosNoticia(){
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'jpg|png';
+        $config['allowed_types'] = 'jpg|png|jpeg';
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
@@ -74,7 +74,7 @@ class user extends CI_Controller
                 'fecha' => $fechaActual
     		);
                 $this->user_model->altaNoticia($datos);
-                redirect(base_url('user/Noticias'));
+                redirect(base_url('user/Noticias_MisNoticias'));
         }
         else
         {
@@ -84,9 +84,20 @@ class user extends CI_Controller
     }
 
     public function eliminarNoticia(){
-        $id = $this->uri->segment(3);
-        $this->user_model->eliminar($id);
-        redirect(base_url('index.php/user/Noticias_MisNoticias'));
+        $id = $this->input->post('id');
+        $path = 'assets/img/';
+        $img = $this->user_model->getImg($id);
+        $img = $img->row();
+        $del = $path.$img->img;
+        //Si ocurre un error durante el borrado de la imagen se detiene la ejecución.
+        if(!unlink($del))
+            return;
+
+        if($this->user_model->eliminar($id))
+            echo "1";
+
+        else
+            echo "0";
     }
 
     public function upload_img(){
@@ -114,57 +125,57 @@ class user extends CI_Controller
 
     }
     public function resize_image($image_data){
-    $this->load->library('image_lib');
-    $w = $image_data['image_width']; // original image's width
-    $h = $image_data['image_height']; // original images's height
+        $this->load->library('image_lib');
+        $w = $image_data['image_width']; // original image's width
+        $h = $image_data['image_height']; // original images's height
 
-    $n_w = 300; // destination image's width
-    $n_h = 300; // destination image's height
+        $n_w = 300; // destination image's width
+        $n_h = 300; // destination image's height
 
-    $source_ratio = $w / $h;
-    $new_ratio = $n_w / $n_h;
-    if($source_ratio != $new_ratio){
+        $source_ratio = $w / $h;
+        $new_ratio = $n_w / $n_h;
+        if($source_ratio != $new_ratio){
 
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = 'assets/img/500x500.png';
+            $config['maintain_ratio'] = FALSE;
+            if($new_ratio > $source_ratio || (($new_ratio == 1) && ($source_ratio < 1))){
+                $config['width'] = $w;
+                $config['height'] = round($w/$new_ratio);
+                $config['y_axis'] = round(($h - $config['height'])/2);
+                $config['x_axis'] = 0;
+
+            } else {
+
+                $config['width'] = round($h * $new_ratio);
+                $config['height'] = $h;
+                $size_config['x_axis'] = round(($w - $config['width'])/2);
+                $size_config['y_axis'] = 0;
+
+            }   
+
+            $this->image_lib->initialize($config);
+            $this->image_lib->crop();
+            $this->image_lib->clear();
+        }
         $config['image_library'] = 'gd2';
         $config['source_image'] = 'assets/img/500x500.png';
-        $config['maintain_ratio'] = FALSE;
-        if($new_ratio > $source_ratio || (($new_ratio == 1) && ($source_ratio < 1))){
-            $config['width'] = $w;
-            $config['height'] = round($w/$new_ratio);
-            $config['y_axis'] = round(($h - $config['height'])/2);
-            $config['x_axis'] = 0;
+        $config['new_image'] = 'assets/img/resized_image.jpg';
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = $n_w;
+        $config['height'] = $n_h;
+        $this->image_lib->initialize($config);
+
+        if (!$this->image_lib->resize()){
+
+            echo $this->image_lib->display_errors();
 
         } else {
 
-            $config['width'] = round($h * $new_ratio);
-            $config['height'] = $h;
-            $size_config['x_axis'] = round(($w - $config['width'])/2);
-            $size_config['y_axis'] = 0;
+            echo "done";
 
-        }
-
-        $this->image_lib->initialize($config);
-        $this->image_lib->crop();
-        $this->image_lib->clear();
+        }   
     }
-    $config['image_library'] = 'gd2';
-    $config['source_image'] = 'assets/img/500x500.png';
-    $config['new_image'] = 'assets/img/resized_image.jpg';
-    $config['maintain_ratio'] = TRUE;
-    $config['width'] = $n_w;
-    $config['height'] = $n_h;
-    $this->image_lib->initialize($config);
-
-    if (!$this->image_lib->resize()){
-
-        echo $this->image_lib->display_errors();
-
-    } else {
-
-        echo "done";
-
-    }
-}
     public function editarDatosNoticia()
     {
         echo $this->input->post('pic');
@@ -231,6 +242,21 @@ class user extends CI_Controller
         $this->load->view('helpers/headerUsuario');
         $this->load->view('editarNoticia',$data);
         $this->load->view('helpers/footer');
+    }
+
+    public function salir()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
+
+    public function imagenNoticia() 
+    {
+        $this->load->library('upload');
+        $config['upload_path'] = 'assets/img/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->upload->initialize($config);
+        
     }
 
 }

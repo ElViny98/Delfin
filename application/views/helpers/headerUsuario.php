@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap-dialog.min.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
+		<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
@@ -43,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="salir">
 				<ul class="navbar-nav mr-auto" >
 					<li class="nav-item">
-						<a class="nav-link"  href="#">Salir</a>
+						<a class="nav-link"  href="<?php echo base_url('index.php/user/salir') ?>">Salir</a>
 					</li>
 				</ul>
 			</div>
