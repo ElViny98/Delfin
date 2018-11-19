@@ -74,11 +74,13 @@ class user extends CI_Controller
                 'fecha' => $fechaActual
     		);
                 $this->user_model->altaNoticia($datos);
-                redirect(base_url('user/Noticias_MisNoticias'));
+                //Usado para evaluar desde javascript que todo haya ido bien
+                echo '1';
         }
         else
         {
-            echo $this->upload->display_errors();
+            //En caso de error esto se evaluará desde javascript
+            echo '0';
         }
 
     }

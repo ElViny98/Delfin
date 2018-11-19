@@ -11,37 +11,42 @@ class User_model extends CI_Model
     
     public function altaNoticia($datos)
     {
-        $this->db->insert('noticias',array('idUsuarios'=> $datos['id'],
+        $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
         'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
         'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
 
     public function uploadimg($datos)
     {
-        $this->db->update('usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
+        $this->db->update('Usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
     }
-    public function update_prf($id, $data){
-    $this->db->where('idUsuarios', $id);
-    $this->db->update('usuarios', $data);
+
+    public function update_prf($id, $data)
+    {
+        $this->db->where('idUsuarios', $id);
+        $this->db->update('Usuarios', $data);
     }
-    public function get_user_data($id){
-      $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
-      return $q->row();
+    public function get_user_data($id)
+    {
+        $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
+        return $q->row();
     }
-    public function misNoticias($id){
-        $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
+    public function misNoticias($id)
+    {
+        $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
         $query = $this->db->get();
         if($query->num_rows() > 0 ) return $query;
         else return false;
     }
 
-    public function eliminar($id){
-        return $this->db->delete( 'noticias' ,  array ( 'idNoticias'  =>  $id ));
+    public function eliminar($id)
+    {
+        return $this->db->delete( 'Noticias' ,  array ( 'idNoticias'  =>  $id ));
     }
 
     public function obtenerNoticia($id)
     {
-        $this->db->select('Titulo,Fecha,Descripcion,img')->from('noticias')->where('idNoticias >=', $id);
+        $this->db->select('Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idNoticias >=', $id);
         $query = $this->db->get();
         if($query->num_rows() > 0 ) return $query;
         else return false;

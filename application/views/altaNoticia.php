@@ -3,7 +3,7 @@
     <hr>
 </div>
 <div class="containerNoticia">
-    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post">
+    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post" id="form-new">
 
         <div class="form-group" >
             <div class="row">
@@ -68,20 +68,7 @@
                     <div id="conteinerEditor">
                         
                     </div>
-                    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
-            		<script>
-                        var quill = new Quill('#conteinerEditor', {
-                            modules: { 
-                                toolbar: [
-                                    [{ header: [1, 2, 3, false] }],
-                                    [ 'bold', 'italic', 'underline' ],
-                                    [ 'image', 'code-block' ]
-                                ] 
-                            },
-                            placeholder: 'Redacción...',
-                            theme: 'snow'
-                        });
-            		</script>
+                    
                 </div>
             </div>
 
@@ -94,3 +81,66 @@
 
     </form>
 </div>
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#conteinerEditor', {
+        modules: { 
+            toolbar: [
+                [ { header: [1, 2, 3, false] } ],
+                [ { 'font': [] } ],
+                [ 'bold', 'italic', 'underline', 'strike' ],
+                [ 'link' ],
+                [ 'image', 'code-block' ],
+                [ { list: 'ordered' }, { list: 'bullet' } ],
+                [ { align: [] } ]
+            ]
+        },
+        placeholder: 'Redacción...',
+        theme: 'snow'
+    });
+
+    $("#form-new").submit(function(event) {
+        event.preventDefault();
+        var actionForm = '<?php echo base_url('index.php/user/datosNoticia'); ?>';
+
+        var formData = new FormData();
+        $.each($('input[type=file]')[0].files, function(i, files) {
+            formData.append('pic', files);
+        });
+
+        $.each($('img'))
+        formData.append('content', getQuillHTML(quill.getContents()));
+        formData.append('txtTitulo', $("#txtTitulo").val());
+
+        $.ajax({
+            url: actionForm,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function(data) {
+                switch(data) {
+                    case '1':
+                        location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        break;
+
+                    case '0':
+                        alert('Algo salió mal. Inténtelo nuevamente en unos segundos.');
+                        break;
+
+                    default:
+                        alert('Porfavor, verifique la conexión a Internet e inténtelo de nuevo');
+                        break;
+                }
+            }
+        });
+    });
+
+    function getQuillHTML(deltaObject) {
+        var tempCont = document.createElement('div');
+        (new Quill(tempCont)).setContents(deltaObject);
+
+        return tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    }
+</script>
