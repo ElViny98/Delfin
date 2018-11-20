@@ -41,10 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</nav>
 
-    <div class="Imagen" >
-    <img src="<?php echo base_url('assets/img/logolargo.png');?>">
-    </div>
-
     <div class="modal fade" id="iniciarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       	<div class="modal-dialog" role="document">
         	<div class="modal-content">
@@ -64,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         				<center><input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required=""></center>
         				<br>
         			</form>
-					<a href="#">¿Olvidó su contraseña?</a>
+					<a href="<?php echo base_url('index.php/inicio/recoverPass'); ?>">¿Olvidó su contraseña?</a>
         		</div>
         		<div class="modal-footer">
                 	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cerrar</button>

@@ -268,3 +268,31 @@ div.scrollTabla{
     max-width: 200px;
     max-height: 200px;
 }
+
+.link-new
+{
+    color: #000000;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.new-container
+{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.link-new:hover
+{
+    color: orange;
+}
+
+.btn-new
+{
+    width: 100%;
+}
+
+.noticias
+{
+    background-color: #FDFDFD;
+}

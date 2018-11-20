@@ -102,6 +102,10 @@
                 </ul>
             </div>
         </div>
+        <div class="col-md-2">
+            <!--<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>-->
+            <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editar_perfil/<?=$user_data->idUsuarios?>">Editar</a></button>
+        </div>
     </div> <!--fin de primer div row-->
 
     <div class="row">

@@ -3,7 +3,7 @@
     <hr>
 </div>
 <div class="containerNoticia">
-    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post">
+    <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post" id="form-new">
 
         <div class="form-group" >
             <div class="row">
@@ -64,24 +64,15 @@
                     <label class="control-label col-lg text-left" for="content">Contenido:</label>
                 </div>
                 <div class="col-lg-11 col-md-11 col-sm-11">
-                    <script src="<?php echo base_url('assets/js/ckeditor5/ckeditor.js'); ?>"></script>
+                    
                     <div id="conteinerEditor">
-                        <textarea name="content" id="editor">Descripción de la noticia</textarea>
+                        
                     </div>
-            		<script>
-            			ClassicEditor
-            				.create( document.querySelector( '#editor' ) )
-            				.then( editor => {
-            					console.log( editor );
-            				} )
-            				.catch( error => {
-            					console.error( error );
-            				} );
-            		</script>
+                    
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="padding-top: 40px;">
               <div class="col-lg">
                 <button type="submit" name='submit' value='upload' class="btn btn-default" id="btnGenerarNot">Generar Noticia</button>
               </div>
@@ -90,3 +81,66 @@
 
     </form>
 </div>
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    var quill = new Quill('#conteinerEditor', {
+        modules: { 
+            toolbar: [
+                [ { header: [1, 2, 3, false] } ],
+                [ { 'font': [] } ],
+                [ 'bold', 'italic', 'underline', 'strike' ],
+                [ 'link' ],
+                [ 'image', 'code-block' ],
+                [ { list: 'ordered' }, { list: 'bullet' } ],
+                [ { align: [] } ]
+            ]
+        },
+        placeholder: 'Redacción...',
+        theme: 'snow'
+    });
+
+    $("#form-new").submit(function(event) {
+        event.preventDefault();
+        var actionForm = '<?php echo base_url('index.php/user/datosNoticia'); ?>';
+
+        var formData = new FormData();
+        $.each($('input[type=file]')[0].files, function(i, files) {
+            formData.append('pic', files);
+        });
+
+        $.each($('img'))
+        formData.append('content', getQuillHTML(quill.getContents()));
+        formData.append('txtTitulo', $("#txtTitulo").val());
+
+        $.ajax({
+            url: actionForm,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function(data) {
+                switch(data) {
+                    case '1':
+                        location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        break;
+
+                    case '0':
+                        alert('Algo salió mal. Inténtelo nuevamente en unos segundos.');
+                        break;
+
+                    default:
+                        alert('Porfavor, verifique la conexión a Internet e inténtelo de nuevo');
+                        break;
+                }
+            }
+        });
+    });
+
+    function getQuillHTML(deltaObject) {
+        var tempCont = document.createElement('div');
+        (new Quill(tempCont)).setContents(deltaObject);
+
+        return tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
+    }
+</script>
