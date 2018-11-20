@@ -37,7 +37,7 @@ class user extends CI_Controller
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'jpg|png';
+        $config['allowed_types'] = 'jpg|png|jpeg';
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
@@ -72,18 +72,22 @@ class user extends CI_Controller
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite'] =TRUE;
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
-        if($this->upload->do_upload('userfile'))
+        $this->load->library('upload', $config);
+        if($this->upload->do_upload('userPhoto'))
         {
-            $data_upload_files = $this->upload->data();
             $image_path = $this->upload->data();
             $datos = array(
-                'imagen' => $config['upload_path'].$image_path['file_name'],
+                'id' => $this->session->userdata('idUsuario'),
+                'imagen' => $image_path['file_name']
               );
-            $this->user_model->uploadimg($datos);
-            redirect('/inicio/iniciarUsuario', 'refresh');
+              $query = 'UPDATE usuarios SET ';
+              $query.= 'img = "'.$datos['imagen'].'" WHERE idUsuarios = '.$datos['id'];
+            $this->user_model->uploadimg($query);
+            redirect(base_url('index.php/user/Perfil'));
         }
         else
         {
@@ -115,9 +119,8 @@ class user extends CI_Controller
             $i = $i->row();
             $this->load->library('upload');
             $config['upload_path'] = 'assets/img/';
-            $config['allowed_types'] = 'jpg|png';
+            $config['allowed_types'] = 'jpg|png|jpeg';
             $config['overwrite'] = TRUE;
-            echo $i->img;
             $config['file_name'] = $i->img;
             $this->upload->initialize($config);
             $this->load->library('upload', $config);
@@ -140,7 +143,7 @@ class user extends CI_Controller
     {
         $len = 24;
         for($s = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != $len; $x = rand(0, $z), $s .= $a{$x}, $i++);
-
+    }
 
     public function editarNoticia(){
         $id = $_GET['id'];
@@ -154,6 +157,39 @@ class user extends CI_Controller
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('editarNoticia',$data);
+        $this->load->view('helpers/footer');
+    }
+    public function Perfil(){
+        $id = $this->session->userdata('idUsuario');
+        $data_user= $this->user_model->get_user_data($id);
+        $user_academico= $this->user_model->get_user_academico($id);
+        $user_institucion= $this->user_model->get_user_institucion($id);
+        $data_user= $this->user_model->get_user_data($id);
+        $datos = array(
+            'id'            => $id,
+            'nombre'        => $data_user->Nombre,
+            'apaterno'      => $data_user->ApPaterno,
+            'amaterno'      => $data_user->ApMaterno,
+            'correo'        => $data_user->Correo,
+            'pais'          => $data_user->Pais,
+            'fechaNac'      => $data_user->Nacimiento,
+            'telefono'      => $data_user->Telefono,
+            'sexo'          => $data_user->Sexo,
+            'img'           => $data_user->Img,
+            'grado'         =>$user_academico->Grado,
+            'cuerpoA'       =>$user_academico->cuerpoAcademico,
+            'consolidacion' =>$user_academico->consolidacionCA,
+            'promep'        =>$user_academico->perfilPROMEP,
+            'sni'           =>$user_academico->nivelSNI,
+            'areaC'         =>$user_academico->areaConocimiento,
+            'institucion'   =>$user_institucion->Nombre,
+            'unidad'        =>$user_institucion->UAcademica,
+            'paisInst'      =>$user_institucion->Pais,
+            'estadoInst'    =>$user_institucion->Estado,
+            'ciudadInst'     =>$user_institucion->Ciudad
+        );
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('perfilUsuario',$datos);
         $this->load->view('helpers/footer');
     }
 

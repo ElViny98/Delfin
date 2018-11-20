@@ -14,12 +14,20 @@ class User_model extends CI_Model
         'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
         'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
-    public function uploadimg($datos)
+    public function uploadimg($query)
     {
-        $this->db->update('usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
+        $this->db->query($query);
     }
     public function get_user_data($id){
       $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
+      return $q->row();
+    }
+    public function get_user_academico($id){
+      $q = $this->db->select('*')->from('infoacademica')->where('idUsuario',$id)->get();
+      return $q->row();
+    }
+    public function get_user_institucion($id){
+      $q = $this->db->select('*')->from('institucion')->where('idUsuario',$id)->get();
       return $q->row();
     }
     public function misNoticias($id){

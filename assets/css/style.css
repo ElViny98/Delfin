@@ -45,11 +45,11 @@
 .row{
   margin: 1%;
 }
-#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot{
+#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEdit{
   width: 150px;
   float: right;
 }
-#btnGenerarNot:hover, #btnNuevaNot:hover, #btnEditNot:hover{
+#btnGenerarNot:hover, #btnNuevaNot:hover, #btnEdit:hover{
     border: 1px solid orange;
     background-color: orange;
     color: white;
@@ -223,14 +223,16 @@ div.scrollTabla{
   height: 480px;
   max-height: 480px;
 }
-#picChange, #cancelar{
+#picChange, #cancelar, #editar,#btnCambiarFoto{
     border-radius: 5px;
     background-color: #DDDDDD;
     border: 1px solid #DDDDDD;
     width: 150px;
     padding: 1%;
+    cursor: pointer;
+
 }
-#picChange:hover, #cancelar:hover{
+#picChange:hover, #cancelar:hover, #editar:hover,#btnCambiarFoto:hover{
     color: white;
     background-color: blue;
     border: 1px solid blue;
@@ -238,4 +240,31 @@ div.scrollTabla{
 #nota{
     padding: 0% 2% 2% 2%;
     text-align: justify;
+}
+.mostrar{
+    display: block;
+}
+.ocultar{
+    display: none;
+}
+#btnCambiarFoto{
+    width: 70%
+}
+#btnCambiarFoto a:hover{
+    color: white;
+}
+#btnCambiarFoto a:link, #btnCambiarFoto a:visited{
+    color: black;
+  text-align: center;
+  text-decoration: none;
+}
+#file-preview-zone-user img{
+    width: 250px;
+    height: 250px;
+}
+#UserPhoto img{
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
 }
