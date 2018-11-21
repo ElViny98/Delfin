@@ -11,15 +11,6 @@ class user extends CI_Controller
         $this->load->helper('file');
     }
 
-    public function datosNotici() 
-    {
-        print_r($_FILES);
-        foreach($_FILES['imgNew']['name'] as $f)
-        {
-            printf("%s\n", $f);
-        }
-    }
-
     public function index()
     {
         if($this->session->userdata('nivel') == 2)
@@ -62,8 +53,8 @@ class user extends CI_Controller
         $this->user_model->update_prf($id,$data);
     }
 
-    public function datosNoticia()
-    {
+    public function datosNoticia(){
+
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
         $config['allowed_types'] = 'jpg|png|jpeg';
@@ -71,30 +62,6 @@ class user extends CI_Controller
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
         $this->load->library('upload', $config);
-
-        $imgCont = count($_FILES['imgNew']['name']);
-        foreach($_FILES['imgNew']['name'] as $f => $value)
-        {
-            $_FILES['imgNew[]']['name'] = $_FILES['imgNew']['name'][$f];
-            $_FILES['imgNew[]']['type'] = $_FILES['imgNew']['type'][$f];
-            $_FILES['imgNew[]']['tmp_name'] = $_FILES['imgNew']['tmp_name'][$f];
-            $_FILES['imgNew[]']['error'] = $_FILES['imgNew']['error'][$f];
-            $_FILES['imgNew[]']['size'] = $_FILES['imgNew']['size'][$f];
-
-            $imgUp = $this->setImageOptions();
-            print_r($imgUp);
-            $this->load->library('upload', $imgUp);
-            $this->upload->initialize($imgUp);
-
-            if($this->upload->do_upload('imgNew[]'))
-                echo 'uwu';
-
-            else
-                echo $this->upload->display_errors();
-        }
-        
-        return;
-
         if($this->upload->do_upload('pic'))
         {
             $image_path = $this->upload->data();
@@ -106,9 +73,9 @@ class user extends CI_Controller
                 'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
-            $this->user_model->altaNoticia($datos);
-            //Usado para evaluar desde javascript que todo haya ido bien
-            echo '1';
+                $this->user_model->altaNoticia($datos);
+                //Usado para evaluar desde javascript que todo haya ido bien
+                echo '1';
         }
         else
         {
@@ -327,16 +294,6 @@ class user extends CI_Controller
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $this->upload->initialize($config);
 
-    }
-
-    private function setImageOptions()
-    {
-        $config = array();
-        $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'gif|jpg|png|JPG|PNG';
-        $config['file_name'] = $this->createHash().'-1';
-        
-        return $config;
     }
 
 }
