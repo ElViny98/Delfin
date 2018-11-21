@@ -8,7 +8,7 @@ class User_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    
+
     public function altaNoticia($datos)
     {
         $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
@@ -29,6 +29,16 @@ class User_model extends CI_Model
     public function get_user_data($id)
     {
         $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
+        return $q->row();
+    }
+    public function get_user_academico($id)
+    {
+        $q = $this->db->select('*')->from('Infoacademica')->where('idUsuario',$id)->get();
+        return $q->row();
+    }
+    public function get_user_institucion($id)
+    {
+        $q = $this->db->select('*')->from('Institucion')->where('idUsuario',$id)->get();
         return $q->row();
     }
     public function misNoticias($id)

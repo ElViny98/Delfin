@@ -102,10 +102,6 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-2">
-            <!--<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>-->
-            <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editar_perfil/<?=$user_data->idUsuarios?>">Editar</a></button>
-        </div>
     </div> <!--fin de primer div row-->
 
     <div class="row">
@@ -174,6 +170,12 @@
                         $('#cancelarEditar').css({'display':'block'});
                         $('#espacioEditar').css({'display':'none'});
                         $('#espacio').css({'display':'block'});
+                        document.getElementById("txtSexo").value='<?php echo $sexo ?>';
+                        document.getElementById("txtGrado").value='<?php echo $grado ?>';
+                        document.getElementById("txtConsolidacion").value='<?php echo $consolidacion ?>';
+                        document.getElementById("txtPromep").value='<?php echo $promep ?>';
+                        document.getElementById("txtSni").value='<?php echo $sni ?>';
+                        document.getElementById("txtareaC").value='<?php echo $areaC ?>';
                     }
                     function Cancelar(){
                         $('#noEditar').css({'display':'block'});
@@ -263,7 +265,11 @@
                                     <p><?php echo $sexo; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar4">
-                                    <input type="cnombre" class="form-control" id="txtSexo" name="txtSexo" placeholder="Sexo" value="<?php echo $sexo ?>">
+                                    <select id="txtSexo" name="txtSexo" class="form-control">
+                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                          <option value="Femenino">Femenino</option>
+                                          <option value="Masculino">Masculino</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -298,7 +304,7 @@
                                 <div class="col-md-6" style="display:none;" id="paraEditar7">
                                     <input type="cnombre" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" value="<?php echo $telefono ?>">
                                 </div>
-                            </div>
+                                </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Correo</label>
@@ -314,13 +320,21 @@
                 <div class="tab-pane fade" id="infoAcademica" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Grado Academico</label>
+                                    <label>Grado Académico</label>
                                 </div>
                                 <div class="col-md-6" style="display:block;" id="noEditar9">
                                     <p><?php echo $grado; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar9">
-                                    <input type="cnombre" class="form-control" id="txtGrado" name="txtGrado" placeholder="Grado" value="<?php echo $grado ?>">
+                                    <select id="txtGrado" name="txtGrado" class="form-control">
+                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                          <option value="Dr.">Dr.</option>
+                                          <option value="M.C.">M.C.</option>
+                                          <option value="Mtro.">Mtro.</option>
+                                          <option value="Lic.">Lic.</option>
+                                          <option value="Ing.">Ing.</option>
+                                          <option value="Tec.">Tec.</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -342,7 +356,13 @@
                                     <p><?php echo $consolidacion; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar11">
-                                    <input type="cnombre" class="form-control" id="txtConsolidacion" name="txtConsolidacion"  value="<?php echo $consolidacion ?>">
+                                    <select id="txtConsolidacion" name="txtConsolidacion" class="form-control">
+                    		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                        		          <option value="Consolidado">Consolidado</option>
+                        		          <option value="En Consolidacion.">En Consolidacion</option>
+                        		          <option value="En Formación">En Formación</option>
+                                          <option value="Ninguno">Ninguno</option>
+                    		        </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -353,7 +373,11 @@
                                     <p><?php echo $promep; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar12">
-                                    <input type="cnombre" class="form-control" id="txtPromep" name="txtPromep"  value="<?php echo $promep ?>">
+                                    <select id="txtPromep" name="txtPromep" class="form-control">
+                    		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                        		          <option value="Con Perfil Deseable">Con Perfil Deseable</option>
+                        		          <option value="Sin Perfil Deseable">Sin Perfil Deseable</option>
+                    		        </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -364,7 +388,15 @@
                                     <p><?php echo $sni; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar13">
-                                    <input type="cnombre" class="form-control" id="txtSni" name="txtSni"  value="<?php echo $sni ?>">
+                                    <select id="txtSni" name="txtSni" class="form-control">
+                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                        <option value="Candidato">Candidato</option>
+                                          <option value="Nivel 1">Nivel 1</option>
+                                          <option value="Nivel 2">Nivel 2</option>
+                                          <option value="Nivel 3">Nivel 3</option>
+                                          <option value="Emérito">Emérito</option>
+                                          <option value="No Tiene">No Tiene</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -375,7 +407,16 @@
                                     <p><?php echo $areaC; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar14">
-                                    <input type="cnombre" class="form-control" id="txtareaC" name="txtareaC"  value="<?php echo $areaC ?>">
+                                    <select id="txtareaC" name="txtareaC" class="form-control">
+                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                              <option value="Área I: Física, Matemáticas y Ciencias de la Tierra">Área I: Física, Matemáticas y Ciencias de la Tierra</option>
+                                              <option value="Área II: Biología y Química">Área II: Biología y Química</option>
+                                              <option value="Área III: Madicina y Salud">Área III: Madicina y Salud</option>
+                                              <option value="Área IV: Humanidades y Ciencias de la Conducta">Área IV: Humanidades y Ciencias de la Conducta</option>
+                                              <option value="Área V: Sociales y Económicas">Área V: Sociales y Económicas</option>
+                                              <option value="Área VI: Biotecnología y Ciencias Agropecuarias">Área VI: Biotecnología y Ciencias Agropecuarias</option>
+                                              <option value="Área VII: Ingeniería e Industria">Área VII: Ingeniería e Industria</option>
+                                    </select>
                                 </div>
                             </div>
                 </div>
