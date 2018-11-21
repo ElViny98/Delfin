@@ -247,12 +247,16 @@ class user extends CI_Controller
         $this->load->view('editarNoticia',$data);
         $this->load->view('helpers/footer');
     }
+
     public function Perfil(){
         $id = $this->session->userdata('idUsuario');
         $data_user= $this->user_model->get_user_data($id);
         $user_academico= $this->user_model->get_user_academico($id);
         $user_institucion= $this->user_model->get_user_institucion($id);
         $data_user= $this->user_model->get_user_data($id);
+        $paises=$this->user_model->get_countries();
+        $estados=$this->user_model->get_regions($user_institucion->Pais);
+        $ciudades=$this->user_model->get_cities($user_institucion->Estado);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -264,21 +268,43 @@ class user extends CI_Controller
             'telefono'      => $data_user->Telefono,
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
-            'grado'         =>$user_academico->Grado,
-            'cuerpoA'       =>$user_academico->cuerpoAcademico,
-            'consolidacion' =>$user_academico->consolidacionCA,
-            'promep'        =>$user_academico->perfilPROMEP,
-            'sni'           =>$user_academico->nivelSNI,
-            'areaC'         =>$user_academico->areaConocimiento,
-            'institucion'   =>$user_institucion->Nombre,
-            'unidad'        =>$user_institucion->UAcademica,
-            'paisInst'      =>$user_institucion->Pais,
-            'estadoInst'    =>$user_institucion->Estado,
-            'ciudadInst'     =>$user_institucion->Ciudad
+            'grado'         => $user_academico->Grado,
+            'cuerpoA'       => $user_academico->cuerpoAcademico,
+            'consolidacion' => $user_academico->consolidacionCA,
+            'promep'        => $user_academico->perfilPROMEP,
+            'sni'           => $user_academico->nivelSNI,
+            'areaC'         => $user_academico->areaConocimiento,
+            'institucion'   => $user_institucion->Nombre,
+            'unidad'        => $user_institucion->UAcademica,
+            'paisInst'      => $user_institucion->Pais,
+            'estadoInst'    => $user_institucion->Estado,
+            'ciudadInst'    => $user_institucion->Ciudad,
+            'countries'     => $paises,
+            'regions'       => $estados,
+            'cities'        => $ciudades
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
         $this->load->view('helpers/footer');
+    }
+
+    public function getRegions()
+    {
+        $q = $this->user_model->get_regions($this->input->get('countryId'));
+        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+        foreach($q->result() as $regions)
+        {
+            echo '<option value="'.$regions->id.'">'.$regions->name.'</option>';
+        }
+    }
+    public function getCities()
+    {
+        $q = $this->user_model->get_cities($this->input->get('regionId'));
+        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+        foreach($q->result() as $cities)
+        {
+            echo '<option value="'.$cities->id.'">'.$cities->name.'</option>';
+        }
     }
 
     public function salir()
@@ -295,5 +321,4 @@ class user extends CI_Controller
         $this->upload->initialize($config);
 
     }
-
 }

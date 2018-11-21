@@ -176,6 +176,10 @@
                         document.getElementById("txtPromep").value='<?php echo $promep ?>';
                         document.getElementById("txtSni").value='<?php echo $sni ?>';
                         document.getElementById("txtareaC").value='<?php echo $areaC ?>';
+                        document.getElementById("txtPais").value='<?php echo $pais?>';
+                        document.getElementById("txtpaisInst").value='<?php echo $paisInst?>';
+                        document.getElementById("txtEstadoInst").value='<?php echo $estadoInst?>';
+                        document.getElementById("txtCiudadInst").value='<?php echo $ciudadInst?>';
                     }
                     function Cancelar(){
                         $('#noEditar').css({'display':'block'});
@@ -291,7 +295,14 @@
                                     <p><?php echo $pais; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar6">
-                                    <input type="cnombre" class="form-control" id="txtPais" name="txtPais" placeholder="País" value="<?php echo $pais ?>">
+                                    <select id="txtPais" name="txtPais" class="form-control">
+                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                          <?php
+                                            foreach ($countries->result() as $country) {
+                                                echo '<option value="'.$country->id.'">'.$country->name.'</option>';
+                                            }
+                                           ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -451,7 +462,14 @@
                                     <p><?php echo $paisInst; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar17">
-                                    <input type="cnombre" class="form-control" id="txtpaisInst" name="txtpaisInst"  value="<?php echo $paisInst ?>">
+                                    <select id="txtpaisInst" name="txtpaisInst" class="form-control">
+                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                          <?php
+                                            foreach ($countries->result() as $country) {
+                                                echo '<option value="'.$country->id.'">'.$country->name.'</option>';
+                                            }
+                                           ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -462,7 +480,14 @@
                                     <p><?php echo $estadoInst; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar18">
-                                    <input type="cnombre" class="form-control" id="txtEstadoInst" name="txtEstadoInst"  value="<?php echo $estadoInst ?>">
+                                    <select class="form-control" id="txtEstadoInst" name="txtEstadoInst">
+                                        <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                        <?php
+                                          foreach ($regions->result() as $region) {
+                                              echo '<option value="'.$region->id.'">'.$region->name.'</option>';
+                                          }
+                                         ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -473,7 +498,14 @@
                                     <p><?php echo $ciudadInst; ?></p>
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                    <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst"  value="<?php echo $ciudadInst ?>">
+                                    <select class="form-control" id="txtCiudadInst" name="txtCiudadInst">
+                                        <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                        <?php
+                                          foreach ($cities->result() as $city) {
+                                              echo '<option value="'.$city->id.'">'.$city->name.'</option>';
+                                          }
+                                         ?>
+                                    </select>
                                 </div>
                             </div>
 
@@ -500,3 +532,33 @@
     </div>
   </form>
 </div>
+<script type="text/javascript">
+    $("#txtpaisInst").change(function() {
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/getRegions?countryId='); ?>' + this.value,
+            type: 'GET',
+            success: function(data) {
+                var sel = document.getElementById("txtEstadoInst");
+                sel.remove(sel.selectedIndex);
+                document.getElementById('txtEstadoInst').innerHTML = data;
+
+                var sel2 = document.getElementById("txtCiudadInst");
+                sel2.remove(sel2.selectedIndex);
+
+                document.getElementById("txtCiudadInst").innerHTML='<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+            }
+        });
+    })
+    $("#txtEstadoInst").change(function() {
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/getCities?regionId='); ?>' + this.value,
+            type: 'GET',
+            success: function(data) {
+                var sel = document.getElementById("txtCiudadInst");
+                sel.remove(sel.selectedIndex);
+                
+                document.getElementById('txtCiudadInst').innerHTML = data;
+            }
+        });
+    })
+</script>

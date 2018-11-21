@@ -73,5 +73,32 @@ class User_model extends CI_Model
     {
         $this->db->query($query);
     }
+    public function get_countries()
+    {
+        $q = $this->db->select('id,name')->from('Countries')->get();
+        return $q;
+    }
+    public function get_regions($id)
+    {
+        $q = $this->db->select('id,name')->from('Regions')->where('country_id',$id)->get();
+        return $q;
+    }
+    public function get_cities($id)
+    {
+        $q = $this->db->select('id,name')->from('Cities')->where('region_id',$id)->get();
+        return $q;
+    }
+    public function get_name_pais($id){
+        $q = $this->db->select('name')->from('Countries')->where('id',$id)->get();
+        return $q;
+    }
+    public function get_name_estado($id){
+        $q = $this->db->select('name')->from('Regions')->where('id',$id)->get();
+        return $q;
+    }
+    public function get_name_ciudad($id){
+        $q = $this->db->select('name')->from('Cities')->where('id',$id)->get();
+        return $q;
+    }
 }
 ?>
