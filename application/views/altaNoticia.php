@@ -108,7 +108,6 @@
             formData.append('pic', files);
         });
 
-        $.each($('img'))
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
 
