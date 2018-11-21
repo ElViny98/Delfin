@@ -46,9 +46,11 @@ class user extends CI_Controller
         $this->load->view('helpers/footer');
     }
     public function editar_perfil(){
-      $data = $this->user_model->get_user_data(2);
+        $id = $this->session->userdata('idUsuario');
+      $data = $this->user_model->get_user_data($id);
       $this->load->view('helpers/headerUsuario');
       $this->load->view('editprofile', array('data' => $data));
+      $this->load->view('helpers/footer');
     }
 
     function update_prof() {
