@@ -49,7 +49,8 @@
         </div>
         <div class="col-md-2">
             <!--<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>-->
-            <button id="btnEditar" type="button"><a href="<?=base_url('index.php/')?>user/editar_perfil/<?=$user_data->idUsuarios?>">Editar</a></button>
+            <button id="btnEditar" type="button" onclick="esconder('myTabContent');">Editar</button>
+            <!--<a href="<?=base_url('index.php/')?>user/editar_perfil/<?=$user_data->idUsuarios?>">edit</a>-->
         </div>
     </div> <!--fin de primer div row-->
     <div class="row">
@@ -72,7 +73,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-content profile-tab" id="myTabContent" >
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row ">
                                 <div class="col-md-6">
@@ -174,9 +175,16 @@
             </div>
         </div>
     </div><!--fin de segundo div row-->
-
 </div>
-</div>
-</div>
-</div>
-</div>
+<script type="text/javascript">
+  function esconder(id){
+    var divelement = document.getElementById(id);
+    if (divelement.style.display == 'none') {
+      divelement.style.display= 'block';
+    }
+    else {
+      divelement.style.display= 'none';
+      //mostrar editar perfil
+    }
+  }
+</script>
