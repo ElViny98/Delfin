@@ -110,6 +110,42 @@
 
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
+        
+        var img = document.getElementsByTagName('img');
+        var base64 = [];
+        var mime = [];
+        var bin = [];
+        var length = [];
+        var buf = [];
+        var arr = [];
+        var file = [];
+        var blob = [];
+        var lModified = new Date();
+
+        //El indice desde el eque empiezan las imágenes en el editor es 2
+        for(var i = 2; i < img.length; i++) {
+            base64.push(img[i].src.split(','));
+            mime.push(base64[i - 2][0].match(/:(.*?);/)[1]);
+        }
+
+        for(var i = 0; i < base64.length; i++) {
+            bin.push(atob(base64[i][1]));
+            length.push(bin[i].length);
+
+            buf[i] = new ArrayBuffer(length[i]);
+            arr[i] = new Uint8Array(buf[i]);
+            bin[i].split('').forEach((e, y) => arr[i][y] = e.charCodeAt(0));
+
+            file[i] = new File([buf[i]], 'tmp-' + i, {type: mime[i]});
+            file[i].lastModified = lModified;
+            formData.append('imgNew[]', file[i]);
+        }
+
+        console.table(base64);
+        console.table(mime);
+        console.table(bin);
+        console.table(length);
+        console.table(file);
 
         $.ajax({
             url: actionForm,
@@ -139,7 +175,7 @@
     function getQuillHTML(deltaObject) {
         var tempCont = document.createElement('div');
         (new Quill(tempCont)).setContents(deltaObject);
-
+        
         return tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
     }
 </script>
