@@ -11,6 +11,15 @@ class user extends CI_Controller
         $this->load->helper('file');
     }
 
+    public function datosNotici()
+    {
+        print_r($_FILES);
+        foreach($_FILES['imgNew']['name'] as $f)
+        {
+            printf("%s\n", $f);
+        }
+    }
+
     public function index()
     {
         if($this->session->userdata('nivel') == 2)
@@ -37,9 +46,11 @@ class user extends CI_Controller
         $this->load->view('helpers/footer');
     }
     public function editar_perfil(){
-      $data = $this->user_model->get_user_data(2);
+        $id = $this->session->userdata('idUsuario');
+      $data = $this->user_model->get_user_data($id);
       $this->load->view('helpers/headerUsuario');
       $this->load->view('editprofile', array('data' => $data));
+      $this->load->view('helpers/footer');
     }
 
     function update_prof()
@@ -75,8 +86,8 @@ class user extends CI_Controller
         $this->user_model->update_prf($id,$data,$dataca,$datain);
     }
 
-    public function datosNoticia(){
-
+    public function datosNoticia()
+    {
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
         $config['allowed_types'] = 'jpg|png|jpeg';
@@ -84,6 +95,30 @@ class user extends CI_Controller
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
         $this->load->library('upload', $config);
+
+        $imgCont = count($_FILES['imgNew']['name']);
+        foreach($_FILES['imgNew']['name'] as $f => $value)
+        {
+            $_FILES['imgNew[]']['name'] = $_FILES['imgNew']['name'][$f];
+            $_FILES['imgNew[]']['type'] = $_FILES['imgNew']['type'][$f];
+            $_FILES['imgNew[]']['tmp_name'] = $_FILES['imgNew']['tmp_name'][$f];
+            $_FILES['imgNew[]']['error'] = $_FILES['imgNew']['error'][$f];
+            $_FILES['imgNew[]']['size'] = $_FILES['imgNew']['size'][$f];
+
+            $imgUp = $this->setImageOptions();
+            print_r($imgUp);
+            $this->load->library('upload', $imgUp);
+            $this->upload->initialize($imgUp);
+
+            if($this->upload->do_upload('imgNew[]'))
+                echo 'uwu';
+
+            else
+                echo $this->upload->display_errors();
+        }
+
+        return;
+
         if($this->upload->do_upload('pic'))
         {
             $image_path = $this->upload->data();
@@ -95,9 +130,9 @@ class user extends CI_Controller
                 'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
-                $this->user_model->altaNoticia($datos);
-                //Usado para evaluar desde javascript que todo haya ido bien
-                echo '1';
+            $this->user_model->altaNoticia($datos);
+            //Usado para evaluar desde javascript que todo haya ido bien
+            echo '1';
         }
         else
         {
@@ -269,12 +304,16 @@ class user extends CI_Controller
         $this->load->view('editarNoticia',$data);
         $this->load->view('helpers/footer');
     }
+
     public function Perfil(){
         $id = $this->session->userdata('idUsuario');
         $data_user= $this->user_model->get_user_data($id);
         $user_academico= $this->user_model->get_user_academico($id);
         $user_institucion= $this->user_model->get_user_institucion($id);
         $data_user= $this->user_model->get_user_data($id);
+        $paises=$this->user_model->get_countries();
+        $estados=$this->user_model->get_regions($user_institucion->Pais);
+        $ciudades=$this->user_model->get_cities($user_institucion->Estado);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -286,21 +325,43 @@ class user extends CI_Controller
             'telefono'      => $data_user->Telefono,
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
-            'grado'         =>$user_academico->Grado,
-            'cuerpoA'       =>$user_academico->cuerpoAcademico,
-            'consolidacion' =>$user_academico->consolidacionCA,
-            'promep'        =>$user_academico->perfilPROMEP,
-            'sni'           =>$user_academico->nivelSNI,
-            'areaC'         =>$user_academico->areaConocimiento,
-            'institucion'   =>$user_institucion->NombreIns,
-            'unidad'        =>$user_institucion->UAcademica,
-            'paisInst'      =>$user_institucion->PaisIns,
-            'estadoInst'    =>$user_institucion->Estado,
-            'ciudadInst'     =>$user_institucion->Ciudad
+            'grado'         => $user_academico->Grado,
+            'cuerpoA'       => $user_academico->cuerpoAcademico,
+            'consolidacion' => $user_academico->consolidacionCA,
+            'promep'        => $user_academico->perfilPROMEP,
+            'sni'           => $user_academico->nivelSNI,
+            'areaC'         => $user_academico->areaConocimiento,
+            'institucion'   => $user_institucion->Nombre,
+            'unidad'        => $user_institucion->UAcademica,
+            'paisInst'      => $user_institucion->Pais,
+            'estadoInst'    => $user_institucion->Estado,
+            'ciudadInst'    => $user_institucion->Ciudad,
+            'countries'     => $paises,
+            'regions'       => $estados,
+            'cities'        => $ciudades
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
         $this->load->view('helpers/footer');
+    }
+
+    public function getRegions()
+    {
+        $q = $this->user_model->get_regions($this->input->get('countryId'));
+        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+        foreach($q->result() as $regions)
+        {
+            echo '<option value="'.$regions->id.'">'.$regions->name.'</option>';
+        }
+    }
+    public function getCities()
+    {
+        $q = $this->user_model->get_cities($this->input->get('regionId'));
+        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+        foreach($q->result() as $cities)
+        {
+            echo '<option value="'.$cities->id.'">'.$cities->name.'</option>';
+        }
     }
 
     public function salir()
@@ -316,6 +377,16 @@ class user extends CI_Controller
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $this->upload->initialize($config);
 
+    }
+
+    private function setImageOptions()
+    {
+        $config = array();
+        $config['upload_path'] = 'assets/img/';
+        $config['allowed_types'] = 'gif|jpg|png|JPG|PNG';
+        $config['file_name'] = $this->createHash().'-1';
+
+        return $config;
     }
 
 }
