@@ -518,7 +518,7 @@
 
         </div>
         <div class="col-md-2" style="display:none;" id="guardarCambios">
-            <button type="submit" name='submit' value='upload' class="btn btn-default" onclick="editprf()" id="editar">Guardar Cambios</button>
+            <button type="button" name='button' value='upload' class="btn btn-default" onclick="editprf()" id="editar">Guardar Cambios</button>
         </div>
         <div class="col-md-2" style="display:none;" id="cancelarEditar">
             <input type="button" name="cancelar" id="cancelar" class="btn btn-default" value="Cancelar" onclick="Cancelar()">
@@ -551,13 +551,12 @@
   }
 
   function editprf(){
-   var id  = $('#id').val();
    var nom = $('#txtNombre').val();
    var apa = $('#txtPaterno').val();
    var ama = $('#txtMaterno').val();
    var sex = $('#txtSexo').val();
    var fec = $('#txtFecha').val();
-   var pai = $('#txtPais').val();
+   var pai = $('#txtPais option:selected').text();
    var tel = $('#txtTelefono').val();
    var cor = $('#txtCorreo').val();
    //infoacademico
@@ -570,16 +569,17 @@
    //infoInstitucional
    var ins = $('#txtInstitucion').val();
    var uni = $('#txtUnidad').val();
-   var paI = $('#txtpaisInst').val();
-   var est = $('#txtEstadoInst').val();
+   var idpaI = $('#txtpaisInst').val();
+   var paI = $('#txtpaisInst option:selected').text();
+   var est = $('#txtEstadoInst option:selected').text();
    var ciu = $('#txtCiudadInst').val();
 
    $.ajax({
    method: "POST",
    url: '<?php echo base_url("index.php/user/update_prof"); ?>',
-   data: { Id: id, name: nom, appaterno: apa, apmaterno:ama, sexo: sex, fechanaci:fec, pais:pai, telefono:tel, correo: cor,
+   data: { name: nom, appaterno: apa, apmaterno:ama, sexo: sex, fechanaci:fec, pais:pai, telefono:tel, correo: cor,
    grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
-   inst: ins, unidad: uni, paisinst: paI, estado: est, ciudad: ciu
+   inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
   }
  })
   if(!alert('Alert For your User!')){window.location.reload();}

@@ -55,7 +55,7 @@ class user extends CI_Controller
 
     function update_prof()
     {
-      $id= $this->input->post('Id');
+      $id= $this->session->userdata('idUsuario');
       $data = array(
             'Nombre' => $this->input->post('name'),
             'ApPaterno' => $this->input->post('appaterno'),
@@ -75,11 +75,12 @@ class user extends CI_Controller
             'nivelSNI' => $this->input->post('Sni'),
             'areaConocimiento' => $this->input->post('area')
           );
-            //Institucion inst: ins, unidad: uni, paisinst: paI, estado: est, ciudad: ciu
+            //Institucion inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
             $datain = array(
-            'Nombreins' => $this->input->post('inst'),
+            'Nombre' => $this->input->post('inst'),
             'UAcademica' => $this->input->post('unidad'),
-            'PaisIns' => $this->input->post('paisinst'),
+            'idPais'    => $this->input->post('idpaisinst'),
+            'Pais' => $this->input->post('paisinst'),
             'Estado' => $this->input->post('estado'),
             'Ciudad' => $this->input->post('ciudad')
           );
