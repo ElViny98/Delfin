@@ -18,12 +18,12 @@
             {
                 if($x % 4 == 0 && $x != 0)
                     echo '<div class="news-container">';
-            
+
                 echo '
                     <div class="row">
                         <div class="col-md-7">
                             <a href="#">
-                                <img class="img-fluid rounded mb-3 mb-md-0" src="'.base_url('assets/img/'.$n->Img).'">
+                                <img class="img-fluid rounded mb-3 mb-md-0" src="'.base_url('assets/img/'.$n->img).'">
                             </a>
                         </div>
                         <div class="col-md-5">
@@ -37,14 +37,14 @@
                 if($x % 4 == 3)
                     echo '</div>
                     ';
-    
+
                 $x++;
             }
             if($x % 4 != 1)
                 echo '</div>
                 ';
         }
-        	
+
     ?>
 
     <!-- Pagination -->
@@ -68,7 +68,7 @@
     					</li>
 				    ';
 			    }
-            } 
+            }
 		?>
 		<li class="page-item">
 			<a class="page-link" href="#" aria-label="Next">

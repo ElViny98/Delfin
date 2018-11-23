@@ -42,15 +42,37 @@ class user extends CI_Controller
       $this->load->view('editprofile', array('data' => $data));
     }
 
-    function update_prof() {
+    function update_prof()
+    {
       $id= $this->input->post('Id');
       $data = array(
             'Nombre' => $this->input->post('name'),
-            'Correo' => $this->input->post('mail'),
-            'Ciudad' => $this->input->post('city'),
-            'Pais' => $this->input->post('country')
-        );
-        $this->user_model->update_prf($id,$data);
+            'ApPaterno' => $this->input->post('appaterno'),
+            'ApMaterno' => $this->input->post('apmaterno'),
+            'Sexo' => $this->input->post('sexo'),
+            'Nacimiento' => $this->input->post('fechanaci'),
+            'Pais' => $this->input->post('pais'),
+            'Telefono' => $this->input->post('telefono'),
+            'Correo' => $this->input->post('correo')
+          );
+            //infoAcademica grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
+            $dataca = array(
+            'Grado' => $this->input->post('grado'),
+            'cuerpoAcademico' => $this->input->post('cuerp'),
+            'consolidacionCA' => $this->input->post('consolidacion'),
+            'perfilPROMEP' => $this->input->post('promep'),
+            'nivelSNI' => $this->input->post('Sni'),
+            'areaConocimiento' => $this->input->post('area')
+          );
+            //Institucion inst: ins, unidad: uni, paisinst: paI, estado: est, ciudad: ciu
+            $datain = array(
+            'Nombreins' => $this->input->post('inst'),
+            'UAcademica' => $this->input->post('unidad'),
+            'PaisIns' => $this->input->post('paisinst'),
+            'Estado' => $this->input->post('estado'),
+            'Ciudad' => $this->input->post('ciudad')
+          );
+        $this->user_model->update_prf($id,$data,$dataca,$datain);
     }
 
     public function datosNoticia(){
@@ -106,7 +128,7 @@ class user extends CI_Controller
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['allowed_types'] = 'jpg|png|jpeg|gif';
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
@@ -270,9 +292,9 @@ class user extends CI_Controller
             'promep'        =>$user_academico->perfilPROMEP,
             'sni'           =>$user_academico->nivelSNI,
             'areaC'         =>$user_academico->areaConocimiento,
-            'institucion'   =>$user_institucion->Nombre,
+            'institucion'   =>$user_institucion->NombreIns,
             'unidad'        =>$user_institucion->UAcademica,
-            'paisInst'      =>$user_institucion->Pais,
+            'paisInst'      =>$user_institucion->PaisIns,
             'estadoInst'    =>$user_institucion->Estado,
             'ciudadInst'     =>$user_institucion->Ciudad
         );

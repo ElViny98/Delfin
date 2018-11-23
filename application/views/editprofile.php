@@ -10,9 +10,7 @@
 <p>Click On Menu</p>
 </div>
 <div id="detail">
-<!-- Fetching All Details of Selected Student From Database And Showing In a Form -->
 <p>Edit Detail & Click Update Button</p>
-<!--<form method="post" action="<?php echo base_url() . "index.php/update_ctrl/update_student_id1"?>">-->
 <label id="hide">Id :</label>
 <input type="text" id="id" name="did" value="<?php echo $data->idUsuarios; ?>">
 <label>Name :</label>
@@ -45,7 +43,9 @@
   })
     .done(function( msg ) {
       alert( "Data Saved: " + msg );
-    });
+    }
+      location.reload(forceGet);
+  );
   }
 
 
