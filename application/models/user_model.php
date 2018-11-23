@@ -28,6 +28,13 @@ class User_model extends CI_Model
         $this->db->update('infoAcademica', $dataca);
         $this->db->update('inst', $datain);
     }
+    public function update_pass($query)
+    {
+        if($this->db->query($query))
+          return true;
+
+        return false;
+    }
     public function get_user_data($id)
     {
         $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();

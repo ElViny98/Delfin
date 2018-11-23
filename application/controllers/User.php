@@ -86,6 +86,18 @@ class user extends CI_Controller
           );
         $this->user_model->update_prf($id,$data,$dataca,$datain);
     }
+    public function update_pass(){
+      $id= $this->session->userdata('idUsuario');
+      $data = $this->input->post('newPass');
+      $query='UPDATE Usuarios SET Password="'.$data.'" WHERE idUsuarios='.$id ;
+      if($this->user_model->update_pass($query)){
+        echo 1;
+      }
+      else {
+        echo 0;
+      }
+
+    }
 
     public function datosNoticia()
     {
@@ -325,6 +337,7 @@ class user extends CI_Controller
             'telefono'      => $data_user->Telefono,
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
+            'password'      => $data_user->Password, //news
             'grado'         => $user_academico->Grado,
             'cuerpoA'       => $user_academico->cuerpoAcademico,
             'consolidacion' => $user_academico->consolidacionCA,
@@ -343,6 +356,7 @@ class user extends CI_Controller
         $this->load->view('perfilUsuario',$datos);
         $this->load->view('helpers/footer');
     }
+
 
     public function getRegions()
     {
