@@ -288,8 +288,6 @@ class user extends CI_Controller
         $user_institucion= $this->user_model->get_user_institucion($id);
         $data_user= $this->user_model->get_user_data($id);
         $paises=$this->user_model->get_countries();
-        $estados=$this->user_model->get_regions($user_institucion->Pais);
-        $ciudades=$this->user_model->get_cities($user_institucion->Estado);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -312,9 +310,7 @@ class user extends CI_Controller
             'paisInst'      => $user_institucion->Pais,
             'estadoInst'    => $user_institucion->Estado,
             'ciudadInst'    => $user_institucion->Ciudad,
-            'countries'     => $paises,
-            'regions'       => $estados,
-            'cities'        => $ciudades
+            'countries'     => $paises
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
@@ -332,7 +328,7 @@ class user extends CI_Controller
     }
     public function getCities()
     {
-        $q = $this->user_model->get_cities($this->input->get('regionId'));
+        $q = $this->user_model->get_cities($this->input->get('regionId'), $this->input->get('countryId'));
         echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
         foreach($q->result() as $cities)
         {
@@ -365,4 +361,47 @@ class user extends CI_Controller
         return $config;
     }
 
+    public function investigaciones()
+    {
+        $data = array(
+            'investigaciones'   => $this->user_model->getInvestigaciones($this->session->userdata('idUsuario'))
+        );
+        $this->load->view('user/investigaciones', $data);
+    }
+
+    public function nuevaInvestigacion()
+    {
+        $this->load->view('user/nuevaInvestigacion');
+    }
+
+    public function registrarInv()
+    {
+        $name = $this->createHash();
+        $data = array(
+            'idInvestigaciones'     => null,
+            'idUsuario'             => $this->session->userdata('idUsuario'),
+            'Hash'                  => $name,
+            'Fecha'                 => $this->input->post('fechaInv'),
+            'Titulo'                => $this->input->post('titulo'),
+            'DOI'                   => 'null',
+            'Tema'                  => $this->input->post('tema'),
+            'Tipo'                  => $this->input->post('tipo')
+        );
+
+        $config = array(
+            'file_name'     => $name,
+            'allowed_types' => 'pdf',
+            'upload_path'   => 'assets/documents'
+        );
+
+        $this->load->library('upload', $config);
+
+        if($this->upload->do_upload('archivoInv'))
+        {
+            echo 'bien';
+            $this->user_model->nuevaInv($data);
+        }
+        else
+            echo $this->upload->display_errors();
+    }
 }

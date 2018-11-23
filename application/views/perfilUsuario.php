@@ -490,11 +490,6 @@
                                 <div class="col-md-6" style="display:none;" id="paraEditar18">
                                     <select class="form-control" id="txtEstadoInst" name="txtEstadoInst">
                                         <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                        <?php
-                                          foreach ($regions->result() as $region) {
-                                              echo '<option value="'.$region->id.'">'.$region->name.'</option>';
-                                          }
-                                         ?>
                                     </select>
                                 </div>
                             </div>
@@ -507,12 +502,6 @@
                                 </div>
                                 <div class="col-md-6" style="display:none;" id="paraEditar19">
                                     <select class="form-control" id="txtCiudadInst" name="txtCiudadInst">
-                                        <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                        <?php
-                                          foreach ($cities->result() as $city) {
-                                              echo '<option value="'.$city->id.'">'.$city->name.'</option>';
-                                          }
-                                         ?>
                                     </select>
                                 </div>
                             </div>
@@ -559,7 +548,7 @@
     })
     $("#txtEstadoInst").change(function() {
         $.ajax({
-            url: '<?php echo base_url('index.php/user/getCities?regionId='); ?>' + this.value,
+            url: '<?php echo base_url('index.php/user/getCities?regionId='); ?>' + this.value + '&countryId=' + $("#txtpaisInst").val(),
             type: 'GET',
             success: function(data) {
                 var sel = document.getElementById("txtCiudadInst");
