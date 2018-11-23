@@ -46,20 +46,45 @@ class user extends CI_Controller
         $this->load->view('helpers/footer');
     }
     public function editar_perfil(){
-      $data = $this->user_model->get_user_data(2);
+        $id = $this->session->userdata('idUsuario');
+      $data = $this->user_model->get_user_data($id);
       $this->load->view('helpers/headerUsuario');
       $this->load->view('editprofile', array('data' => $data));
+      $this->load->view('helpers/footer');
     }
 
-    function update_prof() {
-      $id= $this->input->post('Id');
+    function update_prof()
+    {
+      $id= $this->session->userdata('idUsuario');
       $data = array(
             'Nombre' => $this->input->post('name'),
-            'Correo' => $this->input->post('mail'),
-            'Ciudad' => $this->input->post('city'),
-            'Pais' => $this->input->post('country')
-        );
-        $this->user_model->update_prf($id,$data);
+            'ApPaterno' => $this->input->post('appaterno'),
+            'ApMaterno' => $this->input->post('apmaterno'),
+            'Sexo' => $this->input->post('sexo'),
+            'Nacimiento' => $this->input->post('fechanaci'),
+            'Pais' => $this->input->post('pais'),
+            'Telefono' => $this->input->post('telefono'),
+            'Correo' => $this->input->post('correo')
+          );
+            //infoAcademica grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
+            $dataca = array(
+            'Grado' => $this->input->post('grado'),
+            'cuerpoAcademico' => $this->input->post('cuerp'),
+            'consolidacionCA' => $this->input->post('consolidacion'),
+            'perfilPROMEP' => $this->input->post('promep'),
+            'nivelSNI' => $this->input->post('Sni'),
+            'areaConocimiento' => $this->input->post('area')
+          );
+            //Institucion inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
+            $datain = array(
+            'Nombre' => $this->input->post('inst'),
+            'UAcademica' => $this->input->post('unidad'),
+            'idPais'    => $this->input->post('idpaisinst'),
+            'Pais' => $this->input->post('paisinst'),
+            'Estado' => $this->input->post('estado'),
+            'Ciudad' => $this->input->post('ciudad')
+          );
+        $this->user_model->update_prf($id,$data,$dataca,$datain);
     }
 
     public function datosNoticia()
@@ -139,7 +164,7 @@ class user extends CI_Controller
 
         $this->load->library('upload');
         $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['allowed_types'] = 'jpg|png|jpeg|gif';
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
@@ -288,6 +313,7 @@ class user extends CI_Controller
         $user_institucion= $this->user_model->get_user_institucion($id);
         $data_user= $this->user_model->get_user_data($id);
         $paises=$this->user_model->get_countries();
+        $estados=$this->user_model->get_regions($user_institucion->idPais);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -309,8 +335,9 @@ class user extends CI_Controller
             'unidad'        => $user_institucion->UAcademica,
             'paisInst'      => $user_institucion->Pais,
             'estadoInst'    => $user_institucion->Estado,
-            'ciudadInst'    => $user_institucion->Ciudad,
-            'countries'     => $paises
+            'ciudadInst'    => $user_institucion->cp,
+            'countries'     => $paises,
+            'regions'       => $estados
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
@@ -324,15 +351,6 @@ class user extends CI_Controller
         foreach($q->result() as $regions)
         {
             echo '<option value="'.$regions->id.'">'.$regions->name.'</option>';
-        }
-    }
-    public function getCities()
-    {
-        $q = $this->user_model->get_cities($this->input->get('regionId'), $this->input->get('countryId'));
-        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
-        foreach($q->result() as $cities)
-        {
-            echo '<option value="'.$cities->id.'">'.$cities->name.'</option>';
         }
     }
 

@@ -16,15 +16,17 @@ class User_model extends CI_Model
         'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
 
-    public function uploadimg($datos)
+    public function uploadimg($query)
     {
-        $this->db->update('Usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
+        $this->db->query($query);
     }
 
-    public function update_prf($id, $data)
+    public function update_prf($id, $data, $dataca, $datain)
     {
         $this->db->where('idUsuarios', $id);
         $this->db->update('Usuarios', $data);
+        $this->db->update('infoAcademica', $dataca);
+        $this->db->update('inst', $datain);
     }
     public function get_user_data($id)
     {
@@ -38,7 +40,7 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('Institucion')->where('idUsuario',$id)->get();
+        $q = $this->db->select('*')->from('inst')->where('idUsuario',$id)->get();
         return $q->row();
     }
     public function misNoticias($id)
