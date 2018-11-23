@@ -64,7 +64,8 @@ class user extends CI_Controller
             'Nacimiento' => $this->input->post('fechanaci'),
             'Pais' => $this->input->post('pais'),
             'Telefono' => $this->input->post('telefono'),
-            'Correo' => $this->input->post('correo')
+            'Correo' => $this->input->post('correo'),
+            'idInst'    => $this->input->post('inst'),
           );
             //infoAcademica grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
             $dataca = array(
@@ -73,18 +74,11 @@ class user extends CI_Controller
             'consolidacionCA' => $this->input->post('consolidacion'),
             'perfilPROMEP' => $this->input->post('promep'),
             'nivelSNI' => $this->input->post('Sni'),
-            'areaConocimiento' => $this->input->post('area')
-          );
-            //Institucion inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
-            $datain = array(
-            'Nombre' => $this->input->post('inst'),
+            'areaConocimiento' => $this->input->post('area'),
             'UAcademica' => $this->input->post('unidad'),
-            'idPais'    => $this->input->post('idpaisinst'),
-            'Pais' => $this->input->post('paisinst'),
-            'Estado' => $this->input->post('estado'),
-            'Ciudad' => $this->input->post('ciudad')
           );
-        $this->user_model->update_prf($id,$data,$dataca,$datain);
+
+        $this->user_model->update_prf($id,$data,$dataca);
     }
 
     public function datosNoticia()
@@ -310,10 +304,11 @@ class user extends CI_Controller
         $id = $this->session->userdata('idUsuario');
         $data_user= $this->user_model->get_user_data($id);
         $user_academico= $this->user_model->get_user_academico($id);
-        $user_institucion= $this->user_model->get_user_institucion($id);
+        $user_institucion= $this->user_model->get_user_institucion($data_user->idInst);
         $data_user= $this->user_model->get_user_data($id);
         $paises=$this->user_model->get_countries();
         $estados=$this->user_model->get_regions($user_institucion->idPais);
+        $instituciones=$this->user_model->get_instituciones($user_institucion->idEst);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -325,19 +320,21 @@ class user extends CI_Controller
             'telefono'      => $data_user->Telefono,
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
+            'idInst'        => $data_user->idInst,
             'grado'         => $user_academico->Grado,
             'cuerpoA'       => $user_academico->cuerpoAcademico,
             'consolidacion' => $user_academico->consolidacionCA,
             'promep'        => $user_academico->perfilPROMEP,
             'sni'           => $user_academico->nivelSNI,
             'areaC'         => $user_academico->areaConocimiento,
+            'unidad'        => $user_academico->UAcademica,
             'institucion'   => $user_institucion->Nombre,
-            'unidad'        => $user_institucion->UAcademica,
             'paisInst'      => $user_institucion->Pais,
             'estadoInst'    => $user_institucion->Estado,
             'ciudadInst'    => $user_institucion->cp,
             'countries'     => $paises,
-            'regions'       => $estados
+            'regions'       => $estados,
+            'instituciones' => $instituciones
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
@@ -351,6 +348,15 @@ class user extends CI_Controller
         foreach($q->result() as $regions)
         {
             echo '<option value="'.$regions->id.'">'.$regions->name.'</option>';
+        }
+    }
+    public function getInstituciones()
+    {
+        $q = $this->user_model->get_instituciones($this->input->get('regionId'));
+        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
+        foreach($q->result() as $inst)
+        {
+            echo '<option value="'.$inst->idInstitucion.'">'.$inst->Nombre.'</option>';
         }
     }
 

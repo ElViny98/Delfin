@@ -21,12 +21,11 @@ class User_model extends CI_Model
         $this->db->query($query);
     }
 
-    public function update_prf($id, $data, $dataca, $datain)
+    public function update_prf($id, $data, $dataca)
     {
         $this->db->where('idUsuarios', $id);
         $this->db->update('Usuarios', $data);
         $this->db->update('infoAcademica', $dataca);
-        $this->db->update('inst', $datain);
     }
     public function get_user_data($id)
     {
@@ -40,7 +39,7 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('inst')->where('idUsuario',$id)->get();
+        $q = $this->db->select('*')->from('Inst')->where('idInstitucion',$id)->get();
         return $q->row();
     }
     public function misNoticias($id)
@@ -83,6 +82,11 @@ class User_model extends CI_Model
     public function get_regions($id)
     {
         $q = $this->db->select('id,name')->from('Regions')->where('country_id',$id)->get();
+        return $q;
+    }
+    public function get_instituciones($id)
+    {
+        $q = $this->db->select('*')->from('Inst')->where('idEst',$id)->get();
         return $q;
     }
 }
