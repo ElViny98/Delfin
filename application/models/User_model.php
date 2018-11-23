@@ -89,5 +89,33 @@ class User_model extends CI_Model
         $q = $this->db->select('*')->from('Inst')->where('idEst',$id)->get();
         return $q;
     }
+    public function get_cities($id, $country)
+    {
+        $q = $this->db->query('SELECT id, name FROM Cities WHERE region_id = '.$id.' AND country_id = '.$country);
+        return $q;
+    }
+    public function get_name_pais($id){
+        $q = $this->db->select('name')->from('Countries')->where('id',$id)->get();
+        return $q;
+    }
+    public function get_name_estado($id){
+        $q = $this->db->select('name')->from('Regions')->where('id',$id)->get();
+        return $q;
+    }
+    public function get_name_ciudad($id){
+        $q = $this->db->select('name')->from('Cities')->where('id',$id)->get();
+        return $q;
+    }
+
+    public function getInvestigaciones($id)
+    {
+        $query = $this->db->query('SELECT * FROM Investigaciones WHERE idUsuario = '.$id);
+        return $query;
+    }
+
+    public function nuevaInv($data)
+    {
+        $this->db->insert('Investigaciones', $data);
+    }
 }
 ?>

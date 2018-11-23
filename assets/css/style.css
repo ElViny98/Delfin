@@ -296,3 +296,15 @@ div.scrollTabla{
 {
     background-color: #FDFDFD;
 }
+
+
+.new-document
+{
+    visibility: hidden;
+    display: none;
+}
+
+.new-document:hover
+{
+    cursor: pointer;
+}

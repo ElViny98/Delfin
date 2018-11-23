@@ -385,4 +385,47 @@ class user extends CI_Controller
         return $config;
     }
 
+    public function investigaciones()
+    {
+        $data = array(
+            'investigaciones'   => $this->user_model->getInvestigaciones($this->session->userdata('idUsuario'))
+        );
+        $this->load->view('user/investigaciones', $data);
+    }
+
+    public function nuevaInvestigacion()
+    {
+        $this->load->view('user/nuevaInvestigacion');
+    }
+
+    public function registrarInv()
+    {
+        $name = $this->createHash();
+        $data = array(
+            'idInvestigaciones'     => null,
+            'idUsuario'             => $this->session->userdata('idUsuario'),
+            'Hash'                  => $name,
+            'Fecha'                 => $this->input->post('fechaInv'),
+            'Titulo'                => $this->input->post('titulo'),
+            'DOI'                   => 'null',
+            'Tema'                  => $this->input->post('tema'),
+            'Tipo'                  => $this->input->post('tipo')
+        );
+
+        $config = array(
+            'file_name'     => $name,
+            'allowed_types' => 'pdf',
+            'upload_path'   => 'assets/documents'
+        );
+
+        $this->load->library('upload', $config);
+
+        if($this->upload->do_upload('archivoInv'))
+        {
+            echo 'bien';
+            $this->user_model->nuevaInv($data);
+        }
+        else
+            echo $this->upload->display_errors();
+    }
 }
