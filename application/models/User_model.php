@@ -21,10 +21,12 @@ class User_model extends CI_Model
         $this->db->query($query);
     }
 
-    public function update_prf($id, $data)
+    public function update_prf($id, $data, $dataca, $datain)
     {
         $this->db->where('idUsuarios', $id);
         $this->db->update('Usuarios', $data);
+        $this->db->update('infoAcademica', $dataca);
+        $this->db->update('institucion', $datain);
     }
     public function get_user_data($id)
     {

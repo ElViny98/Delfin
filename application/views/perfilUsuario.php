@@ -1,5 +1,4 @@
-
-    <div class="container emp-profile">
+<div class="container emp-profile">
     <div class="row">
 
         <div class="modal fade" id="photoUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -32,27 +31,22 @@
                     <script type="text/javascript">
                         function archivo(evt) {
                           var files = evt.target.files; // FileList object
-
                           // Obtenemos la imagen del campo "file".
                           for (var i = 0, f; f = files[i]; i++) {
                             //Solo admitimos imágenes.
                             if (!f.type.match('image.*')) {
                                 continue;
                             }
-
                             var reader = new FileReader();
-
                             reader.onload = (function(theFile) {
                                 return function(e) {
                                   // Insertamos la imagen
                                  document.getElementById("file-preview-zone-user").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
                                 };
                             })(f);
-
                             reader.readAsDataURL(f);
                           }
                       }
-
                       document.getElementById('userPhoto').addEventListener('change', archivo, true);
                     </script>
         	   </div>
@@ -519,11 +513,12 @@
         <div class="col-md-2" style="display:block;" id="mostrarEditar">
             <input type="button" class="btn btn-default" name="editar" id="editar" value="Editar Perfil" onclick="mostrarParaEditar()">
         </div>
+
         <div class="col-md-8" style="display:none;" id="espacio">
 
         </div>
         <div class="col-md-2" style="display:none;" id="guardarCambios">
-            <button type="submit" name='submit' value='upload' class="btn btn-default" id="editar">Guardar Cambios</button>
+            <button type="submit" name='submit' value='upload' class="btn btn-default" onclick="editprf()" id="editar">Guardar Cambios</button>
         </div>
         <div class="col-md-2" style="display:none;" id="cancelarEditar">
             <input type="button" name="cancelar" id="cancelar" class="btn btn-default" value="Cancelar" onclick="Cancelar()">
@@ -554,4 +549,40 @@
       //mostrar editar perfil
     }
   }
+
+  function editprf(){
+   var id  = $('#id').val();
+   var nom = $('#txtNombre').val();
+   var apa = $('#txtPaterno').val();
+   var ama = $('#txtMaterno').val();
+   var sex = $('#txtSexo').val();
+   var fec = $('#txtFecha').val();
+   var pai = $('#txtPais').val();
+   var tel = $('#txtTelefono').val();
+   var cor = $('#txtCorreo').val();
+   //infoacademico
+   var gra = $('#txtGrado').val();
+   var cue = $('#txtCuerpoA').val();
+   var con = $('#txtConsolidacion').val();
+   var pro = $('#txtPromep').val();
+   var sni = $('#txtSni').val();
+   var are = $('#txtareaC').val();
+   //infoInstitucional
+   var ins = $('#txtInstitucion').val();
+   var uni = $('#txtUnidad').val();
+   var paI = $('#txtpaisInst').val();
+   var est = $('#txtEstadoInst').val();
+   var ciu = $('#txtCiudadInst').val();
+
+   $.ajax({
+   method: "POST",
+   url: '<?php echo base_url("index.php/user/update_prof"); ?>',
+   data: { Id: id, name: nom, appaterno: apa, apmaterno:ama, sexo: sex, fechanaci:fec, pais:pai, telefono:tel, correo: cor,
+   grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
+   inst: ins, unidad: uni, paisinst: paI, estado: est, ciudad: ciu
+  }
+ })
+  if(!alert('Alert For your User!')){window.location.reload();}
+
+ }
 </script>

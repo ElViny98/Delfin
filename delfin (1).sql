@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2018 a las 17:56:59
+-- Tiempo de generación: 21-11-2018 a las 17:55:46
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -39,48 +39,26 @@ CREATE TABLE `autores` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cities`
+-- Estructura de tabla para la tabla `infoacademica`
 --
 
-CREATE TABLE `cities` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `region_id` int(11) UNSIGNED NOT NULL,
-  `country_id` smallint(5) UNSIGNED NOT NULL,
-  `latitude` decimal(10,8) NOT NULL,
-  `longitude` decimal(11,8) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `countries`
---
-
-CREATE TABLE `countries` (
-  `id` smallint(5) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `code` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `educacion`
---
-
-CREATE TABLE `educacion` (
-  `idEducación` int(11) NOT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
-  `idInstitucion` int(11) DEFAULT NULL,
-  `Egreso` varchar(5) DEFAULT NULL,
-  `Grado` varchar(45) DEFAULT NULL,
-  `Carrera` varchar(45) DEFAULT NULL,
-  `Consolidacion` varchar(25) NOT NULL,
-  `Promep` varchar(40) NOT NULL,
-  `NivelSNI` varchar(40) NOT NULL,
-  `AreaConocimiento` varchar(60) NOT NULL
+CREATE TABLE `infoacademica` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `Grado` varchar(15) NOT NULL,
+  `cuerpoAcademico` varchar(150) DEFAULT NULL,
+  `consolidacionCA` varchar(45) DEFAULT NULL,
+  `perfilPROMEP` varchar(45) DEFAULT NULL,
+  `nivelSNI` varchar(45) DEFAULT NULL,
+  `areaConocimiento` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `infoacademica`
+--
+
+INSERT INTO `infoacademica` (`id`, `idUsuario`, `Grado`, `cuerpoAcademico`, `consolidacionCA`, `perfilPROMEP`, `nivelSNI`, `areaConocimiento`) VALUES
+(1, 2, 'Dr.', 'Tecnología de información y comunicaciones aplicadas a la ingeniería de software y sistemas de información', 'Consolidado', 'Con Perfil Deseable', 'Candidato', 'Área IV: Humanidades y Ciencias de la Conducta');
 
 -- --------------------------------------------------------
 
@@ -90,12 +68,20 @@ CREATE TABLE `educacion` (
 
 CREATE TABLE `institucion` (
   `idInstitucion` int(11) NOT NULL,
-  `Nombre` varchar(45) DEFAULT NULL,
-  `Ciudad` varchar(60) DEFAULT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `Nombre` varchar(45) NOT NULL,
+  `Ciudad` varchar(60) NOT NULL,
   `UAcademica` varchar(40) NOT NULL,
   `Pais` varchar(30) NOT NULL,
   `Estado` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `institucion`
+--
+
+INSERT INTO `institucion` (`idInstitucion`, `idUsuario`, `Nombre`, `Ciudad`, `UAcademica`, `Pais`, `Estado`) VALUES
+(1, 2, 'Universidad Politécnica de Sinaloa', 'Mazatlán', 'Computación', 'México', 'Sinaloa');
 
 -- --------------------------------------------------------
 
@@ -139,18 +125,14 @@ CREATE TABLE `noticias` (
   `img` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `regions`
+-- Volcado de datos para la tabla `noticias`
 --
 
-CREATE TABLE `regions` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `code` varchar(10) NOT NULL,
-  `country_id` smallint(5) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+INSERT INTO `noticias` (`idNoticias`, `idUsuarios`, `Titulo`, `Descripcion`, `Fecha`, `img`) VALUES
+(14, 2, 'Prueba 1', '<p>Descripción de la noticia</p>', '2018-11-09', 'contraseña.jpg'),
+(17, 2, 'ahora si', '<p>&nbsp;se camio imagen</p>', '2018-11-12', 'descarga_(3).jpg'),
+(18, 2, 'otra', '<p>cambio la imagen x8</p>', '2018-11-12', 'fondo-margaritas-Favim_com-2190560.jpg');
 
 -- --------------------------------------------------------
 
@@ -174,6 +156,14 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuarios`, `Nombre`, `ApPaterno`, `ApMaterno`, `Correo`, `Password`, `Privilegio`, `Pais`, `Img`, `Nacimiento`, `Telefono`, `Sexo`) VALUES
+(1, 'angeles', 'leva', 'leva', 'angeles@gmail.com', '4152d2666890cee1f5e3beb68cd5f35e', 1, NULL, '420fb3b8c0586edfb017cb032adb2b3e--background-', NULL, '', ''),
+(2, 'Vanessa Guadalupe', 'Felix', 'Aviña', 'vfelix@upsin.edu.mx', '4152d2666890cee1f5e3beb68cd5f35e', 2, 'México', '1.png', '1979-07-12', '669-1800-695', 'Femenino');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -185,32 +175,18 @@ ALTER TABLE `autores`
   ADD KEY `Investigaciones_idx` (`idInvestigacion`);
 
 --
--- Indices de la tabla `cities`
+-- Indices de la tabla `infoacademica`
 --
-ALTER TABLE `cities`
+ALTER TABLE `infoacademica`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `country_region_name` (`country_id`,`region_id`,`name`);
-
---
--- Indices de la tabla `countries`
---
-ALTER TABLE `countries`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indices de la tabla `educacion`
---
-ALTER TABLE `educacion`
-  ADD PRIMARY KEY (`idEducación`),
-  ADD KEY `EducacionUsuario_idx` (`idUsuario`),
-  ADD KEY `Institucion_idx` (`idInstitucion`);
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `institucion`
 --
 ALTER TABLE `institucion`
-  ADD PRIMARY KEY (`idInstitucion`);
+  ADD PRIMARY KEY (`idInstitucion`),
+  ADD KEY `usuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `investigaciones`
@@ -225,13 +201,6 @@ ALTER TABLE `investigaciones`
 ALTER TABLE `noticias`
   ADD PRIMARY KEY (`idNoticias`),
   ADD KEY `NoticiasUsuario_idx` (`idUsuarios`);
-
---
--- Indices de la tabla `regions`
---
-ALTER TABLE `regions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `country_name` (`country_id`,`name`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -250,28 +219,16 @@ ALTER TABLE `autores`
   MODIFY `idAutores` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `cities`
+-- AUTO_INCREMENT de la tabla `infoacademica`
 --
-ALTER TABLE `cities`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `countries`
---
-ALTER TABLE `countries`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `educacion`
---
-ALTER TABLE `educacion`
-  MODIFY `idEducación` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `infoacademica`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion`
 --
 ALTER TABLE `institucion`
-  MODIFY `idInstitucion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idInstitucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `investigaciones`
@@ -283,19 +240,13 @@ ALTER TABLE `investigaciones`
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `idNoticias` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `regions`
---
-ALTER TABLE `regions`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idNoticias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -308,11 +259,16 @@ ALTER TABLE `autores`
   ADD CONSTRAINT `Investigaciones` FOREIGN KEY (`idInvestigacion`) REFERENCES `investigaciones` (`idInvestigaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `educacion`
+-- Filtros para la tabla `infoacademica`
 --
-ALTER TABLE `educacion`
-  ADD CONSTRAINT `EducacionUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Institucion` FOREIGN KEY (`idInstitucion`) REFERENCES `institucion` (`idInstitucion`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `infoacademica`
+  ADD CONSTRAINT `infoacademica_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`);
+
+--
+-- Filtros para la tabla `institucion`
+--
+ALTER TABLE `institucion`
+  ADD CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`);
 
 --
 -- Filtros para la tabla `investigaciones`
