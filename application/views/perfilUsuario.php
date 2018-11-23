@@ -179,10 +179,10 @@
                                     document.getElementById("txtPromep").value='<?php echo $promep ?>';
                                     document.getElementById("txtSni").value='<?php echo $sni ?>';
                                     document.getElementById("txtareaC").value='<?php echo $areaC ?>';
-                                    document.getElementById("txtPais").value='<?php echo $pais?>';
-                                    document.getElementById("txtpaisInst").value='<?php echo $paisInst?>';
-                                    document.getElementById("txtEstadoInst").value='<?php echo $estadoInst?>';
                                     document.getElementById("txtCiudadInst").value='<?php echo $ciudadInst?>';
+                                     $("#txtPais").find('option:contains("<?php echo $pais?>")').prop('selected', true);
+                                     $("#txtpaisInst").find('option:contains("<?php echo $paisInst?>")').prop('selected', true);
+                                     $("#txtEstadoInst").find('option:contains("<?php echo $estadoInst?>")').prop('selected', true);
                                 }
                                 function Cancelar(){
                                     $('#noEditar').css({'display':'block'});
@@ -316,7 +316,7 @@
                                                 <p><?php echo $telefono; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar7">
-                                                <input type="cnombre" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" value="<?php echo $telefono ?>">
+                                                <input type="cnombre" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $telefono ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -501,14 +501,7 @@
                                                 <p><?php echo $ciudadInst; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                                <select class="form-control" id="txtCiudadInst" name="txtCiudadInst">
-                                                    <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                                    <?php
-                                                      foreach ($cities->result() as $city) {
-                                                          echo '<option value="'.$city->id.'">'.$city->name.'</option>';
-                                                      }
-                                                     ?>
-                                                </select>
+                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $ciudadInst ?>">
                                             </div>
                                         </div>
 
@@ -547,26 +540,10 @@
                 var sel = document.getElementById("txtEstadoInst");
                 sel.remove(sel.selectedIndex);
                 document.getElementById('txtEstadoInst').innerHTML = data;
-
-                var sel2 = document.getElementById("txtCiudadInst");
-                sel2.remove(sel2.selectedIndex);
-
-                document.getElementById("txtCiudadInst").innerHTML='<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
             }
         });
     })
-    $("#txtEstadoInst").change(function() {
-        $.ajax({
-            url: '<?php echo base_url('index.php/user/getCities?regionId='); ?>' + this.value,
-            type: 'GET',
-            success: function(data) {
-                var sel = document.getElementById("txtCiudadInst");
-                sel.remove(sel.selectedIndex);
 
-                document.getElementById('txtCiudadInst').innerHTML = data;
-            }
-        });
-    })
   function esconder(id){
     var divelement = document.getElementById(id);
     if (divelement.style.display == 'none') {

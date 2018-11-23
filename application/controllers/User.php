@@ -290,8 +290,7 @@ class user extends CI_Controller
         $user_institucion= $this->user_model->get_user_institucion($id);
         $data_user= $this->user_model->get_user_data($id);
         $paises=$this->user_model->get_countries();
-        $estados=$this->user_model->get_regions($user_institucion->Pais);
-        $ciudades=$this->user_model->get_cities($user_institucion->Estado);
+        $estados=$this->user_model->get_regions($user_institucion->idPais);
         $datos = array(
             'id'            => $id,
             'nombre'        => $data_user->Nombre,
@@ -313,10 +312,9 @@ class user extends CI_Controller
             'unidad'        => $user_institucion->UAcademica,
             'paisInst'      => $user_institucion->Pais,
             'estadoInst'    => $user_institucion->Estado,
-            'ciudadInst'    => $user_institucion->Ciudad,
+            'ciudadInst'    => $user_institucion->cp,
             'countries'     => $paises,
-            'regions'       => $estados,
-            'cities'        => $ciudades
+            'regions'       => $estados
         );
         $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
@@ -330,15 +328,6 @@ class user extends CI_Controller
         foreach($q->result() as $regions)
         {
             echo '<option value="'.$regions->id.'">'.$regions->name.'</option>';
-        }
-    }
-    public function getCities()
-    {
-        $q = $this->user_model->get_cities($this->input->get('regionId'));
-        echo '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
-        foreach($q->result() as $cities)
-        {
-            echo '<option value="'.$cities->id.'">'.$cities->name.'</option>';
         }
     }
 

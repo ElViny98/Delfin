@@ -16,9 +16,9 @@ class User_model extends CI_Model
         'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
 
-    public function uploadimg($datos)
+    public function uploadimg($query)
     {
-        $this->db->update('Usuarios', array('file_name' => $datos['imagen']),"idUsuarios = 2");
+        $this->db->query($query);
     }
 
     public function update_prf($id, $data)
@@ -81,23 +81,6 @@ class User_model extends CI_Model
     public function get_regions($id)
     {
         $q = $this->db->select('id,name')->from('Regions')->where('country_id',$id)->get();
-        return $q;
-    }
-    public function get_cities($id)
-    {
-        $q = $this->db->select('id,name')->from('Cities')->where('region_id',$id)->get();
-        return $q;
-    }
-    public function get_name_pais($id){
-        $q = $this->db->select('name')->from('Countries')->where('id',$id)->get();
-        return $q;
-    }
-    public function get_name_estado($id){
-        $q = $this->db->select('name')->from('Regions')->where('id',$id)->get();
-        return $q;
-    }
-    public function get_name_ciudad($id){
-        $q = $this->db->select('name')->from('Cities')->where('id',$id)->get();
         return $q;
     }
 }
