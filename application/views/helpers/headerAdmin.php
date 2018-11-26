@@ -2,13 +2,15 @@
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Google Nexus Website Menu</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Delfin</title>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/normalize.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/demo.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/component.css'); ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 		<script src="<?php echo base_url('assets/js/modernizr.custom.js'); ?>"></script>
 	</head>
 	<body>
