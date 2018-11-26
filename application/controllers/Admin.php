@@ -7,6 +7,7 @@ class admin extends CI_Controller
     {
         parent::__construct();
         $this->load->library(array('session'));
+        $this->load->library('table');
     }
 
     public function index()
@@ -14,6 +15,8 @@ class admin extends CI_Controller
         if($this->session->userdata('nivel') == 1)
         {
             $this->load->view('helpers/headerAdmin');
+            $this->load->view('perfilAdmin');
+
         }
         else
         {
