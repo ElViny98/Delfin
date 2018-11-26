@@ -20,6 +20,12 @@ class admin extends CI_Controller
             redirect(base_url());
         }
     }
+
+    public function salir()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
 }
 
 ?>

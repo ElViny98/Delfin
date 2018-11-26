@@ -26,7 +26,7 @@ class User_model extends CI_Model
         $this->db->where('idUsuarios', $id);
         $this->db->update('Usuarios', $data);
         $this->db->update('infoAcademica', $dataca);
-        $this->db->update('inst', $datain);
+        $this->db->update('Institucion', $datain);
     }
     public function get_user_data($id)
     {
@@ -40,7 +40,7 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('inst')->where('idUsuario',$id)->get();
+        $q = $this->db->select('*')->from('Institucion')->where('idUsuario',$id)->get();
         return $q->row();
     }
     public function misNoticias($id)

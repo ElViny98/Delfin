@@ -325,215 +325,108 @@
                                             </div>
                                         </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>País</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar6">
-                                    <p><?php echo $pais; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar6">
-                                    <select id="txtPais" name="txtPais" class="form-control">
-                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                          <?php
-                                            foreach ($countries->result() as $country) {
-                                                echo '<option value="'.$country->id.'">'.$country->name.'</option>';
-                                            }
-                                           ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Telefono</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar7">
-                                    <p><?php echo $telefono; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar7">
-                                    <input type="cnombre" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" value="<?php echo $telefono ?>">
-                                </div>
-                                </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Correo</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar8">
-                                    <p><?php echo $correo; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar8">
-                                    <input type="cnombre" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Correo" value="<?php echo $correo ?>">
-                                </div>
-                            </div>
-                </div>
-                <div class="tab-pane fade" id="infoAcademica" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Grado Académico</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar9">
-                                    <p><?php echo $grado; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar9">
-                                    <select id="txtGrado" name="txtGrado" class="form-control">
-                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                          <option value="Dr.">Dr.</option>
-                                          <option value="M.C.">M.C.</option>
-                                          <option value="Mtro.">Mtro.</option>
-                                          <option value="Lic.">Lic.</option>
-                                          <option value="Ing.">Ing.</option>
-                                          <option value="Tec.">Tec.</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Cuerpo Académico</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar10">
-                                    <p><?php echo $cuerpoA; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar10">
-                                    <input type="cnombre" class="form-control" id="txtCuerpoA" name="txtCuerpoA" placeholder="Cuerpo Académico" value="<?php echo $cuerpoA ?>">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Grado de consolidación del CA</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar11">
-                                    <p><?php echo $consolidacion; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar11">
-                                    <select id="txtConsolidacion" name="txtConsolidacion" class="form-control">
-                    		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                        		          <option value="Consolidado">Consolidado</option>
-                        		          <option value="En Consolidacion.">En Consolidacion</option>
-                        		          <option value="En Formación">En Formación</option>
-                                          <option value="Ninguno">Ninguno</option>
-                    		        </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Perfil PROMEP</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar12">
-                                    <p><?php echo $promep; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar12">
-                                    <select id="txtPromep" name="txtPromep" class="form-control">
-                    		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                        		          <option value="Con Perfil Deseable">Con Perfil Deseable</option>
-                        		          <option value="Sin Perfil Deseable">Sin Perfil Deseable</option>
-                    		        </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Nivel SNI</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar13">
-                                    <p><?php echo $sni; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar13">
-                                    <select id="txtSni" name="txtSni" class="form-control">
-                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                        <option value="Candidato">Candidato</option>
-                                          <option value="Nivel 1">Nivel 1</option>
-                                          <option value="Nivel 2">Nivel 2</option>
-                                          <option value="Nivel 3">Nivel 3</option>
-                                          <option value="Emérito">Emérito</option>
-                                          <option value="No Tiene">No Tiene</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Área de conocimiento</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar14">
-                                    <p><?php echo $areaC; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar14">
-                                    <select id="txtareaC" name="txtareaC" class="form-control">
-                                              <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                              <option value="Área I: Física, Matemáticas y Ciencias de la Tierra">Área I: Física, Matemáticas y Ciencias de la Tierra</option>
-                                              <option value="Área II: Biología y Química">Área II: Biología y Química</option>
-                                              <option value="Área III: Madicina y Salud">Área III: Madicina y Salud</option>
-                                              <option value="Área IV: Humanidades y Ciencias de la Conducta">Área IV: Humanidades y Ciencias de la Conducta</option>
-                                              <option value="Área V: Sociales y Económicas">Área V: Sociales y Económicas</option>
-                                              <option value="Área VI: Biotecnología y Ciencias Agropecuarias">Área VI: Biotecnología y Ciencias Agropecuarias</option>
-                                              <option value="Área VII: Ingeniería e Industria">Área VII: Ingeniería e Industria</option>
-                                    </select>
-                                </div>
-                            </div>
-                </div>
-                <div class="tab-pane fade" id="infoInstitucion" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Institución</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar15">
-                                    <p><?php echo $institucion; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar15">
-                                    <input type="cnombre" class="form-control" id="txtInstitucion" name="txtInstitucion"  value="<?php echo $institucion ?>">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Unidad académica</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar16">
-                                    <p><?php echo $unidad; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar16">
-                                    <input type="cnombre" class="form-control" id="txtUnidad" name="txtUnidad"  value="<?php echo $unidad ?>">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Pais</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar17">
-                                    <p><?php echo $paisInst; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar17">
-                                    <select id="txtpaisInst" name="txtpaisInst" class="form-control">
-                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                          <?php
-                                            foreach ($countries->result() as $country) {
-                                                echo '<option value="'.$country->id.'">'.$country->name.'</option>';
-                                            }
-                                           ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Estado</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar18">
-                                    <p><?php echo $estadoInst; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar18">
-                                    <select class="form-control" id="txtEstadoInst" name="txtEstadoInst">
-                                        <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Ciudad</label>
-                                </div>
-                                <div class="col-md-6" style="display:block;" id="noEditar19">
-                                    <p><?php echo $ciudadInst; ?></p>
-                                </div>
-                                <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                    <select class="form-control" id="txtCiudadInst" name="txtCiudadInst">
-                                    </select>
-                                </div>
+                            <div class="tab-pane fade" id="infoAcademica" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Grado Académico</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar9">
+                                                <p><?php echo $grado; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar9">
+                                                <select id="txtGrado" name="txtGrado" class="form-control">
+                                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                                      <option value="Dr.">Dr.</option>
+                                                      <option value="M.C.">M.C.</option>
+                                                      <option value="Mtro.">Mtro.</option>
+                                                      <option value="Lic.">Lic.</option>
+                                                      <option value="Ing.">Ing.</option>
+                                                      <option value="Tec.">Tec.</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Cuerpo Académico</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar10">
+                                                <p><?php echo $cuerpoA; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar10">
+                                                <input type="cnombre" class="form-control" id="txtCuerpoA" name="txtCuerpoA" placeholder="Cuerpo Académico" value="<?php echo $cuerpoA ?>">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Grado de consolidación del CA</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar11">
+                                                <p><?php echo $consolidacion; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar11">
+                                                <select id="txtConsolidacion" name="txtConsolidacion" class="form-control">
+                                		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                    		          <option value="Consolidado">Consolidado</option>
+                                    		          <option value="En Consolidacion.">En Consolidacion</option>
+                                    		          <option value="En Formación">En Formación</option>
+                                                      <option value="Ninguno">Ninguno</option>
+                                		        </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Perfil PROMEP</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar12">
+                                                <p><?php echo $promep; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar12">
+                                                <select id="txtPromep" name="txtPromep" class="form-control">
+                                		                  <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                    		          <option value="Con Perfil Deseable">Con Perfil Deseable</option>
+                                    		          <option value="Sin Perfil Deseable">Sin Perfil Deseable</option>
+                                		        </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Nivel SNI</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar13">
+                                                <p><?php echo $sni; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar13">
+                                                <select id="txtSni" name="txtSni" class="form-control">
+                                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                                    <option value="Candidato">Candidato</option>
+                                                      <option value="Nivel 1">Nivel 1</option>
+                                                      <option value="Nivel 2">Nivel 2</option>
+                                                      <option value="Nivel 3">Nivel 3</option>
+                                                      <option value="Emérito">Emérito</option>
+                                                      <option value="No Tiene">No Tiene</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Área de conocimiento</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar14">
+                                                <p><?php echo $areaC; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar14">
+                                                <select id="txtareaC" name="txtareaC" class="form-control">
+                                                          <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                                          <option value="Área I: Física, Matemáticas y Ciencias de la Tierra">Área I: Física, Matemáticas y Ciencias de la Tierra</option>
+                                                          <option value="Área II: Biología y Química">Área II: Biología y Química</option>
+                                                          <option value="Área III: Madicina y Salud">Área III: Madicina y Salud</option>
+                                                          <option value="Área IV: Humanidades y Ciencias de la Conducta">Área IV: Humanidades y Ciencias de la Conducta</option>
+                                                          <option value="Área V: Sociales y Económicas">Área V: Sociales y Económicas</option>
+                                                          <option value="Área VI: Biotecnología y Ciencias Agropecuarias">Área VI: Biotecnología y Ciencias Agropecuarias</option>
+                                                          <option value="Área VII: Ingeniería e Industria">Área VII: Ingeniería e Industria</option>
+                                                </select>
+                                            </div>
+                                        </div>
                             </div>
                             <div class="tab-pane fade" id="infoInstitucion" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
@@ -645,7 +538,6 @@
             }
         });
     })
-
   function esconder(id){
     var divelement = document.getElementById(id);
     if (divelement.style.display == 'none') {
@@ -656,7 +548,6 @@
       //mostrar editar perfil
     }
   }
-
   function editprf(){
    var nom = $('#txtNombre').val();
    var apa = $('#txtPaterno').val();
@@ -680,7 +571,6 @@
    var paI = $('#txtpaisInst option:selected').text();
    var est = $('#txtEstadoInst option:selected').text();
    var ciu = $('#txtCiudadInst').val();
-
    $.ajax({
    method: "POST",
    url: '<?php echo base_url("index.php/user/update_prof"); ?>',
@@ -690,6 +580,5 @@
   }
  })
   if(!alert('Alert For your User!')){window.location.reload();}
-
  }
 </script>
