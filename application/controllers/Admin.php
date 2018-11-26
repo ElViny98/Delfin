@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class admin extends CI_Controller
@@ -19,6 +19,12 @@ class admin extends CI_Controller
         {
             redirect(base_url());
         }
+    }
+
+    public function salir()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
     }
 }
 

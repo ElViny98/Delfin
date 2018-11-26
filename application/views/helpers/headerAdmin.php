@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="salir">
 				<ul class="navbar-nav mr-auto" >
 					<li class="nav-item">
-						<a class="nav-link"  href="#">Salir</a>
+						<a class="nav-link"  href="<?ohp echo base_url('index.php/admin/salir'); ?>">Salir</a>
 					</li>
 				</ul>
 			</div>
