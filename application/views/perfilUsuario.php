@@ -134,7 +134,7 @@
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#infoAcademica" role="tab" aria-controls="profile" aria-selected="false">Información académica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#infoInstitucion" role="tab" aria-controls="projects" aria-selected="false">Información de la Institución</a>
+                        <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#infoInstitucion" role="tab" aria-controls="projects" aria-selected="false">Información de la Institución</a>
                     </li>
                 </ul>
             </div>
@@ -208,16 +208,29 @@
                                     $('#cancelarEditar').css({'display':'block'});
                                     $('#espacioEditar').css({'display':'none'});
                                     $('#espacio').css({'display':'block'});
+                                    $('#paraEditar20').css({'display':'block'});
+                                    $('#paraEditar21').css({'display':'block'});
+                                    $('#paraEditar22').css({'display':'block'});
+                                    document.getElementById("txtNombre").value='<?php echo $nombre ?>';
+                                    document.getElementById("txtPaterno").value='<?php echo $apaterno ?>';
+                                    document.getElementById("txtMaterno").value='<?php echo $amaterno ?>';
                                     document.getElementById("txtSexo").value='<?php echo $sexo ?>';
+                                    document.getElementById("txtFecha").value='<?php echo $fechaNac ?>';
+                                    $("#txtPais").find('option:contains("<?php echo $pais?>")').prop('selected', true);
+                                    document.getElementById("txtTelefono").value='<?php echo $telefono ?>';
+                                    document.getElementById("txtCorreo").value='<?php echo $correo ?>';
                                     document.getElementById("txtGrado").value='<?php echo $grado ?>';
+                                    document.getElementById("txtCuerpoA").value='<?php echo $cuerpoA ?>';
                                     document.getElementById("txtConsolidacion").value='<?php echo $consolidacion ?>';
                                     document.getElementById("txtPromep").value='<?php echo $promep ?>';
                                     document.getElementById("txtSni").value='<?php echo $sni ?>';
                                     document.getElementById("txtareaC").value='<?php echo $areaC ?>';
+                                    $("#txtpaisInst").find('option:contains("<?php echo $paisInst?>")').prop('selected', true);
+                                    $("#txtEstadoInst").find('option:contains("<?php echo $estadoInst?>")').prop('selected', true);
+                                    document.getElementById("txtInstitucion").value='<?php echo $idInst?>';
                                     document.getElementById("txtCiudadInst").value='<?php echo $ciudadInst?>';
-                                     $("#txtPais").find('option:contains("<?php echo $pais?>")').prop('selected', true);
-                                     $("#txtpaisInst").find('option:contains("<?php echo $paisInst?>")').prop('selected', true);
-                                     $("#txtEstadoInst").find('option:contains("<?php echo $estadoInst?>")').prop('selected', true);
+                                    document.getElementById("txtUnidad").value='<?php echo $unidad?>';
+
                                 }
                                 function Cancelar(){
                                     $('#noEditar').css({'display':'block'});
@@ -470,28 +483,6 @@
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="infoInstitucion" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Institución</label>
-                                            </div>
-                                            <div class="col-md-6" style="display:block;" id="noEditar15">
-                                                <p><?php echo $institucion; ?></p>
-                                            </div>
-                                            <div class="col-md-6" style="display:none;" id="paraEditar15">
-                                                <input type="cnombre" class="form-control" id="txtInstitucion" name="txtInstitucion"  value="<?php echo $institucion ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Unidad académica</label>
-                                            </div>
-                                            <div class="col-md-6" style="display:block;" id="noEditar16">
-                                                <p><?php echo $unidad; ?></p>
-                                            </div>
-                                            <div class="col-md-6" style="display:none;" id="paraEditar16">
-                                                <input type="cnombre" class="form-control" id="txtUnidad" name="txtUnidad"  value="<?php echo $unidad ?>">
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Pais</label>
