@@ -620,7 +620,6 @@
             }
         });
     })
-
   function esconder(id){
     var divelement = document.getElementById(id);
     if (divelement.style.display == 'none') {
@@ -631,7 +630,6 @@
       //mostrar editar perfil
     }
   }
-
   function editprf(){
    var nom = $('#txtNombre').val();
    var apa = $('#txtPaterno').val();
@@ -651,7 +649,10 @@
    //infoInstitucional
    var ins = $('#txtInstitucion').val();
    var uni = $('#txtUnidad').val();
-
+   var idpaI = $('#txtpaisInst').val();
+   var paI = $('#txtpaisInst option:selected').text();
+   var est = $('#txtEstadoInst option:selected').text();
+   var ciu = $('#txtCiudadInst').val();
    $.ajax({
    method: "POST",
    url: '<?php echo base_url("index.php/user/update_prof"); ?>',
@@ -660,10 +661,6 @@
    inst: ins, unidad: uni
   }
  })
-  if(!alert('Perfil Modificado')){window.location.reload();}
-
- }
-
  $('#btnAceptar2').on('click',function()
     {
         // let Pswd is ID of password and cPswd is ID of confirm password text Box
