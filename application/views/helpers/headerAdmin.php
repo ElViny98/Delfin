@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
+	<script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
 </head>
 <body>
 	<div id="inactive" class="inactive-bar">
@@ -32,7 +33,7 @@
 					</a>
 				</li>
 				<li>
-					<a class="bar-link" href="#">
+					<a class="bar-link" href="<?php echo base_url('index.php/admin/usuarios'); ?>">
 						<i class="fa fa-users fix-content" aria-hidden="true"></i>
 						Usuarios
 					</a>
@@ -71,9 +72,4 @@
 			</div>
 		</div>
 	</div>
-	<div id="main-content" class="content-main" style="height: 1000px;">
-		Contenido aquí
-	</div>
-</body>
-<script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
-</html>
+	

@@ -15,13 +15,18 @@ class admin extends CI_Controller
     {
         if($this->session->userdata('nivel') == 1)
         {
-            $datos['consulta'] = $this->admin_model->get_usuarios();
             $this->load->view('helpers/headerAdmin');
         }
         else
         {
             redirect(base_url());
         }
+    }
+
+    public function usuarios(){
+        $datos['consulta'] = $this->admin_model->get_usuarios();
+        $this->load->view('helpers/headerAdmin');
+        $this->load->view('admin/usuarios',$datos);
     }
 
     public function salir()
