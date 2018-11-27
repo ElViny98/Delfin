@@ -30,11 +30,6 @@
     text-indent: 12px;
 }
 
-.icons-container li a i span
-{
-    text-indent: 80px;
-}
-
 
 .logout-container li
 {   
@@ -114,6 +109,7 @@
     top: 0;
     margin-left: 70px;
     transition: all 0.5s ease;
+    z-index: 1000;
 }
 
 .nav-user
@@ -137,6 +133,7 @@
 
 .menu-container
 {
+    margin: 10px;
     display: inline-block;
     cursor: pointer;
 }
@@ -174,7 +171,27 @@
 
 .content-main
 {
-    background: grey;
     margin-left: 70px;
     transition: all 0.5s ease;
+}
+
+@media(max-width: 768px)
+{
+    .nav-container
+    {
+        display: none;
+    }
+    
+    .activate
+    {
+        height: 100% !important;
+    }
+
+    .inactive-bar
+    {
+        width: 100%;
+        height: 55px;
+    }
+
+
 }
