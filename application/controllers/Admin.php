@@ -34,6 +34,12 @@ class admin extends CI_Controller
         $this->session->sess_destroy();
         redirect(base_url());
     }
+
+    public function usuarios()
+    {
+        $data['consulta'] = $this->admin_model->get_usuarios();
+        $this->load->view('admin/usuarios', $data);
+    }
 }
 
 ?>

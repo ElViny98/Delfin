@@ -8,6 +8,12 @@
 	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/bootstrap.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
+	<script>
+	function usuarios() {
+		document.getElemenById('main-content').innerHTML = '';
+		$("#main-content").load('<?php echo base_url('index.php/admin/usuarios'); ?>');
+	}
+	</script>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
@@ -15,13 +21,15 @@
 </head>
 <body>
 	<div id="inactive" class="inactive-bar">
-		<div class="img-container">
-			<img src="<?php echo base_url('assets/img/logoDel.png'); ?>" >
+		<div class="menu-container" id="menu-toggle">
+			<div class="bar1"></div>
+			<div class="bar2"></div>
+			<div class="bar3"></div>
 		</div>
 		<div class="icons-container">
 			<ul class="icons">
 				<li>
-					<a class="bar-link" href="#">
+					<a class="bar-link" href="#" onclick="usuarios();">
 						<i class="fa fa-user fix-content" aria-hidden="true"></i>
 						Perfil
 					</a>
@@ -61,11 +69,6 @@
 	</div>
 	<div id="nav-content" class="nav-container">
 		<div class="navbar nav-user">
-			<div class="menu-container" id="menu-toggle">
-				<div class="bar1"></div>
-				<div class="bar2"></div>
-				<div class="bar3"></div>
-			</div>
 			<img src="https://via.placeholder.com/50" style="margin: 5px 5px;">
 			<div class="user-name">
 				<?php echo $this->session->userdata('nombre'); ?>
