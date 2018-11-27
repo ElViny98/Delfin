@@ -10,8 +10,12 @@
 	<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
 	<script>
 	function usuarios() {
-		document.getElemenById('main-content').innerHTML = '';
+		document.getElementById('main-content').innerHTML = '';
 		$("#main-content").load('<?php echo base_url('index.php/admin/usuarios'); ?>');
+	}
+	function instituciones(){
+		document.getElementById('main-content').innerHTML = '';
+		$("#main-content").load('<?php echo base_url('index.php/admin/instituciones'); ?>');
 	}
 	</script>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
@@ -34,7 +38,7 @@
 					</a>
 				</li>
 				<li>
-					<a class="bar-link" href="#">
+					<a class="bar-link" href="#" onclick="instituciones();">
 						<i class="fa fa-university fix-content" aria-hidden="true"></i>
 						Instituciones
 					</a>

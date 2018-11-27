@@ -12,5 +12,9 @@ class Admin_model extends CI_Model
         $q = $this->db->select('*')->from('Usuarios')->where('Privilegio','2')->get();
         return $q;
     }
+    public function get_instituciones(){
+      $q = $this->db->select('*')->from('inst')->get();
+      return $q;
+    }
 }
 ?>
