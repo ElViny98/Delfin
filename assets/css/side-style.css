@@ -26,14 +26,14 @@
 
 .icons-container li
 {
-    line-height: 45px; 
+    line-height: 45px;
     text-indent: 12px;
 }
 
 
 .logout-container li
-{   
-    line-height: 45px; 
+{
+    line-height: 45px;
     text-indent: 12px;
     text-align: center;
     bottom: 20px;
@@ -90,7 +90,7 @@
     width: 100%;
 }
 
-.activate 
+.activate
 {
     z-index: 50;
     width: 270px !important;
@@ -105,6 +105,7 @@
 
 .nav-container
 {
+    z-index: 1000;
     position: sticky;
     top: 0;
     margin-left: 70px;
@@ -138,7 +139,7 @@
     cursor: pointer;
 }
 
-.bar1, .bar2, .bar3 
+.bar1, .bar2, .bar3
 {
     width: 35px;
     height: 5px;
@@ -147,18 +148,18 @@
     transition: 0.4s;
 }
 
-.change .bar1 
+.change .bar1
 {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-.change .bar2 
+.change .bar2
 {
     opacity: 0;
 }
 
-.change .bar3 
+.change .bar3
 {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
 }
@@ -181,7 +182,7 @@
     {
         display: none;
     }
-    
+
     .activate
     {
         height: 100% !important;

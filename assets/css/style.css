@@ -323,3 +323,6 @@ div.scrollTabla{
     font-weight: 600;
     color: #0062cc;
 }
+.hiddenRow {
+    padding: 0 !important;
+}
