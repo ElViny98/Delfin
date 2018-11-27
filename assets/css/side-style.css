@@ -168,7 +168,7 @@
 
 .move-off-canvas
 {
-    margin-left: 270px;
+    margin-left: 270px !important;
     transition: all 0.5s ease;
 }
 
@@ -176,4 +176,5 @@
 {
     background: grey;
     margin-left: 70px;
+    transition: all 0.5s ease;
 }
