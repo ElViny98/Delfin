@@ -35,7 +35,11 @@ class admin extends CI_Controller
         redirect(base_url());
     }
 
-    
+    public function usuarios()
+    {
+        $data['consulta'] = $this->admin_model->get_usuarios();
+        $this->load->view('admin/usuarios', $data);
+    }
     public function instituciones(){
       $data['consulta'] = $this->admin_model->get_instituciones();
       $this->load->view('admin/instituciones', $data);
