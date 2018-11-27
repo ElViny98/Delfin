@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div id="main-content" class="content-main" style="height: 1000px;">
-
+		Contenido aquí
 	</div>
 </body>
 <script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
