@@ -125,6 +125,7 @@
                         <h4>
                             <?php echo $institucion; ?>
                         </h4>
+                        <hr>
                         <br>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -144,7 +145,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="profile-work" style="margin-top: 0px;">
-                <p>OPCIONES</p>
+                <p style="color:orange;">OPCIONES</p>
                 <a onclick="cambiarPass()" href="#">Cambiar Contraseña</a>
             </div>
         </div>
@@ -261,9 +262,6 @@
                                     $('#paraEditar18').css({'display':'none'});
                                     $('#noEditar19').css({'display':'block'});
                                     $('#paraEditar19').css({'display':'none'});
-                                    $('#paraEditar20').css({'display':'none'});
-                                    $('#paraEditar21').css({'display':'none'});
-                                    $('#paraEditar22').css({'display':'none'});
                                     $('#espacioEditar').css({'display':'block'});
                                     $('#mostrarEditar').css({'display':'block'});
                                     $('#espacio').css({'display':'none'});
@@ -328,7 +326,7 @@
                                                 <p><?php echo $fechaNac; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar5">
-                                                <input type="date" class="form-control" id="txtFecha" name="txtFecha" placeholder="Fecha de Nacimiento" value="<?php echo $fechaNac ?>">
+                                                <input type="cnombre" class="form-control" id="txtFecha" name="txtFecha" placeholder="Fecha de Nacimiento" value="<?php echo $fechaNac ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -370,11 +368,6 @@
                                             <div class="col-md-6" style="display:none;" id="paraEditar8">
                                                 <input type="cnombre" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Correo" value="<?php echo $correo ?>">
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="row" style="display:none;" id="paraEditar22">
-                                            <p>Verifique que su correo electrónico este escrito correctamente ya que es el medio por el que enviamos información relevante.</p>
-                                            <p>Debe escribir el teléfono con su clave lada. No escriba los prefijos (01) y/o (52)</p>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="infoAcademica" role="tabpanel" aria-labelledby="profile-tab">
@@ -519,49 +512,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Institución</label>
-                                            </div>
-                                            <div class="col-md-6" style="display:block;" id="noEditar15">
-                                                <p><?php echo $institucion; ?></p>
-                                            </div>
-                                            <div class="col-md-6" style="display:none;" id="paraEditar15">
-                                                <select class="form-control" id="txtInstitucion" name="txtInstitucion">
-                                                    <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
-                                                    <?php
-                                                      foreach ($instituciones->result() as $institucion) {
-                                                          echo '<option value="'.$institucion->idInstitucion.'">'.$institucion->Nombre.'</option>';
-                                                      }
-                                                     ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Código Postal</label>
+                                                <label>Ciudad</label>
                                             </div>
                                             <div class="col-md-6" style="display:block;" id="noEditar19">
                                                 <p><?php echo $ciudadInst; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $ciudadInst ?>">
+                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst" readonly="readonly" value="<?php echo $ciudadInst ?>">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Unidad académica</label>
-                                            </div>
-                                            <div class="col-md-6" style="display:block;" id="noEditar16">
-                                                <p><?php echo $unidad; ?></p>
-                                            </div>
-                                            <div class="col-md-6" style="display:none;" id="paraEditar16">
-                                                <input type="cnombre" class="form-control" id="txtUnidad" name="txtUnidad"  value="<?php echo $unidad ?>">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row" style="display:none;" id="paraEditar20">
-                                            <p>Si la institución no cuenta con unidades academicas, escriba ninguna. Ejemplo de unidad académica es: Facultad de Administración ó Escuela de Musica ó Instituto de Ciencias ó Centro Universitario.</p>
-                                            <p>País, estado y ciudad son referentes a la ubicación de la institución donde usted labora.</p>
-                                        </div>
+
                             </div>
                         </div>
                     </div>
@@ -587,7 +547,6 @@
             <input type="button" name="cancelar" id="cancelar" class="btn btn-default" value="Cancelar" onclick="Cancelar()">
         </div>
     </div>
-
   </form>
 
 
@@ -602,21 +561,6 @@
                 var sel = document.getElementById("txtEstadoInst");
                 sel.remove(sel.selectedIndex);
                 document.getElementById('txtEstadoInst').innerHTML = data;
-                var sel2 = document.getElementById("txtInstitucion");
-                sel2.remove(sel2.selectedIndex);
-                document.getElementById('txtInstitucion').innerHTML = '<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>';
-            }
-        });
-    })
-
-    $("#txtEstadoInst").change(function() {
-        $.ajax({
-            url: '<?php echo base_url('index.php/user/getInstituciones?regionId='); ?>' + this.value,
-            type: 'GET',
-            success: function(data) {
-                var sel = document.getElementById("txtInstitucion");
-                sel.remove(sel.selectedIndex);
-                document.getElementById('txtInstitucion').innerHTML = data;
             }
         });
     })
@@ -653,14 +597,19 @@
    var paI = $('#txtpaisInst option:selected').text();
    var est = $('#txtEstadoInst option:selected').text();
    var ciu = $('#txtCiudadInst').val();
+
    $.ajax({
    method: "POST",
    url: '<?php echo base_url("index.php/user/update_prof"); ?>',
    data: { name: nom, appaterno: apa, apmaterno:ama, sexo: sex, fechanaci:fec, pais:pai, telefono:tel, correo: cor,
    grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
-   inst: ins, unidad: uni
+   inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
   }
  })
+  if(!alert('Alert For your User!')){window.location.reload();}
+
+ }
+
  $('#btnAceptar2').on('click',function()
     {
         // let Pswd is ID of password and cPswd is ID of confirm password text Box

@@ -1,8 +1,8 @@
-<div id="titulo">
+<div class="container">
     <h3>Noticias</h3>
     <hr>
 </div>
-<div class="containerNoticia">
+<div class="container">
     <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post" id="form-new">
 
         <div class="form-group" >
@@ -64,11 +64,11 @@
                     <label class="control-label col-lg text-left" for="content">Contenido:</label>
                 </div>
                 <div class="col-lg-11 col-md-11 col-sm-11">
-                    
+
                     <div id="conteinerEditor">
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
 <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
     var quill = new Quill('#conteinerEditor', {
-        modules: { 
+        modules: {
             toolbar: [
                 [ { header: [1, 2, 3, false] } ],
                 [ { 'font': [] } ],
@@ -110,7 +110,7 @@
 
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
-        
+
         var img = document.getElementsByTagName('img');
         var base64 = [];
         var mime = [];
@@ -175,7 +175,7 @@
     function getQuillHTML(deltaObject) {
         var tempCont = document.createElement('div');
         (new Quill(tempCont)).setContents(deltaObject);
-        
+
         return tempCont.getElementsByClassName('ql-editor')[0].innerHTML;
     }
 </script>
