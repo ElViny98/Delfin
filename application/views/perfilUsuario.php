@@ -125,6 +125,7 @@
                         <h4>
                             <?php echo $institucion; ?>
                         </h4>
+                        <hr>
                         <br>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -144,7 +145,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="profile-work" style="margin-top: 0px;">
-                <p>OPCIONES</p>
+                <p style="color:orange;">OPCIONES</p>
                 <a onclick="cambiarPass()" href="#">Cambiar Contraseña</a>
             </div>
         </div>
@@ -543,7 +544,7 @@
                                                 <p><?php echo $ciudadInst; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $ciudadInst ?>">
+                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst" readonly="readonly" value="<?php echo $ciudadInst ?>">
                                             </div>
                                         </div>
                                         <div class="row">

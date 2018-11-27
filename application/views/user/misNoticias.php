@@ -10,8 +10,8 @@
 		</div>
 	</div>
 	<hr>
-	<div class="container noticias">
-		<?php 
+	<div class="container">
+		<?php
 			foreach($consulta->result() as $q)
 			{
 				echo '
