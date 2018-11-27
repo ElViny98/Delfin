@@ -6,6 +6,7 @@ class admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('admin_model');
         $this->load->library(array('session'));
         $this->load->library('table');
     }
@@ -14,9 +15,9 @@ class admin extends CI_Controller
     {
         if($this->session->userdata('nivel') == 1)
         {
-            $this->load->view('helpers/headerAdmin');
-            $this->load->view('perfilAdmin');
-
+            $datos['consulta'] = $this->admin_model->get_usuarios();
+            $this->load->view('helpers/headerAdmin');//$this->load->view('perfilAdmin'); pagmanny
+            $this->load->view('admin/usuarios',$datos);
         }
         else
         {

@@ -144,16 +144,6 @@
     <div class="row">
         <div class="col-md-4">
             <div class="profile-work" style="margin-top: 0px;">
-                <p>LINKs</p>
-                <a href="">su Pagina web</a><br/>
-                <a href="">Links de otra paginas</a><br/>
-                <a href="">o puede ser para fb,insta</a>
-                <p>ACADEMICO</p>
-                <a href="">Maestria en info</a><br/>
-                <a href="">Doctorado en info<br/>
-                <a href="">Postgrado</a><br/>
-                <a href="">etc.</a><br/>
-                <a href="">etc</a><br/>
                 <p>OPCIONES</p>
                 <a onclick="cambiarPass()" href="#">Cambiar Contraseña</a>
             </div>
@@ -573,7 +563,6 @@
             }
         });
     })
-
   function esconder(id){
     var divelement = document.getElementById(id);
     if (divelement.style.display == 'none') {
@@ -584,7 +573,6 @@
       //mostrar editar perfil
     }
   }
-
   function editprf(){
    var nom = $('#txtNombre').val();
    var apa = $('#txtPaterno').val();

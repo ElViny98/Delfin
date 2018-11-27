@@ -8,6 +8,9 @@ class Admin_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    
+    public function get_usuarios(){
+        $q = $this->db->select('*')->from('Usuarios')->where('Privilegio','2')->get();
+        return $q;
+    }
 }
 ?>
