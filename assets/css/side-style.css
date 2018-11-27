@@ -1,0 +1,166 @@
+.inactive-bar
+{
+    position: fixed;
+    width: 70px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #0a5097;
+    list-style: none;
+    overflow-x: hidden;
+    transition: all 0.5s ease;
+}
+
+.img-container img
+{
+    width: 50px;
+    height: 42px;
+    margin: 10px 10px;
+}
+
+.icons-container
+{
+    margin-top: 42px;
+    height: 60%;
+}
+
+.icons-container li
+{
+    line-height: 45px; 
+    text-indent: 12px;
+}
+
+.icons-container li a i span
+{
+    text-indent: 80px;
+}
+
+
+.logout-container li
+{   
+    line-height: 45px; 
+    text-indent: 12px;
+    text-align: center;
+    bottom: 20px;
+}
+
+.icons-container li a, .logout-container li a
+{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+
+.icons-container li a:hover, .logout-container li a:hover
+{
+    background: #0A5AAA;
+}
+
+.icons
+{
+    position: relative;
+    top: 0;
+    width: 70px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.logout-container
+{
+    margin-top: 5%;
+    width: 70px;
+    height: 15%;
+}
+
+.active-bar
+{
+    position: fixed;
+    margin-left: 70px;
+    width: 200px;
+    height: 100%;
+    display: none;
+    background: #0a5097;
+    transition: display 1s ease;
+}
+
+.offset-container
+{
+    height: 57.44px;
+    width: 100%;
+}
+
+.activate 
+{
+    z-index: 50;
+    width: 270px !important;
+    transition: all 0.5s ease;
+}
+
+.bar-link
+{
+    width: 270px;
+    display: inline-block;
+}
+
+.nav-container
+{
+    margin-left: 70px;
+    transition: all 0.5s ease;
+}
+
+.nav-user
+{
+    background: #0a5097;
+    color: white;
+}
+
+.fix-content
+{
+    min-width: 30px;
+    margin-right: 50px;
+}
+
+.user-name
+{
+    align-content: center;
+    padding: 5px 15px;
+    font-size: 16px;
+}
+
+.menu-container
+{
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 
+{
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 
+{
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 
+{
+    opacity: 0;
+}
+
+.change .bar3 
+{
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.move-off-canvas
+{
+    margin-left: 270px;
+    transition: all 0.5s ease;
+}

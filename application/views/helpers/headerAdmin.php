@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Delfin</title>
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/normalize.css'); ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/demo.css'); ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/component.css'); ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
-		<script src="<?php echo base_url('assets/js/modernizr.custom.js'); ?>"></script>
-	</head>
-	<body>
-		<div class="container">
-			<ul id="gn-menu" class="gn-menu-main">
-				<li class="gn-trigger">
-					<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
-					<nav class="gn-menu-wrapper">
-						<div class="gn-scroller">
-							<ul class="gn-menu">
-								<li><a class="gn-icon fa-users">Usuarios</a></li>
-								<li><a class="gn-icon fa-university">Instituciones</a></li>
-								<li><a class="gn-icon fa-user">Perfil</a></li>
-								<li><a class="gn-icon fa-cog">Mantenimiento</a></li>
-							</ul>
-						</div><!-- /gn-scroller -->
-					</nav>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Delfin</title>
+	<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/bootstrap.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
+</head>
+<body>
+	<div id="inactive" class="inactive-bar">
+		<div class="img-container">
+			<img src="<?php echo base_url('assets/img/logoDel.png'); ?>" >
+		</div>
+		<div class="icons-container">
+			<ul class="icons">
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-user fix-content" aria-hidden="true"></i>
+						Perfil
+					</a>
 				</li>
-				<li style="padding: 0px 10px;" class="codrops-icon"><span><?php echo $this->session->userdata('nombre'); ?></span></li>
-				<li><a class="codrops-icon" href="<?php echo base_url('index.php/admin/salir'); ?>"><i class="fa fa-sign-out" aria-hidden="true">&nbsp</i><span>Cerrar sesión</span></a></li>
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-university fix-content" aria-hidden="true"></i>
+						Instituciones
+					</a>
+				</li>
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-users fix-content" aria-hidden="true"></i>
+						Usuarios
+					</a>
+				</li>
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-cog fix-content" aria-hidden="true"></i>
+						Opciones
+					</a>
+				</li>
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-newspaper-o fix-content" aria-hidden="true"></i>
+						Noticias
+					</a>
+				</li>
+				<li>
+					<a class="bar-link" href="#">
+						<i class="fa fa-file-text-o fix-content" aria-hidden="true"></i>
+						Investigaciones
+					</a>
+				</li>
 			</ul>
-		</div><!-- /container -->
-		<script src="<?php echo base_url('assets/js/classie.js'); ?>"></script>
-		<script src="<?php echo base_url('assets/js/gnmenu.js'); ?>"></script>
-		<script>
-			new gnMenu( document.getElementById( 'gn-menu' ) );
-		</script>
+		</div>
+	</div>
+	<div id="nav-content" class="nav-container">
+		<div class="navbar nav-user">
+			<div class="menu-container" id="menu-toggle">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
+			<img src="https://via.placeholder.com/50" style="margin: 5px 5px;">
+			<div class="user-name">
+				<?php echo $this->session->userdata('nombre'); ?>
+			</div>
+		</div>
+	</div>
+	<div id="main-content" class="content-main" style="height: 1000px;">
+
+	</div>
+</body>
+<script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
+</html>
