@@ -18,6 +18,7 @@
 		$("#main-content").load('<?php echo base_url('index.php/admin/instituciones'); ?>');
 	}
 	</script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
@@ -46,7 +47,7 @@
 				</li>
 				<li>
 					<a class="bar-link" href="#">
-						<i class="fa fa-users fix-content" aria-hidden="true"></i>
+						<i class="fa fa-users fix-content" aria-hidden="true" onclick="usuarios()"></i>
 						Usuarios
 					</a>
 				</li>
@@ -84,4 +85,9 @@
 	</div>
 </body>
 <script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
+<script type="text/javascript">
+	function usuarios() {
+		$("#main-content").load('<?php echo base_url('index.php/admin/usuarios'); ?>')
+	}
+</script>
 </html>
