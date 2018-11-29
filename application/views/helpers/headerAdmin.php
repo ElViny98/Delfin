@@ -14,6 +14,7 @@
 		$("#main-content").load('<?php echo base_url('index.php/admin/usuarios'); ?>');
 	}
 	</script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
@@ -75,4 +76,3 @@
 			</div>
 		</div>
 	</div>
-	
