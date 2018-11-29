@@ -26,7 +26,6 @@ class admin extends CI_Controller
     public function usuarios(){
         $query='SELECT idUsuarios,usuarios.Nombre as Nombre,ApPaterno,ApMaterno,Img,Correo,Telefono,status,inst.Nombre as institucion  FROM inst, usuarios WHERE inst.idInstitucion=usuarios.idInst and usuarios.Privilegio=2';
         $datos['consulta'] = $this->admin_model->get_usuarios($query);
-        $this->load->view('helpers/headerAdmin');
         $this->load->view('admin/usuarios',$datos);
     }
     public function salir()
