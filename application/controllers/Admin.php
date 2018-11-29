@@ -43,7 +43,11 @@ class admin extends CI_Controller
         else
             echo '0';
     }
+    public function instituciones(){
+      $data['consulta'] = $this->admin_model->get_instituciones();
+      $this->load->view('admin/instituciones', $data);
+    }
+  }
 
-}
 
 ?>
