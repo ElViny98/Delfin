@@ -21,6 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome/css/font-awesome.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/admin_table.css');?>">
 </head>
 <body>
 	<div id="inactive" class="inactive-bar">

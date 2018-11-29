@@ -1,54 +1,97 @@
 
-<div class="contenidoTabla" id="divVerUsuarios">
+<div class="contenidoTabla" id="divVerInstituciones">
 	<div class="container-fluid" >
 		<div class="row">
 			<div class="col-xs-12 col-md-8 col-lg-9 col-xl-9 container" >
-        <div class="contenidoTabla" id="divVerInstituciones">
-          <div class="container-fluid">
-            <h1>Instituciones</h1>
+				  <h1>Instituciones</h1>
+						<?php $table='
+					<table class="table table-condensed" style="border-collapse:collapse;">
+							<thead>
+							</thead>
+							<tbody>
+					';
+			 foreach ($consulta->result() as $q)
+
+				{
+					$table.='
+					<tr data-toggle="collapse" data-target="#demo'.$q->idInstitucion.'" class="accordion-toggle">
+							<td><p style="font-weight: 600; font-size: 20px">'.$q->Nombre.'</p></td>
+							<td><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></td>
+						<td></td>
+					</tr>
+					<tr >
+						<td colspan="6" class="hiddenRow">
+							<div class="accordian-body collapse" id="demo'.$q->idInstitucion.'">
+									<div class="row">
+											<div class="col-md-6">
+													<label>Nombre</label>
+											</div>
+											<div class="col-md-6" >
+													<input type="text" class="form-control" id="txtNombre" name="txtNombre" value="'.$q->Nombre.'">
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-md-6">
+													<label>Pais</label>
+											</div>
+											<div class="col-md-6" >
+													<select id="txtpaisInst" name="txtpaisInst" class="form-control">
+																<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+																';
+																	foreach ($paises->result() as $pais) {
+																			$table.='<option value="'.$pais->id.'">'.$pais->name.'</option>';
+																	}
+												$table.='
+													</select>
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-md-6">
+													<label>Estado</label>
+											</div>
+											<div class="col-md-6">
+													<select class="form-control" id="txtEstadoInst" name="txtEstadoInst">
+															<option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option></select>
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-md-6">
+													<label>Código Postal</label>
+											</div>
+											<div class="col-md-6" >
+													<input type="text" class="form-control" id="txtCP" name="txtNombre" value="'.$q->cp.'">
+											</div>
+									</div>
+							</div>
+						</td>
+					</tr>
+					';
+				}
+				$table.='
+					</tbody>
+				</table>
+				';
+				echo $table;
+			?>
+
             <br>
-            <table class="table table-condensed" style="border-collapse:collapse;">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>C.P.</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                    <td><?php echo $data->Nombre; ?></td>
-                    <td>Mexico</td>
-                    <td>82530</td>
-                </tr>
-                <tr >
-                    <td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo1"> Demo1 </div> </td>
-                </tr>
-                <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
-                    <td>2</td>
-                    <td>05 May 2013</td>
-                    <td>Credit Account</td>
 
-                </tr>
-                <tr>
-                    <td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>
-                </tr>
-                <tr data-toggle="collapse" data-target="#demo3" class="accordion-toggle">
-                    <td>3</td>
-                    <td>05 May 2013</td>
-                    <td>Credit Account</td>
-
-                </tr>
-                <tr>
-                    <td colspan="6"  class="hiddenRow"><div id="demo3" class="accordian-body collapse">Demo3</div></td>
-                </tr>
-            </tbody>
-          </table>
-          </div>
+				</div>
         </div>
 	</div>
 </div>
 <script type="text/javascript">
 	function verDetalles(index) {
 	}
+	$("#txtpaisInst").change(function() {
+			$.ajax({
+					url: '<?php echo base_url('index.php/user/getRegions?countryId='); ?>' + this.value,
+					type: 'GET',
+					success: function(data) {
+							var sel = document.getElementById("txtEstadoInst");
+							sel.remove(sel.selectedIndex);
+							document.getElementById('txtEstadoInst').innerHTML = data;
+					}
+			});
+	})
 </script>

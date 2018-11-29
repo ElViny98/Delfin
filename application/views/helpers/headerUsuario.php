@@ -31,6 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="opcionesMenu">
 				<ul class="navbar-nav mr-auto" >
 				<!--<li class="nav-item active">-->
+				<li class="nav-item">
+					<a class="nav-link"  href="<?php echo base_url('index.php/user/home');?>">Home</a>
+				</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url('index.php/user/Perfil');?>">Perfil</a>
 					</li>

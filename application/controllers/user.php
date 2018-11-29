@@ -25,13 +25,18 @@ class user extends CI_Controller
         if($this->session->userdata('nivel') == 2)
         {
             $this->load->view('helpers/headerUsuario');
+
         }
         else
         {
             redirect(base_url());
         }
     }
-
+    public function home(){
+      $this->load->view('helpers/headerUsuario');
+      $this->load->view('blogview');
+      $this->load->view('helpers/footer');
+    }
     public function Noticias()
     {
         $this->load->view('helpers/headerUsuario');
@@ -412,16 +417,20 @@ class user extends CI_Controller
         $this->load->view('user/nuevaInvestigacion');
     }
 
+    public function editarInvestigacion(){
+
+    }
+
     public function registrarInv()
     {
         $name = $this->createHash();
         $data = array(
-            'idInvestigaciones'     => null,
+            
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name,
             'Fecha'                 => $this->input->post('fechaInv'),
             'Titulo'                => $this->input->post('titulo'),
-            'DOI'                   => 'null',
+            //'DOI'                   => 'null',
             'Tema'                  => $this->input->post('tema'),
             'Tipo'                  => $this->input->post('tipo')
         );
