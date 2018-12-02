@@ -70,8 +70,8 @@ hr{
     color: white;
 }
 .emp-profile{
-    padding: 3%;
-    margin-top: 3%;
+    padding: 13px;
+    margin-top: 20px;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
@@ -164,7 +164,6 @@ hr{
 #file-preview-zone{
     border: 1px solid #CED4DA;
     border-radius: 2px;
-    width: 700px;
     height: 300px;
 }
 #file-preview-zone img{

@@ -1,4 +1,4 @@
-<div class="contenidoTabla" id="divVerUsuarios">
+<div class="contenidoTabla" id="divVerUsuarios" style="margin-top: 2%;">
 	<div class="container-fluid" >
 		<div class="row">
 			<div class="col-xs-12 col-md-8 col-lg-9 col-xl-9 container" >

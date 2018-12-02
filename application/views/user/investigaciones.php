@@ -1,6 +1,4 @@
-<?php $this->load->view('helpers/headerUsuario'); ?>
-
-<div class="row">
+<div class="row" style="margin-top: 3%; padding: 0 20px;">
     <div class="col-lg-9 col-md-6 col-sm-12">
         <h2>Investigaciones</h2>
     </div>
@@ -27,8 +25,4 @@
         </div>
        ';
     }
-?>
-
-<?php 
-    $this->load->view('helpers/footer');
 ?>
