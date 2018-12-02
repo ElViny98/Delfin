@@ -6,6 +6,7 @@ function closeNav() {
     if($(window).width() < 769) {
         $("#inactive").toggleClass('activate');
         $("#menu-toggle").toggleClass('change');
+        $("#inactive").animate({scrollTop: 0}, "fast");
     }
 }
 
