@@ -152,10 +152,9 @@
 	</div>
 </body>
 <script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
-<script>
-function modificar(index) {
-    cleanMain();
-    $("#main-content").load(globalUrl + 'index.php/user/editarNoticia?id=' + index);
-}
+<script type="text/javascript">
+	function usuarios() {
+		$("#main-content").load('<?php echo base_url('index.php/admin/usuarios'); ?>')
+	}
 </script>
 </html>
