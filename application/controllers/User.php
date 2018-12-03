@@ -24,7 +24,9 @@ class user extends CI_Controller
     {
         if($this->session->userdata('nivel') == 2)
         {
-            $this->home();
+            $data['privilegio'] = 2;
+            $this->load->view('helpers/headerAdmin', $data);
+              $this->home();
         }
         else
         {
@@ -46,9 +48,7 @@ class user extends CI_Controller
 
     public function Noticias_MisNoticias(){
         $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('user/misNoticias',$datos);
-        $this->load->view('helpers/footer');
     }
     public function editar_perfil(){
         $id = $this->session->userdata('idUsuario');
@@ -312,16 +312,14 @@ class user extends CI_Controller
             'descripcion'   => $d->Descripcion,
             'img'           => $d->img
         );
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('editarNoticia',$data);
-        $this->load->view('helpers/footer');
     }
 
     public function Perfil(){
         $id = $this->session->userdata('idUsuario');
         $data_user= $this->user_model->get_user_data($id);
         $user_academico= $this->user_model->get_user_academico($id);
-        $user_institucion= $this->user_model->get_user_institucion($data_user->idInst);
+        $user_institucion= $this->user_model->get_user_institucion($data_user->idInstitucion);
         $data_user= $this->user_model->get_user_data($id);
         $paises=$this->user_model->get_countries();
         $estados=$this->user_model->get_regions($user_institucion->idPais);
@@ -338,7 +336,7 @@ class user extends CI_Controller
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
             'password'      => $data_user->Password, //news
-            'idInst'        => $data_user->idInst,
+            'idInst'        => $data_user->idInstitucion,
             'grado'         => $user_academico->Grado,
             'cuerpoA'       => $user_academico->cuerpoAcademico,
             'consolidacion' => $user_academico->consolidacionCA,
@@ -354,9 +352,7 @@ class user extends CI_Controller
             'regions'       => $estados,
             'instituciones' => $instituciones
         );
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('perfilUsuario',$datos);
-        $this->load->view('helpers/footer');
     }
 
 
@@ -377,12 +373,6 @@ class user extends CI_Controller
         {
             echo '<option value="'.$inst->idInstitucion.'">'.$inst->Nombre.'</option>';
         }
-    }
-
-    public function salir()
-    {
-        $this->session->sess_destroy();
-        redirect(base_url());
     }
 
     public function imagenNoticia()

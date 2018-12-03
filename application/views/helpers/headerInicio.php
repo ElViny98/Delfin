@@ -32,6 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<li class="nav-item">
 					<a class="nav-link" onclick="iniciarSesion()" href="#">Iniciar Sesión</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo base_url('index.php/inicio/registro'); ?>">Registro</a>
+				</li>
 			</ul>
 
 			<form class="form-inline my-2 my-lg-0">
