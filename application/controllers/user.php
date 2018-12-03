@@ -24,8 +24,7 @@ class user extends CI_Controller
     {
         if($this->session->userdata('nivel') == 2)
         {
-            $this->load->view('helpers/headerUsuario');
-
+            $this->home();
         }
         else
         {
@@ -34,7 +33,8 @@ class user extends CI_Controller
     }
     public function home(){
       $this->load->view('helpers/headerUsuario');
-      $this->load->view('blogview');
+      $arrayNot = array('data' => $this->user_model->getFeedNot());
+      $this->load->view('blogview', $arrayNot);
       $this->load->view('helpers/footer');
     }
     public function Noticias()
@@ -425,7 +425,7 @@ class user extends CI_Controller
     {
         $name = $this->createHash();
         $data = array(
-            
+
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name,
             'Fecha'                 => $this->input->post('fechaInv'),

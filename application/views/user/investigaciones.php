@@ -16,7 +16,7 @@
        '
         <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
             <div class="row new-container" >
-                <div class="col-lg-9 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <a href="'.base_url('index.php/user/investigacion?id='.$r->idInvestigaciones).'" class="link-new">'.$r->Titulo.'</a>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">

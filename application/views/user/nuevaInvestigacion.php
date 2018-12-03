@@ -55,7 +55,7 @@
             <div class="col-2">
                 <button class="btn btn-success" id="btnRegistrar">Registrar investigación</button>
             </div>
-        </div>
+        </div><!--end of original-->
     </form>
     <br>
 </div>
