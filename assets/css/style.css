@@ -52,13 +52,18 @@ hr{
     background-color: orange;
     border: 3px solid orange;
 }
-#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot{
+#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot, #registrar{
   width: 150px;
   float: right;
 }
 #btnGenerarNot:hover, #btnNuevaNot:hover, #btnEditNot:hover{
     border: 1px solid orange;
     background-color: orange;
+    color: white;
+}
+#registrar:hover{
+    border: 1px solid blue;
+    background-color: blue;
     color: white;
 }
 #btnNuevaNot a:link, #btnNuevaNot a:visited{
