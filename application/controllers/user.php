@@ -26,6 +26,7 @@ class user extends CI_Controller
         {
             $data['privilegio'] = 2;
             $this->load->view('helpers/headerAdmin', $data);
+              $this->home();
         }
         else
         {
@@ -34,7 +35,8 @@ class user extends CI_Controller
     }
     public function home(){
       $this->load->view('helpers/headerUsuario');
-      $this->load->view('blogview');
+      $arrayNot = array('data' => $this->user_model->getFeedNot());
+      $this->load->view('blogview', $arrayNot);
       $this->load->view('helpers/footer');
     }
     public function Noticias()
@@ -389,7 +391,7 @@ class user extends CI_Controller
     {
         $name = $this->createHash();
         $data = array(
-            
+
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name.'.pdf',
             'Fecha'                 => $this->input->post('fechaInv'),

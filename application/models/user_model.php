@@ -34,6 +34,7 @@ class User_model extends CI_Model
 
         return false;
     }
+    //Jalar datos de los usuarios para perfil
     public function get_user_data($id)
     {
         $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
@@ -49,6 +50,7 @@ class User_model extends CI_Model
         $q = $this->db->select('*')->from('Institucion')->where('idInstitucion',$id)->get();
         return $q->row();
     }
+    //fin de datos Perfil usuario
     public function misNoticias($id)
     {
         $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
@@ -119,7 +121,10 @@ class User_model extends CI_Model
         $query = $this->db->query('SELECT * FROM Investigaciones WHERE idUsuario = '.$id);
         return $query;
     }
-
+    public function getFeedNot(){//youre here
+     $this->db->select('img, Descripcion, Fecha, Titulo');
+      return $this->db->get('noticias')->result();
+    }
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
