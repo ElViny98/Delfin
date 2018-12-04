@@ -42,6 +42,12 @@ class inicio extends CI_Controller {
 			}
 		}
 	}
+
+	public function registro()
+	{
+		$this->load->view('registro');
+	}
+
 	public function AcercaDe()
 	{
 		$this->load->view('helpers/headerInicio');
@@ -205,6 +211,13 @@ class inicio extends CI_Controller {
 			echo $x;
 		}
 	}
+
+	
+    public function salir()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
 }
 
 ?>

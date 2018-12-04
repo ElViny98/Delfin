@@ -1,6 +1,4 @@
-<?php $this->load->view('helpers/headerUsuario'); ?>
-
-<div class="row">
+<div class="row" style="margin-top: 3%; padding: 0 20px;">
     <div class="col-lg-9 col-md-6 col-sm-12">
         <h2>Investigaciones</h2>
     </div>
@@ -9,26 +7,25 @@
     </div>
 </div>
 <hr>
-<?php   
+<?php
     foreach($investigaciones->result() as $r)
     {
         echo
        '
         <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
             <div class="row new-container" >
-                <div class="col-lg-9 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <a href="'.base_url('index.php/user/investigacion?id='.$r->idInvestigaciones).'" class="link-new">'.$r->Titulo.'</a>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <a href="'.base_url('index.php/user/modInv?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbspEditar</a>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <a href="'.base_url('index.php/user/editarInvestigacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbspEditar</a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <a href="'.base_url('index.php/user/eliminarInvesitacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-danger"><i class="fa fa-trash"></i>&nbspEiminar</a>
                 </div>
             </div>
             <hr>
         </div>
        ';
     }
-?>
-
-<?php 
-    $this->load->view('helpers/footer');
 ?>

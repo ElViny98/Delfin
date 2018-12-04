@@ -1,8 +1,8 @@
-<div id="titulo">
+<div class="container">
     <h3>Noticias</h3>
     <hr>
 </div>
-<div class="containerNoticia">
+<div class="container">
     <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/editarDatosNoticia?id='.$id)?>" method="post" id="form-new">
 
         <div class="form-group" >
@@ -86,7 +86,7 @@
                 <div class="col-lg-11 col-md-11 col-sm-11">
                     <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
                     <div id="conteinerEditor">
-                        
+
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
 </div>
 <script>
     var quill = new Quill('#conteinerEditor', {
-        modules: { 
+        modules: {
             toolbar: [
                 [{ header: [1, 2, 3, false] }],
                 [ { 'font': [] } ],
@@ -110,7 +110,7 @@
                 [ 'image', 'code-block' ],
                 [ { list: 'ordered' }, { list: 'bullet' } ],
                 [ { align: [] } ]
-            ] 
+            ]
         },
         placeholder: 'Redacción...',
         theme: 'snow'

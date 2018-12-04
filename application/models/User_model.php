@@ -34,6 +34,7 @@ class User_model extends CI_Model
 
         return false;
     }
+    //Jalar datos de los usuarios para perfil
     public function get_user_data($id)
     {
         $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
@@ -46,9 +47,10 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('Inst')->where('idInstitucion',$id)->get();
+        $q = $this->db->select('*')->from('Institucion')->where('idInstitucion',$id)->get();
         return $q->row();
     }
+    //fin de datos Perfil usuario
     public function misNoticias($id)
     {
         $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
@@ -93,7 +95,7 @@ class User_model extends CI_Model
     }
     public function get_instituciones($id)
     {
-        $q = $this->db->select('*')->from('Inst')->where('idEst',$id)->get();
+        $q = $this->db->select('*')->from('Institucion')->where('idEst',$id)->get();
         return $q;
     }
     public function get_cities($id, $country)
@@ -119,10 +121,23 @@ class User_model extends CI_Model
         $query = $this->db->query('SELECT * FROM Investigaciones WHERE idUsuario = '.$id);
         return $query;
     }
-
+    public function getFeedNot(){//youre here
+     $this->db->select('img, Descripcion, Fecha, Titulo');
+      return $this->db->get('noticias')->result();
+    }
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
+    }
+
+    public function publicacionesRecientes()
+    {
+        $queryNoticias = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.Titulo, Noticias.Img FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios';
+        $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios';
+        return array(
+            'Noticias' => $this->db->query($queryNoticias),
+            'Investigaciones' => $this->db->query($queryInvestigaciones)
+        );
     }
 }
 ?>

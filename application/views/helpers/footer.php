@@ -7,9 +7,10 @@
       	<div class="col-lg footer-copyright text-center py-3">
             © 2018
       	</div>
-    </footer> -->
+    </footer>-->
     <!-- Footer -->
 	</body>
+	<script src="<?php echo base_url('assets/js/sidebar.js'); ?>"></script>
 	<script type="text/javascript">
 		function modificar(index) {
 			location.href = '<?php echo base_url('index.php/user/editarNoticia?id='); ?>'+index;

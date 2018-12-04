@@ -1,11 +1,11 @@
 <?php $this->load->view('helpers/headerUsuario'); ?>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 container">
         <h2>Investigaciones</h2>
+        <hr>
     </div>
 </div>
-<hr>
 
 <div class="container">
     <form enctype="multipart/form-data" id="formInv" action="<?php echo base_url('index.php/user/registrarInv'); ?>" method="post">
@@ -55,8 +55,9 @@
             <div class="col-2">
                 <button class="btn btn-success" id="btnRegistrar">Registrar investigación</button>
             </div>
-        </div>
+        </div><!--end of original-->
     </form>
+    <br>
 </div>
 
 <script>
@@ -105,3 +106,4 @@
         $("#formInv").submit();
     });
 </script>
+<?php $this->load->view('helpers/footer'); ?>
