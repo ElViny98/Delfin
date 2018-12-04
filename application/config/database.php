@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
+	'hostname' => '127.0.0.1',
+	'username' => 'Delfin',
 	'password' => 'Vinicio123',
-	'database' => 'delfin',
+	'database' => 'Delfin',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

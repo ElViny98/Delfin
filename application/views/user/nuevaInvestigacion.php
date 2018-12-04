@@ -1,5 +1,3 @@
-<?php $this->load->view('helpers/headerUsuario'); ?>
-
 <div class="row">
     <div class="col-12 container">
         <h2>Investigaciones</h2>
@@ -106,4 +104,3 @@
         $("#formInv").submit();
     });
 </script>
-<?php $this->load->view('helpers/footer'); ?>

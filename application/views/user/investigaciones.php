@@ -3,7 +3,7 @@
         <h2>Investigaciones</h2>
     </div>
     <div class="col-lg-3 col-md-6 col-md-12 align-middle">
-        <a href="<?php echo base_url('index.php/user/nuevaInvestigacion'); ?>" class="btn btn-primary" style="width:100%;"><i class="fa fa-plus-circle"></i>&nbspNueva investigación</a>
+        <button onclick="nuevaInvestigacion();" class="btn btn-primary" style="width:100%;"><i class="fa fa-plus-circle"></i>&nbspNueva investigación</button>
     </div>
 </div>
 <hr>
@@ -21,7 +21,7 @@
                     <a href="'.base_url('index.php/user/editarInvestigacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbspEditar</a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <a href="'.base_url('index.php/user/eliminarInvesitacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-danger"><i class="fa fa-trash"></i>&nbspEiminar</a>
+                    <a href="'.base_url('index.php/user/eliminarInvesitacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-danger"><i class="fa fa-times"></i>&nbspEiminar</a>
                 </div>
             </div>
             <hr>
