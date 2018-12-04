@@ -124,5 +124,15 @@ class User_model extends CI_Model
     {
         $this->db->insert('Investigaciones', $data);
     }
+
+    public function publicacionesRecientes()
+    {
+        $queryNoticias = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.Titulo, Noticias.Img FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios';
+        $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios';
+        return array(
+            'Noticias' => $this->db->query($queryNoticias),
+            'Investigaciones' => $this->db->query($queryInvestigaciones)
+        );
+    }
 }
 ?>
