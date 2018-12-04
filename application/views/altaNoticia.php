@@ -111,7 +111,7 @@
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
 
-        var img = document.getElementsByTagName('img');
+        /*var img = document.getElementsByTagName('img');
         var base64 = [];
         var mime = [];
         var bin = [];
@@ -146,7 +146,7 @@
         console.table(bin);
         console.table(length);
         console.table(file);
-
+        */
         $.ajax({
             url: actionForm,
             type: 'POST',
@@ -157,7 +157,7 @@
             success: function(data) {
                 switch(data) {
                     case '1':
-                        location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        //location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
                         break;
 
                     case '0':

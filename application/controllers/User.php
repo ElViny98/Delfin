@@ -26,6 +26,7 @@ class user extends CI_Controller
         {
             $data['privilegio'] = 2;
             $this->load->view('helpers/headerAdmin', $data);
+              $this->home();
         }
         else
         {
@@ -34,7 +35,8 @@ class user extends CI_Controller
     }
     public function home(){
       $this->load->view('helpers/headerUsuario');
-      $this->load->view('blogview');
+      $arrayNot = array('data' => $this->user_model->getFeedNot());
+      $this->load->view('blogview', $arrayNot);
       $this->load->view('helpers/footer');
     }
     public function Noticias()
@@ -104,31 +106,7 @@ class user extends CI_Controller
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
-        $this->load->library('upload', $config);
-
-        $imgCont = count($_FILES['imgNew']['name']);
-        foreach($_FILES['imgNew']['name'] as $f => $value)
-        {
-            $_FILES['imgNew[]']['name'] = $_FILES['imgNew']['name'][$f];
-            $_FILES['imgNew[]']['type'] = $_FILES['imgNew']['type'][$f];
-            $_FILES['imgNew[]']['tmp_name'] = $_FILES['imgNew']['tmp_name'][$f];
-            $_FILES['imgNew[]']['error'] = $_FILES['imgNew']['error'][$f];
-            $_FILES['imgNew[]']['size'] = $_FILES['imgNew']['size'][$f];
-
-            $imgUp = $this->setImageOptions();
-            print_r($imgUp);
-            $this->load->library('upload', $imgUp);
-            $this->upload->initialize($imgUp);
-
-            if($this->upload->do_upload('imgNew[]'))
-                echo 'uwu';
-
-            else
-                echo $this->upload->display_errors();
-        }
-
-        return;
-
+        
         if($this->upload->do_upload('pic'))
         {
             $image_path = $this->upload->data();
@@ -415,7 +393,7 @@ class user extends CI_Controller
         $data = array(
 
             'idUsuario'             => $this->session->userdata('idUsuario'),
-            'Hash'                  => $name,
+            'Hash'                  => $name.'.pdf',
             'Fecha'                 => $this->input->post('fechaInv'),
             'Titulo'                => $this->input->post('titulo'),
             //'DOI'                   => 'null',
@@ -438,5 +416,13 @@ class user extends CI_Controller
         }
         else
             echo $this->upload->display_errors();
+    }
+
+    function inicio()
+    {
+        $publicaciones = $this->user_model->publicacionesRecientes();
+        $data['Noticias'] = $publicaciones['Noticias'];
+        $data['Investigaciones'] = $publicaciones['Investigaciones'];
+        $this->load->view('user/fedInicio', $data);
     }
 }
