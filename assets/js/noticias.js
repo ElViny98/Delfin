@@ -12,7 +12,7 @@ function mostrar(index) {
 	for(var i=0; i<containers.length; i++) {
         containers[i].style.display = 'none';
     }
-    
+
     containers[index].removeAttribute('style');
     $('html, body').animate({scrollTop: $("#new-container").offset().top}, 200);
 }

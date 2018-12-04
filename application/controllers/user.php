@@ -413,7 +413,7 @@ class user extends CI_Controller
     {
         $name = $this->createHash();
         $data = array(
-            
+
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name,
             'Fecha'                 => $this->input->post('fechaInv'),

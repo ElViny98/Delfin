@@ -14,8 +14,8 @@ class inicio extends CI_Controller {
 	}
 
 	public function index()
-	{	
-		//Si no se ha iniciado sesión, la dirección "localhost/Delfin" 
+	{
+		//Si no se ha iniciado sesión, la dirección "localhost/Delfin"
 		//Dirige a la página de inicio
 		if($this->session->userdata('nivel') == null)
 		{
@@ -45,7 +45,51 @@ class inicio extends CI_Controller {
 
 	public function registro()
 	{
-		$this->load->view('registro');
+		$data['paises']=$this->iniciar->get_countries();
+		$data['instituciones']=$this->iniciar->get_instituciones();
+		$this->load->view('registro',$data);
+	}
+
+	public function altaUsuario(){
+		$idInstitucion=0;
+		$institucion=$this->input->post('inst');
+		if ($institucion=='Otra') {
+			$dataInst = array(
+				'Nombre' => $this->input->post('nombreInst'),
+				'idPais' => $this->input->post('idpaisinst'),
+				'Pais' => $this->input->post('paisinst'),
+				'idEst' => $this->input->post('idEstadoInst'),
+				'Estado' => $this->input->post('estadoInst'),
+				'cp' => $this->input->post('cogPos'),
+			);
+			$this->iniciar->altaInstitucion($dataInst);
+			$id=$this->iniciar->lastInst();
+			$idInstitucion=$id->idInstitucion;
+		}else {
+
+			$idInstitucion=$this->input->post('idInst');
+		}
+		//data: { name: nom, appaterno: apa, apmaterno:ama, sexo: sex, pais:pai, telefono:tel, correo: cor, contraseña:contraEn,
+		//idInst:idIns, inst: ins,nombreInst:insNom, idpaisinst: idpaI, paisinst: paI, idEstadoInst:idEsI, estadoInst: esI, cogPos: cp
+			$dataUser = array(
+              'Nombre' 			=> $this->input->post('name'),
+              'ApPaterno' 		=> $this->input->post('appaterno'),
+              'ApMaterno' 		=> $this->input->post('apmaterno'),
+			  'Correo' 			=> $this->input->post('correo'),
+			  'Password' 		=> $this->input->post('contraseña'),
+			  'Pais' 			=> $this->input->post('pais'),
+			  'Telefono' 		=> $this->input->post('telefono'),
+              'Sexo' 			=> $this->input->post('sexo'),
+			  'idInstitucion'   => $idInstitucion,
+			  'Privilegio'		=> '2',
+			  'status'			=> '1'
+            );
+			$resultado=$this->iniciar->altaUser($dataUser);
+			if ($resultado=='1') {
+				echo '1';
+			}else {
+				echo '0';
+			}
 	}
 
 	public function AcercaDe()
@@ -183,8 +227,8 @@ class inicio extends CI_Controller {
 			$this->email->subject('Recuperación de contraseña');
 			$this->email->to($this->input->post('correo'));
 			$this->email->message('<h1>Solicitud de recuperación de contraseña</h1><br><br>
-			<p>Se solicitó una recuperación de contraseña para la cuenta DELFIN vinculada 
-			a este correo electrónico. Si usted solicitó esta modificación, dé clic en el 
+			<p>Se solicitó una recuperación de contraseña para la cuenta DELFIN vinculada
+			a este correo electrónico. Si usted solicitó esta modificación, dé clic en el
 			enlace que aparece a continuación: <br><br><center><i>
 			<a href="'. base_url('index.php/inicio/passwordrecovery?token='.$token).'">
 			Recuperar contraseña</a></i></center>');
@@ -196,7 +240,7 @@ class inicio extends CI_Controller {
 	}
 
 	public function passwordrecovery()
-	{	
+	{
 		$token = '';
 		if(isset($_GET['token']))
 		{
@@ -212,7 +256,7 @@ class inicio extends CI_Controller {
 		}
 	}
 
-	
+
     public function salir()
     {
         $this->session->sess_destroy();

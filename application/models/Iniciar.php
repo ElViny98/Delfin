@@ -58,14 +58,14 @@ class iniciar extends CI_Model
     }
 
     public function generarToken($email, $token)
-    {   
+    {
         $id = $this->db->query('SELECT idUsuarios FROM usuarios WHERE Correo = "'.$email.'";');
         //En caso de que el correo no esté registrado
         if($id->num_rows() == 0)
             return null;
-        
+
         else
-        {   
+        {
             $id = $id->row();
         }
         $insert = 'INSERT INTO recuperacion VALUES('.$id->idUsuarios.', "'.$token.'");';
@@ -78,9 +78,9 @@ class iniciar extends CI_Model
         $id = $this->db->query('SELECT idUsuario FROM recuperacion WHERE Token = "'.$token.'";');
         if($id->num_rows() == 0)
             return 0;
-        
+
         $id = $id->row();
-        
+
         if($this->db->query('UPDATE Usuarios SET Password = "'.$pass.'" WHERE idUsuarios = '.$id->idUsuario.';'))
         {
             //Para evitar llenar la base de datos de basura y por seguridad,
@@ -91,6 +91,43 @@ class iniciar extends CI_Model
 
         else
             return 0;
+    }
+    public function get_countries()
+    {
+        $q = $this->db->select('id,name')->from('Countries')->get();
+        return $q;
+    }
+    public function get_instituciones()
+    {
+        $q = $this->db->select('*')->from('inst')->get();
+        return $q;
+    }
+    public function altaInstitucion($datos){
+        $this->db->insert('inst',$datos);
+    }
+    public function lastInst(){
+        $q=$this->db->select('idInstitucion')->from('Inst')->order_by('idInstitucion','DESC')->get();
+        return $q->row();
+    }
+    public function lastUser(){
+        $q=$this->db->select('idUsuarios')->from('Usuarios')->order_by('idUsuarios','DESC')->get();
+        return $q->row();
+    }
+    public function altaUser($datos){
+        $this->db->insert('Usuarios', $datos);
+        if($this->db->affected_rows() > 0) {
+            $lastIdUser=$this->lastUser();
+            $datos2= array('idUsuario' => $lastIdUser->idUsuarios );
+            $this->db->insert('Infoacademica',$datos2);
+            if ($this->db->affected_rows() > 0) {
+                return '1';
+            }else {
+                return '0';
+            }
+        }
+        else {
+            return '0';
+        }
     }
 }
 ?>
