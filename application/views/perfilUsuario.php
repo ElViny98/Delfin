@@ -161,6 +161,8 @@
                     <div class="row ">
                         <div class="tab-content profile-tab" id="myTabContent" style="width:100%;">
                             <script type="text/javascript">
+                                var selectOption;
+                                var selectOption2;
                                 function mostrarParaEditar(){
                                     $('#noEditar').css({'display':'none'});
                                     $('#paraEditar').css({'display':'block'});
@@ -226,9 +228,12 @@
                                     document.getElementById("txtareaC").value='<?php echo $areaC ?>';
                                     $("#txtpaisInst").find('option:contains("<?php echo $paisInst?>")').prop('selected', true);
                                     $("#txtEstadoInst").find('option:contains("<?php echo $estadoInst?>")').prop('selected', true);
-                                    document.getElementById("txtInstitucion").value='<?php echo $idInst?>';
+                                    $("#txtInstitucion").find('option:contains("<?php echo $institucion?>")').prop('selected', true);
                                     document.getElementById("txtCiudadInst").value='<?php echo $ciudadInst?>';
                                     document.getElementById("txtUnidad").value='<?php echo $unidad?>';
+
+                                    selectOption = document.getElementById('txtEstadoInst').innerHTML;
+                                    selectOption2 = document.getElementById('txtInstitucion').innerHTML;
 
                                 }
                                 function Cancelar(){
@@ -279,6 +284,8 @@
                                     $('#espacio').css({'display':'none'});
                                     $('#guardarCambios').css({'display':'none'});
                                     $('#cancelarEditar').css({'display':'none'});
+                                    document.getElementById('txtEstadoInst').innerHTML = selectOption;
+                                    document.getElementById('txtInstitucion').innerHTML=selectOption2;
                                 }
                             </script>
                             <div class="tab-pane fade show active" id="infoPersonal" role="tabpanel" aria-labelledby="home-tab">

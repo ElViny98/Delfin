@@ -11,22 +11,12 @@ class user extends CI_Controller
         $this->load->helper('file');
     }
 
-    public function datosNotici()
-    {
-        print_r($_FILES);
-        foreach($_FILES['imgNew']['name'] as $f)
-        {
-            printf("%s\n", $f);
-        }
-    }
-
     public function index()
     {
         if($this->session->userdata('nivel') == 2)
         {
             $data['privilegio'] = 2;
             $this->load->view('helpers/headerAdmin', $data);
-              $this->home();
         }
         else
         {
@@ -127,7 +117,6 @@ class user extends CI_Controller
             //En caso de error esto se evaluará desde javascript
             echo '0';
         }
-
     }
 
     public function eliminarNoticia(){
