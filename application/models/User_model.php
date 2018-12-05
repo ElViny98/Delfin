@@ -98,6 +98,11 @@ class User_model extends CI_Model
         $q = $this->db->select('*')->from('Inst')->where('idEst',$id)->get();
         return $q;
     }
+    public function get_cp($id)
+    {
+        $q = $this->db->select('cp')->from('Inst')->where('idInstitucion',$id)->get();
+        return $q->row();
+    }
     public function get_cities($id, $country)
     {
         $q = $this->db->query('SELECT id, name FROM Cities WHERE region_id = '.$id.' AND country_id = '.$country);

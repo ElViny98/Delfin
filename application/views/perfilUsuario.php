@@ -97,8 +97,14 @@
 
         <div class="col-md-4">
             <div class="profile-img" id="UserPhoto">
+                <?php
+                    if ($img==NULL){?>
+                        <img src="<?php echo base_url()?>assets/img/usuario.jpg" />
+                <?php    }else {?>
+                        <img src="<?php echo base_url()?>assets/img/<?= $img?>" />
+                <?php    }
 
-                <img src="<?php echo base_url()?>assets/img/<?= $img?>" />
+                ?>
             </div>
             <center>
             <div >
@@ -199,7 +205,9 @@
                                     $('#cancelarEditar').css({'display':'block'});
                                     $('#espacioEditar').css({'display':'none'});
                                     $('#espacio').css({'display':'block'});
+                                    $('#noEditar20').css({'display':'none'});
                                     $('#paraEditar20').css({'display':'block'});
+                                    $('#noEditar21').css({'display':'none'});
                                     $('#paraEditar21').css({'display':'block'});
                                     $('#paraEditar22').css({'display':'block'});
                                     document.getElementById("txtNombre").value='<?php echo $nombre ?>';
@@ -262,6 +270,10 @@
                                     $('#paraEditar18').css({'display':'none'});
                                     $('#noEditar19').css({'display':'block'});
                                     $('#paraEditar19').css({'display':'none'});
+                                    $('#noEditar20').css({'display':'block'});
+                                    $('#paraEditar20').css({'display':'none'});
+                                    $('#noEditar21').css({'display':'block'});
+                                    $('#paraEditar21').css({'display':'none'});
                                     $('#espacioEditar').css({'display':'block'});
                                     $('#mostrarEditar').css({'display':'block'});
                                     $('#espacio').css({'display':'none'});
@@ -326,7 +338,7 @@
                                                 <p><?php echo $fechaNac; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar5">
-                                                <input type="cnombre" class="form-control" id="txtFecha" name="txtFecha" placeholder="Fecha de Nacimiento" value="<?php echo $fechaNac ?>">
+                                                <input type="date" class="form-control" id="txtFecha" name="txtFecha" placeholder="Fecha de Nacimiento" value="<?php echo $fechaNac ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -512,6 +524,24 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
+                                                <label>Institución</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar20">
+                                                <p><?php echo $institucion; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar20">
+                                                <select class="form-control" id="txtInstitucion" name="txtInstitucion">
+                                                    <option value="0" disabled="disabled" selected="selected">Seleccionar opción...</option>
+                                                    <?php
+                                                      foreach ($instituciones->result() as $inst) {
+                                                          echo '<option value="'.$inst->idInstitucion.'">'.$inst->Nombre.'</option>';
+                                                      }
+                                                     ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <label>Ciudad</label>
                                             </div>
                                             <div class="col-md-6" style="display:block;" id="noEditar19">
@@ -519,6 +549,17 @@
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar19">
                                                 <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst" readonly="readonly" value="<?php echo $ciudadInst ?>">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Unidad</label>
+                                            </div>
+                                            <div class="col-md-6" style="display:block;" id="noEditar21">
+                                                <p><?php echo $unidad; ?></p>
+                                            </div>
+                                            <div class="col-md-6" style="display:none;" id="paraEditar21">
+                                                <input type="cnombre" class="form-control" id="txtUnidad" name="txtUnidad" value="<?php echo $unidad ?>">
                                             </div>
                                         </div>
 
@@ -561,6 +602,30 @@
                 var sel = document.getElementById("txtEstadoInst");
                 sel.remove(sel.selectedIndex);
                 document.getElementById('txtEstadoInst').innerHTML = data;
+                var sel2 = document.getElementById("txtInstitucion");
+                sel2.remove(sel2.selectedIndex);
+                document.getElementById('txtCiudadInst').value = '';
+            }
+        });
+    })
+    $("#txtEstadoInst").change(function() {
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/getInstituciones?regionId='); ?>' + this.value,
+            type: 'GET',
+            success: function(data) {
+                var sel = document.getElementById("txtInstitucion");
+                sel.remove(sel.selectedIndex);
+                document.getElementById('txtInstitucion').innerHTML = data;
+                document.getElementById('txtCiudadInst').value = '';
+            }
+        });
+    })
+    $("#txtInstitucion").change(function() {
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/getCP?instId='); ?>' + this.value,
+            type: 'GET',
+            success: function(data) {
+                document.getElementById('txtCiudadInst').value = data;
             }
         });
     })

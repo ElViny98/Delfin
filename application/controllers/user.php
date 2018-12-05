@@ -106,7 +106,7 @@ class user extends CI_Controller
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
-        
+
         if($this->upload->do_upload('pic'))
         {
             $image_path = $this->upload->data();
@@ -349,6 +349,11 @@ class user extends CI_Controller
         {
             echo '<option value="'.$inst->idInstitucion.'">'.$inst->Nombre.'</option>';
         }
+    }
+    public function getCP()
+    {
+        $q = $this->user_model->get_cp($this->input->get('instId'));
+        echo $q->cp;
     }
 
     public function imagenNoticia()
