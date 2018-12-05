@@ -52,13 +52,18 @@ hr{
     background-color: orange;
     border: 3px solid orange;
 }
-#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot{
+#btnEnviar, #btnGenerarNot, #btnNuevaNot, #btnEditNot, #registrar{
   width: 150px;
   float: right;
 }
 #btnGenerarNot:hover, #btnNuevaNot:hover, #btnEditNot:hover{
     border: 1px solid orange;
     background-color: orange;
+    color: white;
+}
+#registrar:hover{
+    border: 1px solid blue;
+    background-color: blue;
     color: white;
 }
 #btnNuevaNot a:link, #btnNuevaNot a:visited{
@@ -383,4 +388,88 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+.investigaciones-display
+{
+    position: fixed;
+    margin-left: 20px;
+    width: 200px;
+    border-radius: 10px;
+    background: white;
+    height: 100%;
+    display: inline-block;
+    min-width: 200px;
+    margin-top: auto;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.header
+{
+    width: 100%;
+    margin: 2% 0 2% 0;
+    border-bottom: 1px solid orange;
+    padding: 15px;
+    text-align: left;
+}
+
+.content
+{
+    overflow-y: auto;
+}
+
+.investigaciones-list
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.investigaciones-list li
+{
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.investigaciones-list li img
+{
+    padding-bottom: 10px;
+}
+
+.img-perfil-container
+{
+    display: inline-block;
+    min-width: 45px;
+    width: 25%;
+}
+
+.investigacion-container
+{
+    display: block;
+    width: 100%;
+}
+
+.perfil-container
+{
+    width: 70%;
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.perfil-container a
+{
+    font-size: 12px;
+}
+
+.content-fed 
+{
+    position: relative;
+    left: 270px;
+    display: flex;
+    overflow: hidden;
 }

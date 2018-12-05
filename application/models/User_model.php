@@ -47,7 +47,7 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('inst')->where('idInstitucion', 1)->get();//cambie $id por 1 (nomas ese existe en la bd)
+        $q = $this->db->select('*')->from('Inst')->where('idInstitucion',$id)->get();
         return $q->row();
     }
     //fin de datos Perfil usuario
@@ -93,8 +93,13 @@ class User_model extends CI_Model
     }
     public function get_instituciones($id)
     {
-        $q = $this->db->select('*')->from('inst')->where('idEst',$id)->get();
+        $q = $this->db->select('*')->from('Inst')->where('idEst',$id)->get();
         return $q;
+    }
+    public function get_cp($id)
+    {
+        $q = $this->db->select('cp')->from('Inst')->where('idInstitucion',$id)->get();
+        return $q->row();
     }
     public function get_cities($id, $country)
     {
@@ -126,6 +131,16 @@ class User_model extends CI_Model
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
+    }
+
+    public function publicacionesRecientes()
+    {
+        $queryNoticias = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.Titulo, Noticias.Img FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios';
+        $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios';
+        return array(
+            'Noticias' => $this->db->query($queryNoticias),
+            'Investigaciones' => $this->db->query($queryInvestigaciones)
+        );
     }
 }
 ?>
