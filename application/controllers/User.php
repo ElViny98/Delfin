@@ -369,7 +369,15 @@ class user extends CI_Controller
 
     public function nuevaInvestigacion()
     {
-        $this->load->view('user/nuevaInvestigacion');
+        $q = $this->user_model->autoresUsuarios($this->session->userdata('idUsuario'));
+        if($q->num_rows() > 0)
+        {
+            $data['autores'] = $q;
+            $this->load->view('user/nuevaInvestigacion', $data);
+        }
+
+        else
+            $this->load->view('user/nuevaInvestigacion');
     }
 
     public function editarInvestigacion(){
@@ -378,20 +386,22 @@ class user extends CI_Controller
 
     public function registrarInv()
     {
+        echo $this->input->post('fechaInv');
         $name = $this->createHash();
+        print_r($_FILES['archivoInv']);
+        return;
         $data = array(
-
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name.'.pdf',
             'Fecha'                 => $this->input->post('fechaInv'),
             'Titulo'                => $this->input->post('titulo'),
-            //'DOI'                   => 'null',
+            'DOI'                   => 'null',
             'Tema'                  => $this->input->post('tema'),
             'Tipo'                  => $this->input->post('tipo')
         );
 
         $config = array(
-            'file_name'     => $name,
+            'file_name'     => $name.'.pdf',
             'allowed_types' => 'pdf',
             'upload_path'   => 'assets/documents'
         );
@@ -401,7 +411,18 @@ class user extends CI_Controller
         if($this->upload->do_upload('archivoInv'))
         {
             echo 'bien';
-            $this->user_model->nuevaInv($data);
+            $newId = $this->user_model->nuevaInv($data);
+            $query = 'INSERT INTO AutoresInv VALUES (';
+            for($i = 0; $i<count($_POST['autores']); $i++)
+            {
+                if($i == count($_POST['autores']) - 1)
+                    $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autores'][$i].'"), '.$newId;
+
+                else
+                $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autores'][$i].'"), '.$newId.', ';
+            }   
+            $query.=');';
+            echo $query;
         }
         else
             echo $this->upload->display_errors();
