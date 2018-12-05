@@ -44,3 +44,9 @@ function modificar(index) {
     $("#main-content").load(globalUrl + 'index.php/user/editarNocia?id=' + index);
 }
 
+
+function nuevaInvestigacion() {
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/nuevaInvestigacion');
+}
+

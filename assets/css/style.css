@@ -395,7 +395,7 @@ input:checked + .slider:before {
 {
     position: fixed;
     margin-left: 20px;
-    width: 15%;
+    width: 200px;
     border-radius: 10px;
     background: white;
     height: 100%;
@@ -464,4 +464,12 @@ input:checked + .slider:before {
 .perfil-container a
 {
     font-size: 12px;
+}
+
+.content-fed 
+{
+    position: relative;
+    left: 270px;
+    display: flex;
+    overflow: hidden;
 }

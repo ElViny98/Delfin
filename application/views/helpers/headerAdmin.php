@@ -97,13 +97,6 @@
 						</li>	
 
 						<li>
-							<a class="bar-link" href="#" id="btnInstituciones">
-								<i class="fa fa-university fix-content" aria-hidden="true"></i>
-								Instituciones
-							</a>
-						</li>
-
-						<li>
 							<a class="bar-link" href="#" id="btnNoticias">
 								<i class="fa fa-newspaper-o fix-content" aria-hidden="true"></i>
 								Noticias
@@ -147,7 +140,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="main-content" class="content-main" style="height: 1000px;">
+	<div id="main-content" class="content-main">
 		Contenido aquí
 	</div>
 </body>

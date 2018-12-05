@@ -128,7 +128,7 @@ class User_model extends CI_Model
     }
     public function getFeedNot(){//youre here
      $this->db->select('img, Descripcion, Fecha, Titulo');
-      return $this->db->get('noticias')->result();
+      return $this->db->get('Noticias')->result();
     }
     public function nuevaInv($data)
     {
