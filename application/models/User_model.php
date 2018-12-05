@@ -37,26 +37,24 @@ class User_model extends CI_Model
     //Jalar datos de los usuarios para perfil
     public function get_user_data($id)
     {
-        $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
+        $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
         return $q->row();
     }
     public function get_user_academico($id)
     {
-        $q = $this->db->select('*')->from('Infoacademica')->where('idUsuario',$id)->get();
+        $q = $this->db->select('*')->from('infoacademica')->where('idUsuario',$id)->get();
         return $q->row();
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('Institucion')->where('idInstitucion',$id)->get();
+        $q = $this->db->select('*')->from('inst')->where('idInstitucion', 1)->get();//cambie $id por 1 (nomas ese existe en la bd)
         return $q->row();
     }
     //fin de datos Perfil usuario
-    public function misNoticias($id)
+    public function misNoticias()
     {
-        $this->db->select('idNoticias,Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idUsuarios >=', $id)->order_by("Fecha", "desc")->order_by("idNoticias", "desc");
-        $query = $this->db->get();
-        if($query->num_rows() > 0 ) return $query;
-        else return false;
+        $this->db->select('*')->from('noticias')->where('idUsuarios', 2);
+        return $this->db->get('noticias')->result();
     }
 
     public function eliminar($id)
@@ -66,7 +64,7 @@ class User_model extends CI_Model
 
     public function obtenerNoticia($id)
     {
-        $this->db->select('Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idNoticias >=', $id);
+        $this->db->select('Titulo,Fecha,Descripcion,img')->from('Noticias')->where('idNoticias >=', $id);//?? solo jala la noticia de el idNoticia que es dado
         $query = $this->db->get();
         if($query->num_rows() > 0 ) return $query;
         else return false;
@@ -95,7 +93,7 @@ class User_model extends CI_Model
     }
     public function get_instituciones($id)
     {
-        $q = $this->db->select('*')->from('Institucion')->where('idEst',$id)->get();
+        $q = $this->db->select('*')->from('inst')->where('idEst',$id)->get();
         return $q;
     }
     public function get_cities($id, $country)
@@ -118,12 +116,12 @@ class User_model extends CI_Model
 
     public function getInvestigaciones($id)
     {
-        $query = $this->db->query('SELECT * FROM Investigaciones WHERE idUsuario = '.$id);
-        return $query;
+      $this->db->select('*')->from('Investigaciones')->where('idUsuario',$id)->get();
+        return $this->db->get('Investigaciones')->result();
     }
-    public function getFeedNot(){//youre here
-     $this->db->select('img, Descripcion, Fecha, Titulo');
-      return $this->db->get('noticias')->result();
+    public function get_user_noticias($id){//youre here
+     $this->db->select('img, Descripcion, Fecha, Titulo')->from('Noticias')->where('idUsuarios',$id)->get();
+      return $this->db->get('Noticias')->result();
     }
     public function nuevaInv($data)
     {
