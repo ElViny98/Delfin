@@ -11,22 +11,12 @@ class user extends CI_Controller
         $this->load->helper('file');
     }
 
-    public function datosNotici()
-    {
-        print_r($_FILES);
-        foreach($_FILES['imgNew']['name'] as $f)
-        {
-            printf("%s\n", $f);
-        }
-    }
-
     public function index()
     {
         if($this->session->userdata('nivel') == 2)
         {
             $data['privilegio'] = 2;
             $this->load->view('helpers/headerAdmin', $data);
-              $this->home();
         }
         else
         {
@@ -34,9 +24,43 @@ class user extends CI_Controller
         }
     }
     public function home(){
-      $this->load->view('helpers/headerUsuario');
-      $arrayNot = array('data' => $this->user_model->getFeedNot());
-      $this->load->view('blogview', $arrayNot);
+      $this->load->view('helpers/headerUsuario');//comentar esto para blogview 2.0
+      $this->datos_PerfilUsuario();
+    }
+    public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
+      //$id = $this->session->userdata('idUsuario');
+      $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
+      $user_academico = $this->user_model->get_user_academico(2);
+      $user_noticias = $this->user_model->get_user_noticias(2);
+      $user_institucion = $this->user_model->get_user_institucion($data_user->idInst);
+      $user_investigaciones=$this->user_model->getInvestigaciones(2);
+      $datos = array(
+          //'id'            => $id,
+          'nombre'        => $data_user->Nombre,
+          'apaterno'      => $data_user->ApPaterno,
+          'amaterno'      => $data_user->ApMaterno,
+          'correo'        => $data_user->Correo,
+          'pais'          => $data_user->Pais,
+          'fechaNac'      => $data_user->Nacimiento,
+          'telefono'      => $data_user->Telefono,
+          'sexo'          => $data_user->Sexo,
+          'img'           => $data_user->Img,
+          'noticias'      => $user_noticias,
+          'idInst'        => $data_user->idInst,
+          'grado'         => $user_academico->Grado,
+          'cuerpoA'       => $user_academico->cuerpoAcademico,
+          'consolidacion' => $user_academico->consolidacionCA,
+          'promep'        => $user_academico->perfilPROMEP,
+          'sni'           => $user_academico->nivelSNI,
+          'areaC'         => $user_academico->areaConocimiento,
+          'unidad'        => $user_academico->UAcademica,
+          'institucion'   => $user_institucion->Nombre,
+          'paisInst'      => $user_institucion->Pais,
+          'estadoInst'    => $user_institucion->Estado,
+          'ciudadInst'    => $user_institucion->cp,
+          'investigaciones' =>$user_investigaciones
+      );
+      $this->load->view('blogview',$datos);
       $this->load->view('helpers/footer');
     }
     public function Noticias()
@@ -106,7 +130,7 @@ class user extends CI_Controller
         $config['overwrite'] = TRUE;
         $config['file_name'] = $this->createHash();
         $this->upload->initialize($config);
-        
+
         if($this->upload->do_upload('pic'))
         {
             $image_path = $this->upload->data();
@@ -127,7 +151,6 @@ class user extends CI_Controller
             //En caso de error esto se evaluará desde javascript
             echo '0';
         }
-
     }
 
     public function eliminarNoticia(){
@@ -293,10 +316,10 @@ class user extends CI_Controller
 
     public function Perfil(){
         $id = $this->session->userdata('idUsuario');
-        $data_user= $this->user_model->get_user_data($id);
+        $data_user= $this->user_model->get_user_data($id);//Aqui
         $user_academico= $this->user_model->get_user_academico($id);
         $user_institucion= $this->user_model->get_user_institucion($data_user->idInstitucion);
-        $data_user= $this->user_model->get_user_data($id);
+        $data_user= $this->user_model->get_user_data($id);//porque esta otra vez?
         $paises=$this->user_model->get_countries();
         $estados=$this->user_model->get_regions($user_institucion->idPais);
         $instituciones=$this->user_model->get_instituciones($user_institucion->idEst);
@@ -349,6 +372,11 @@ class user extends CI_Controller
         {
             echo '<option value="'.$inst->idInstitucion.'">'.$inst->Nombre.'</option>';
         }
+    }
+    public function getCP()
+    {
+        $q = $this->user_model->get_cp($this->input->get('instId'));
+        echo $q->cp;
     }
 
     public function imagenNoticia()
