@@ -77,6 +77,12 @@
         `;
         document.getElementById('btnArchivo').innerHTML = html;
     }
+    $("#autoresInv").tagsInput({
+        width: '100%',
+        height: '100%',
+        defaultText: 'Autores',
+        class: 'col-xl-11 col-lg-10 col-md-10 col-sm-12 form-control'
+    });
     <?php 
         if(isset($autores))
         {
@@ -99,20 +105,15 @@
         }
     ?>
     console.log('Something');
-    $("#autoresInv").tagsInput({
-        width: '100%',
-        height: '100%',
-        defaultText: 'Autores',
-        class: 'col-xl-11 col-lg-10 col-md-10 col-sm-12 form-control'
-    });
     
     $("#formInv").submit(function(event) {
         event.preventDefault();
         var autores = $("#autoresInv").val().split(',');
         var aut = compareArr(autores, auxAut);
-        var formData = new FormData($('form')[0]);
+        var formData = new FormData(document.getElementById('formInv'));
         var aut = compareArr(autores, auxAut); //aut tiene los 'nuevos' autores
-        
+        formData.append('archivoInv', document.getElementById('archivoInv').files[0])
+
         aut.forEach(function(x) {
             formData.append('autoresNuevos[]', x);
         });
@@ -121,15 +122,17 @@
             formData.append('autores[]', x);
         });
 
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function() {
-            if(http.readyState == 4 && http.status == 200) {
-
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/registrarInv'); ?>',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(ans) {
+                alert(ans)
             }
-            http.open("POST", "<?php echo base_url('index.php/user/registrarInv'); ?>", true);
-            http.setRequestHeader('multipart/form-data');
-            http.send(formData);
-        }
+        })
 
     });
 

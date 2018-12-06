@@ -122,7 +122,7 @@ class User_model extends CI_Model
     public function getInvestigaciones($id)
     {
       $this->db->select('*')->from('Investigaciones')->where('idUsuario',$id)->get();
-        return $this->db->get('Investigaciones')->result();
+        return $this->db->get('Investigaciones');
     }
     public function get_user_noticias($id){//youre here
      $this->db->select('img, Descripcion, Fecha, Titulo')->from('Noticias')->where('idUsuarios',$id)->get();
@@ -131,7 +131,7 @@ class User_model extends CI_Model
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
-        return $this->db->query('SELECT MAX(idInvestigaciones) FROM Investigaciones')->row();
+        return $this->db->query('SELECT MAX(idInvestigaciones) as idInvestigaciones FROM Investigaciones')->row();
     }
 
     public function publicacionesRecientes()
@@ -152,6 +152,11 @@ class User_model extends CI_Model
     public function invAutor($query)
     {
         return $this->db->query($query);
+    }
+
+    public function newAutor($data)
+    {
+        $this->db->insert('Autores', $data);
     }
 }
 ?>
