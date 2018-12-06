@@ -27,5 +27,14 @@
 </div>
 
 <div class="content-fed">
-    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9">
+                <input class="form-control" type="text" id="txtBuscar">
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </div>
 </div>

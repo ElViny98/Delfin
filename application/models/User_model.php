@@ -133,6 +133,7 @@ class User_model extends CI_Model
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
+        return $this->db->query('SELECT MAX(idInvestigaciones) as idInvestigaciones FROM Investigaciones')->row();
     }
 
     public function publicacionesRecientes()
@@ -143,6 +144,21 @@ class User_model extends CI_Model
             'Noticias' => $this->db->query($queryNoticias),
             'Investigaciones' => $this->db->query($queryInvestigaciones)
         );
+    }
+
+    public function autoresUsuarios($idUsuario)
+    {
+        return $this->db->query('SELECT Nombre FROM Autores WHERE idUsuarios = '.$idUsuario);
+    }
+
+    public function invAutor($query)
+    {
+        return $this->db->query($query);
+    }
+
+    public function newAutor($data)
+    {
+        $this->db->insert('Autores', $data);
     }
 }
 ?>

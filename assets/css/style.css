@@ -468,8 +468,6 @@ input:checked + .slider:before {
 
 .content-fed 
 {
-    position: relative;
-    left: 270px;
     display: flex;
     overflow: hidden;
 }

@@ -99,14 +99,14 @@ class iniciar extends CI_Model
     }
     public function get_instituciones()
     {
-        $q = $this->db->select('*')->from('inst')->get();
+        $q = $this->db->select('*')->from('Institucion')->get();
         return $q;
     }
     public function altaInstitucion($datos){
-        $this->db->insert('inst',$datos);
+        $this->db->insert('Institucion',$datos);
     }
     public function lastInst(){
-        $q=$this->db->select('idInstitucion')->from('Inst')->order_by('idInstitucion','DESC')->get();
+        $q=$this->db->select('idInstitucion')->from('Institucion')->order_by('idInstitucion','DESC')->get();
         return $q->row();
     }
     public function lastUser(){
