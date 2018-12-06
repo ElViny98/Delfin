@@ -31,5 +31,10 @@ class Admin_model extends CI_Model
         $q = $this->db->select('id,name')->from('Regions')->where('country_id',$id)->get();
         return $q;
     }
+
+    public function getConfig()
+    {
+        return $this->db->query('SELECT * FROM Mantenimiento');
+    }
 }
 ?>

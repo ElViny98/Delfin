@@ -44,6 +44,18 @@ class admin extends CI_Controller
       $data['paises']=$this->admin_model->get_countries();
       $data['consulta'] = $this->admin_model->get_instituciones();
       $this->load->view('admin/instituciones', $data);
-    }
-  }
+	}
+	
+	public function config()
+	{
+		if($this->session->userdata('nivel') != 1)
+		{
+			redirect(base_url());
+		}
+		else
+		{
+			$data['mantenimiento'] = $this->admin_model->getConfig();
+		}
+	}
+}
 ?>
