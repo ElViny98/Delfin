@@ -79,11 +79,11 @@
        </ul>
                      <div class="row">
 
-                         <div class="col-md-8">
-                             <div class="tab-content profile-tab" id="myTabContent">
+                         <div class="row" style="width:100%;">
+                             <div class="tab-content profile-tab" id="myTabContent" style="width:100%;">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                    <div class="row">
-                                       <?php foreach ($noticias as $noticia) { ?>
+                                       <?php foreach ($noticias->result() as $noticia) { ?>
                                        <div class="card mb-4" style="margin-top:20px;">
                                        <img src="<?php echo base_url()?>assets/img/<?= $noticia->img?>" style="height:300px; width:665px;" class="card-img-top" alt="Card image cap" />
 
@@ -112,19 +112,26 @@
                                  </div>
                                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                    <div class="row">
-                                       <?php foreach ($investigaciones as $investigacion) { ?>
-                                           <div class="card mb-4" style="margin-top:20px;width:100%;">
-
+                                       <?php foreach ($investigaciones->result() as $investigacion) { ?>
+                                           <div class="card mb-3" style="margin-top:20px;width:100%;">
                                              <div class="card-body">
-                                               <h2 class="card-title"> <?php echo $investigacion->Titulo; ?></h2>
-                                               <p class="card-text"> <p> <?php echo $investigacion->tipo; ?> </p>
-                                               <p class="card-text"> <p> <?php echo $investigacion->Tema; ?> </p>
+                                               <div class="row">
+                                                 <div class="col-md-8">
+                                                   <h2 class="card-title"> <?php echo $investigacion->Titulo; ?></h2>
+                                                   <p class="card-text"> <p> <?php echo $investigacion->tipo; ?> </p>
+                                                   <p class="card-text"> <p> <?php echo $investigacion->Tema; ?> </p>
+                                                 </div>
+                                                 <div class="col-md-3" style="padding:2%;">
+                                                   <a href="#" onclick="viewDocument('<?php echo $investigacion->Hash; ?>')"><i class="fa fa-5x fa-file " aria-hidden="true"></i>
+                                                   </a>
+                                                 </div>
+                                               </div>
+
                                              </div>
                                              <div class="card-footer text-muted">
                                                <?php echo $investigacion->Fecha;?>
                                              </div>
                                            </div>
-
                                        <?php } ?>
                                        <!--end of Blog Post -->
                                     </div>
@@ -138,7 +145,11 @@
   </div>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script type="text/javascript">
+      function viewDocument(hash){
+        window.open('<?php echo base_url('assets/documents/'); ?>'+hash, '_blank');
+      }
+    </script>
   </body>
 
 </html>

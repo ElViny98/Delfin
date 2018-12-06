@@ -121,16 +121,19 @@ class User_model extends CI_Model
 
     public function getInvestigaciones($id)
     {
-      $this->db->select('*')->from('Investigaciones')->where('idUsuario',$id)->get();
-        return $this->db->get('Investigaciones')->result();
+      $sql = 'SELECT * FROM Investigaciones WHERE idUsuario='.$id.' ORDER BY Fecha DESC' ;
+      $query = $this->db->query($sql);
+      return $query;
     }
     public function get_user_noticias($id){//youre here
-     $this->db->select('img, Descripcion, Fecha, Titulo')->from('Noticias')->where('idUsuarios',$id)->get();
-      return $this->db->get('Noticias')->result();
+      $sql = 'SELECT * FROM Noticias WHERE idUsuarios='.$id.' ORDER BY Fecha DESC' ;
+      $query = $this->db->query($sql);
+      return $query;
     }
     public function nuevaInv($data)
     {
         $this->db->insert('Investigaciones', $data);
+        return $this->db->query('SELECT MAX(idInvestigaciones) as idInvestigaciones FROM Investigaciones')->row();
     }
 
     public function publicacionesRecientes()
@@ -141,6 +144,21 @@ class User_model extends CI_Model
             'Noticias' => $this->db->query($queryNoticias),
             'Investigaciones' => $this->db->query($queryInvestigaciones)
         );
+    }
+
+    public function autoresUsuarios($idUsuario)
+    {
+        return $this->db->query('SELECT Nombre FROM Autores WHERE idUsuarios = '.$idUsuario);
+    }
+
+    public function invAutor($query)
+    {
+        return $this->db->query($query);
+    }
+
+    public function newAutor($data)
+    {
+        $this->db->insert('Autores', $data);
     }
 }
 ?>
