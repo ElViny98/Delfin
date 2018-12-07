@@ -51,10 +51,9 @@ class User_model extends CI_Model
         return $q->row();
     }
     //fin de datos Perfil usuario
-    public function misNoticias()
+    public function misNoticias($id)
     {
-        $this->db->select('*')->from('noticias')->where('idUsuarios', 2);
-        return $this->db->get('noticias')->result();
+        return $this->db->query('SELECT * FROM Noticias WHERE idUsuarios = '.$id);
     }
 
     public function eliminar($id)
