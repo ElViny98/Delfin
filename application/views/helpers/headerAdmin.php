@@ -12,7 +12,7 @@
 	<script src="<?php echo base_url('assets/js/bootstrap.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/cryptoJS.js'); ?>"></script>
 	<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
-
+	<script src="<?php echo base_url('assets/js/jquery.tagsinput.js'); ?>"></script>
 	<?php 
 	if(isset($privilegio))
 		echo '<script src="'.base_url('assets/js/user-utils.js').'"></script>';
@@ -22,6 +22,7 @@
 
 	?>
 
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.tagsinput.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/side-style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.css');?>">

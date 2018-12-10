@@ -80,7 +80,6 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar2">Cancelar</button>
                             <button type="button" class="btn btn-primary"  id="btnAceptar2">Aceptar</button>
                       </div>
-
                 <script type="text/javascript">
                   function cambiarPass(){
                     $("#passUserModal").modal('show');
@@ -575,7 +574,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!--fin de col 8-->
     </div><!--fin de segundo div row-->
     <div class="row">
         <div class="col-md-10" style="display:block;" id="espacioEditar">

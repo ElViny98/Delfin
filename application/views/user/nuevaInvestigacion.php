@@ -8,8 +8,8 @@
 <div class="container">
     <form enctype="multipart/form-data" id="formInv" action="<?php echo base_url('index.php/user/registrarInv'); ?>" method="post">
         <div class="form-row">
-            <label for="tipo" class="col-xl-1 col-lg-2 col-md-6 col-sm-12" style="padding-top: 0.5%;">Tipo:</label>
-            <select name="tipo" id="tipoInv" class="form-control col-xl-11 col-lg-10 col-md-6 col-sm-12">
+            <label for="tipo" class="col-xl-1 col-lg-2 col-md-3 col-sm-12" style="padding-top: 0.5%;">Tipo:</label>
+            <select name="tipo" id="tipoInv" class="form-control col-xl-11 col-lg-10 col-md-9 col-sm-12">
                 <option value="Artículo">Artículo</option>
                 <option value="Libro">Libro</option>
                 <option value="Capítulo">Capítulo</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="form-row" style="margin-top: 2%;">
             <label style="padding-top: 0.5%;" for="autoresInv" class="col-xl-1 col-lg-2 col-md-2 col-sm-12">Autores:</label>
-            <div contenteditable="true" class="col-xl-11 col-lg-10 col-md-10 col-sm-12 form-control" type="text" name="autoresInv" id="autoresInv"></div>
+            <input class="col-xl-11 col-lg-10 col-md-10 col-sm-12 form-control" type="text" id="autoresInv">
             <small style="float: right;">Separe los nombres con una coma</small>
         </div>
         <div class="form-row" style="margin-top: 2%; height: 50px;">
@@ -59,7 +59,7 @@
 </div>
 
 <script>
-    var autores = [];
+    var auxAut = [];
     $("#btnArchivo").on('click', function(event) {
         event.preventDefault();
         $("#archivoInv").click();
@@ -72,35 +72,83 @@
                 <i class="fa fa-file" style="color: #FFFFFF;">&nbsp</i>
             </span>
             <span>
-                ${document.getElementById('archivoInv').files[0].name}
+                ${ document.getElementById('archivoInv').files[0].name }
             </span>
         `;
         document.getElementById('btnArchivo').innerHTML = html;
     }
+    $("#autoresInv").tagsInput({
+        width: '100%',
+        height: '100%',
+        defaultText: 'Autores',
+        class: 'col-xl-11 col-lg-10 col-md-10 col-sm-12 form-control'
+    });
+    <?php 
+        if(isset($autores))
+        {
+            $aut = '';
+            $len = count($autores->result());
+            $index = 0;
+            foreach($autores->result() as $au)
+            {
+                if($index == $len - 1)
+                    $aut.=$au->Nombre;
 
-    function setNameStyle(aut) {
-        var styleHtml = '';
-        aut.forEach(function(e) {
-            styleHtml += `
-                <span style="background-color: #9C9C9C; color: #E7E7E7; border-radius: 5px;">${e}</span>
-            `
-        });
-        document.getElementById('autoresInv').innerHTML = styleHtml;
-        console.log(styleHtml);
-    }
-
-    document.getElementById('autoresInv').addEventListener('keydown', function(key) {
-        if(key.key != ',')
-            return false;
-
-        else {
-            autores = document.getElementById('autoresInv').innerHTML.split(',');
-            setNameStyle(autores);
-            console.log(autores);
+                else
+                    $aut.=$au->Nombre.',';
+                
+                $index++;
+            }
+            echo '$("#autoresInv").importTags("'.$aut.'");
+            auxAut = "'.$aut.'".split(",");
+            ';
         }
+    ?>
+    console.log('Something');
+    
+    $("#formInv").submit(function(event) {
+        event.preventDefault();
+        var autores = $("#autoresInv").val().split(',');
+        var aut = compareArr(autores, auxAut);
+        var formData = new FormData(document.getElementById('formInv'));
+        var aut = compareArr(autores, auxAut); //aut tiene los 'nuevos' autores
+        formData.append('archivoInv', document.getElementById('archivoInv').files[0])
+
+        aut.forEach(function(x) {
+            formData.append('autoresNuevos[]', x);
+        });
+
+        auxAut.forEach(function(x) {
+            formData.append('autores[]', x);
+        });
+
+        $.ajax({
+            url: '<?php echo base_url('index.php/user/registrarInv'); ?>',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function(ans) {
+                alert(ans)
+            }
+        })
+
     });
 
-    $("#btnRegistrar").on('click', function(event) {
-        $("#formInv").submit();
-    });
+    function compareArr(arr1, arr2) {
+        var flag = true;
+        var arr = [];
+        arr1.forEach(function(x) {
+            arr2.forEach(function(y) {
+                if(x == y)
+                    flag = false;
+            });
+            if(flag) {
+                arr.push(x);
+            }
+            flag = true;
+        });
+        return arr;
+    }
 </script>

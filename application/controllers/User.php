@@ -24,9 +24,43 @@ class user extends CI_Controller
         }
     }
     public function home(){
-      $this->load->view('helpers/headerUsuario');
-      $arrayNot = array('data' => $this->user_model->getFeedNot());
-      $this->load->view('blogview', $arrayNot);
+      $this->load->view('helpers/headerUsuario');//comentar esto para blogview 2.0
+      $this->datos_PerfilUsuario();
+    }
+    public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
+      //$id = $this->session->userdata('idUsuario');
+      $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
+      $user_academico = $this->user_model->get_user_academico(2);
+      $user_noticias = $this->user_model->get_user_noticias(2);
+      $user_institucion = $this->user_model->get_user_institucion($data_user->idInst);
+      $user_investigaciones=$this->user_model->getInvestigaciones(2);
+      $datos = array(
+          //'id'            => $id,
+          'nombre'        => $data_user->Nombre,
+          'apaterno'      => $data_user->ApPaterno,
+          'amaterno'      => $data_user->ApMaterno,
+          'correo'        => $data_user->Correo,
+          'pais'          => $data_user->Pais,
+          'fechaNac'      => $data_user->Nacimiento,
+          'telefono'      => $data_user->Telefono,
+          'sexo'          => $data_user->Sexo,
+          'img'           => $data_user->Img,
+          'noticias'      => $user_noticias,
+          'idInst'        => $data_user->idInst,
+          'grado'         => $user_academico->Grado,
+          'cuerpoA'       => $user_academico->cuerpoAcademico,
+          'consolidacion' => $user_academico->consolidacionCA,
+          'promep'        => $user_academico->perfilPROMEP,
+          'sni'           => $user_academico->nivelSNI,
+          'areaC'         => $user_academico->areaConocimiento,
+          'unidad'        => $user_academico->UAcademica,
+          'institucion'   => $user_institucion->Nombre,
+          'paisInst'      => $user_institucion->Pais,
+          'estadoInst'    => $user_institucion->Estado,
+          'ciudadInst'    => $user_institucion->cp,
+          'investigaciones' =>$user_investigaciones
+      );
+      $this->load->view('blogview',$datos);
       $this->load->view('helpers/footer');
     }
     public function Noticias()
@@ -282,10 +316,10 @@ class user extends CI_Controller
 
     public function Perfil(){
         $id = $this->session->userdata('idUsuario');
-        $data_user= $this->user_model->get_user_data($id);
+        $data_user= $this->user_model->get_user_data($id);//Aqui
         $user_academico= $this->user_model->get_user_academico($id);
         $user_institucion= $this->user_model->get_user_institucion($data_user->idInstitucion);
-        $data_user= $this->user_model->get_user_data($id);
+        $data_user= $this->user_model->get_user_data($id);//porque esta otra vez?
         $paises=$this->user_model->get_countries();
         $estados=$this->user_model->get_regions($user_institucion->idPais);
         $instituciones=$this->user_model->get_instituciones($user_institucion->idEst);
@@ -374,7 +408,15 @@ class user extends CI_Controller
 
     public function nuevaInvestigacion()
     {
-        $this->load->view('user/nuevaInvestigacion');
+        $q = $this->user_model->autoresUsuarios($this->session->userdata('idUsuario'));
+        if($q->num_rows() > 0)
+        {
+            $data['autores'] = $q;
+            $this->load->view('user/nuevaInvestigacion', $data);
+        }
+
+        else
+            $this->load->view('user/nuevaInvestigacion');
     }
 
     public function editarInvestigacion(){
@@ -383,30 +425,65 @@ class user extends CI_Controller
 
     public function registrarInv()
     {
+        //var_dump($_FILES);
         $name = $this->createHash();
+        //print_r($_POST);
         $data = array(
-
             'idUsuario'             => $this->session->userdata('idUsuario'),
             'Hash'                  => $name.'.pdf',
             'Fecha'                 => $this->input->post('fechaInv'),
             'Titulo'                => $this->input->post('titulo'),
-            //'DOI'                   => 'null',
+            'DOI'                   => 'null',
             'Tema'                  => $this->input->post('tema'),
             'Tipo'                  => $this->input->post('tipo')
         );
 
-        $config = array(
-            'file_name'     => $name,
-            'allowed_types' => 'pdf',
-            'upload_path'   => 'assets/documents'
-        );
+        $config['file_name'] = $name. '.pdf';
+        $config['allowed_types'] = '*';
+        $config['upload_path'] = 'assets/documents';
 
         $this->load->library('upload', $config);
 
         if($this->upload->do_upload('archivoInv'))
         {
-            echo 'bien';
-            $this->user_model->nuevaInv($data);
+            $newId = $this->user_model->nuevaInv($data);
+            if(isset($_POST['autores']))
+            {
+                $query = 'INSERT INTO AutoresInv VALUES (';
+                for($i = 0; $i<count($_POST['autores']); $i++)
+                {
+                    if($i == count($_POST['autores']) - 1)
+                        $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autores'][$i].'"), '.$newId->idInvestigaciones.')';
+
+                    else
+                        $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autores'][$i].'"), '.$newId->idInvestigaciones.'), (';
+                }   
+                $query.=';';
+                $this->user_model->invAutor($query);
+            }
+
+            if(isset($_POST['autoresNuevos']))
+            {
+                for($i = 0; $i<count($_POST['autoresNuevos']); $i++)
+                {
+                    $data = array(
+                        'Nombre'    => $_POST['autoresNuevos'][$i],
+                        'idUsuarios'=> $this->session->userdata('idUsuario')
+                    );
+                    $this->user_model->newAutor($data);
+                }
+                $query = 'INSERT INTO AutoresInv VALUES (';
+                for($i = 0; $i<count($_POST['autoresNuevos']); $i++)
+                {
+                    if($i == count($_POST['autoresNuevos']) - 1)
+                        $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autoresNuevos'][$i].'"), '.$newId->idInvestigaciones.')';
+
+                    else
+                        $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autoresNuevos'][$i].'"), '.$newId->idInvestigaciones.'), (';
+                }   
+                $query.=';';
+                $this->user_model->invAutor($query);
+            }
         }
         else
             echo $this->upload->display_errors();

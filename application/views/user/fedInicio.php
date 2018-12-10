@@ -26,17 +26,15 @@
     </ul>
 </div>
 
-<div class="content-fed" >
-    <div style="">
-
+<div class="content-fed">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9">
+                <input class="form-control" type="text" id="txtBuscar">
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
     </div>
-        <form class="form-inline ">
-            <input class="form-control "  type="buscar" placeholder="Buscar" aria-label="Buscar">
-            <button class="btn btn-outline-primary " type="submit">Buscar</button>
-        </form>
-</div>
-
-
-
-
 </div>
