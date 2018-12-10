@@ -26,6 +26,17 @@
     </ul>
 </div>
 
-<div class="content-fed">
-    
+<div class="content-fed" >
+    <div style="">
+
+    </div>
+        <form class="form-inline ">
+            <input class="form-control "  type="buscar" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-primary " type="submit">Buscar</button>
+        </form>
+</div>
+
+
+
+
 </div>

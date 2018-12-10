@@ -202,7 +202,9 @@ class inicio extends CI_Controller {
 
 	public function recoverPass()
 	{
+		$this->load->view('helpers/headerInicio');
 		$this->load->view('recover');
+		$this->load->view('helpers/footer');
 	}
 
 	public function recuperar()
