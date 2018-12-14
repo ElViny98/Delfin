@@ -39,14 +39,17 @@ $(document).ready(function() {
     });
 });
 
-function modificar(index) {
-    cleanMain();
-    $("#main-content").load(globalUrl + 'index.php/user/editarNocia?id=' + index);
-}
-
-
 function nuevaInvestigacion() {
     cleanMain();
     $("#main-content").load(globalUrl + 'index.php/user/nuevaInvestigacion');
 }
 
+function nuevaNoticia() {
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/Noticias');
+}
+
+function modificarNoticia(index) {
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/editarNoticia?id=' + index);
+}

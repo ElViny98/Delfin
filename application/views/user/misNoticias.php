@@ -5,7 +5,7 @@
 				<h2>Mis noticias</h2>
 			</div>
 			<div class="col-xs-12 col-md-4 col-lg-3 col-xl-3">
-				<a href="<?php echo base_url('index.php/user/Noticias'); ?>" style="width: 100%;" class="btn btn-primary"><li class="fa fa-plus-circle"></li>&nbspRedactar</a>
+				<a href="#" onclick="nuevaNoticia();" style="width: 100%;" class="btn btn-primary"><li class="fa fa-plus-circle"></li>&nbspRedactar</a>
 			</div>
 		</div>
 	</div>
@@ -20,10 +20,10 @@
 						<a href="'.base_url('index.php/user/vernoticia?id='.$q->idNoticias).'" class="link-new">'.$q->Titulo.'</a>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2" style="margin-bottom: 10px;">
-						<button type="button" class="btn btn-success btn-new" onclick="modificar('.$q->idNoticias.')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbspModificar</button>
+						<button type="button" class="btn btn-success btn-new" onclick="modificarNoticia('.$q->idNoticias.')"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbspModificar</button>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-3 col-lg-2 col-xl-2" style="margin-bottom: 10px;">
-						<button type="button" class="btn btn-danger btn-new" onclick="borrar('.$q->idNoticias.')"><i class="fa fa-times" aria-hidden="true"></i>&nbspEliminar</button>
+						<button type="button" class="btn btn-danger btn-new" onclick="borrarNoticia('.$q->idNoticias.')"><i class="fa fa-times" aria-hidden="true"></i>&nbspEliminar</button>
 					</div>
 				</div>
 				';
