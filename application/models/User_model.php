@@ -15,6 +15,12 @@ class User_model extends CI_Model
         'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
         'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
     }
+    public function getNoticiasTodas()
+    {
+        $sql = 'SELECT * FROM noticias ';
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     public function uploadimg($query)
     {
@@ -137,7 +143,7 @@ class User_model extends CI_Model
 
     public function publicacionesRecientes()
     {
-        $queryNoticias = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.Titulo, Noticias.Img FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios';
+        $queryNoticias = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.idNoticias, Noticias.Titulo, Noticias.img ,Noticias.Descripcion,Noticias.Fecha FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios ORDER BY Noticias.Fecha DESC';
         $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios';
         $queryInvestigadores = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno From Usuarios';
         return array(

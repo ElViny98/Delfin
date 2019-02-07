@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class user extends CI_Controller
+class User extends CI_Controller
 {
     public function __construct()
     {
@@ -22,13 +22,17 @@ class user extends CI_Controller
         {
             redirect(base_url());
         }
+
     }
     public function home(){
       $this->load->view('helpers/headerUsuario');//comentar esto para blogview 2.0
       $this->datos_PerfilUsuario();
+
     }
     public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
       //$id = $this->session->userdata('idUsuario');
+
+
       $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
       $user_academico = $this->user_model->get_user_academico(2);
       $user_noticias = $this->user_model->get_user_noticias(2);
@@ -58,7 +62,8 @@ class user extends CI_Controller
           'paisInst'      => $user_institucion->Pais,
           'estadoInst'    => $user_institucion->Estado,
           'ciudadInst'    => $user_institucion->cp,
-          'investigaciones' =>$user_investigaciones
+          'investigaciones' =>$user_investigaciones,
+
       );
       $this->load->view('blogview',$datos);
     }
