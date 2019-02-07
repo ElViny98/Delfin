@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class user extends CI_Controller
+class User extends CI_Controller
 {
     public function __construct()
     {
@@ -22,13 +22,18 @@ class user extends CI_Controller
         {
             redirect(base_url());
         }
+
     }
-    public function home(){
+    public function home()
+    {
       $this->load->view('helpers/headerUsuario');//comentar esto para blogview 2.0
       $this->datos_PerfilUsuario();
+
     }
     public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
       //$id = $this->session->userdata('idUsuario');
+
+
       $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
       $user_academico = $this->user_model->get_user_academico(2);
       $user_noticias = $this->user_model->get_user_noticias(2);
@@ -58,33 +63,35 @@ class user extends CI_Controller
           'paisInst'      => $user_institucion->Pais,
           'estadoInst'    => $user_institucion->Estado,
           'ciudadInst'    => $user_institucion->cp,
-          'investigaciones' =>$user_investigaciones
+          'investigaciones' =>$user_investigaciones,
+
       );
       $this->load->view('blogview',$datos);
     }
+
     public function Noticias()
     {
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('altaNoticia');
-        $this->load->view('helpers/footer');
     }
 
     public function Noticias_MisNoticias(){
         $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
         $this->load->view('user/misNoticias',$datos);
     }
-    public function editar_perfil(){
+
+    public function editar_perfil()
+    {
         $id = $this->session->userdata('idUsuario');
-      $data = $this->user_model->get_user_data($id);
-      $this->load->view('helpers/headerUsuario');
-      $this->load->view('editprofile', array('data' => $data));
-      $this->load->view('helpers/footer');
+        $data = $this->user_model->get_user_data($id);
+        $this->load->view('helpers/headerUsuario');
+        $this->load->view('editprofile', array('data' => $data));
+        $this->load->view('helpers/footer');
     }
 
     function update_prof()
     {
-      $id= $this->session->userdata('idUsuario');
-      $data = array(
+        $id= $this->session->userdata('idUsuario');
+        $data = array(
             'Nombre' => $this->input->post('name'),
             'ApPaterno' => $this->input->post('appaterno'),
             'ApMaterno' => $this->input->post('apmaterno'),
@@ -93,32 +100,30 @@ class user extends CI_Controller
             'Pais' => $this->input->post('pais'),
             'Telefono' => $this->input->post('telefono'),
             'Correo' => $this->input->post('correo'),
-            'idInst'    => $this->input->post('inst'),
-          );
-            //infoAcademica grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
-            $dataca = array(
+            'idInst'    => $this->input->post('inst')
+        );
+        //infoAcademica grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
+        $dataca = array(
             'Grado' => $this->input->post('grado'),
             'cuerpoAcademico' => $this->input->post('cuerp'),
             'consolidacionCA' => $this->input->post('consolidacion'),
             'perfilPROMEP' => $this->input->post('promep'),
             'nivelSNI' => $this->input->post('Sni'),
             'areaConocimiento' => $this->input->post('area'),
-            'UAcademica' => $this->input->post('unidad'),
-          );
+            'UAcademica' => $this->input->post('unidad')
+        );
 
         $this->user_model->update_prf($id,$data,$dataca);
     }
     public function update_pass(){
-      $id= $this->session->userdata('idUsuario');
-      $data = $this->input->post('newPass');
-      $query='UPDATE Usuarios SET Password="'.$data.'" WHERE idUsuarios='.$id ;
-      if($this->user_model->update_pass($query)){
-        echo 1;
-      }
-      else {
-        echo 0;
-      }
+        $id= $this->session->userdata('idUsuario');
+        $data = $this->input->post('newPass');
+        $query='UPDATE Usuarios SET Password="'.$data.'" WHERE idUsuarios='.$id ;
+        if($this->user_model->update_pass($query))
+            echo 1;
 
+        else
+            echo 0;
     }
 
     public function datosNoticia()
@@ -491,7 +496,7 @@ class user extends CI_Controller
     function inicio()
     {
         $publicaciones = $this->user_model->publicacionesRecientes();
-        $data['Noticias'] = $publicaciones['Noticias'];
+        $data['noticias'] = $publicaciones['noticias'];
         $data['Investigaciones'] = $publicaciones['Investigaciones'];
         $this->load->view('user/fedInicio', $data);
     }
