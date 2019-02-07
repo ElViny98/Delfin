@@ -7,27 +7,24 @@
 
         <div class="form-group" >
             <div class="row">
-                <div class="col-lg-1 col-md-1 col-sm-1" >
+                <div class="col-lg-2 col-md-2 col-sm-2" >
                     <label class="control-label col-lg text-left" for="txtTitulo">Titulo:</label>
                 </div>
-                <div class="col-lg-11 col-md-11 col-sm-11">
+                <div class="col-lg-10 col-md-10 col-sm-10">
                      <input type="cnombre" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Titulo">
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1 col-md-1 col-sm-1" >
+                <div class="col-lg-2 col-md-2 col-sm-2" >
                     <label class="control-label col-lg text-left" for="pic">Imagen:</label>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-7" >
+                <div class="col-lg-10 col-md-10 col-sm-10" >
                     <div id="file-preview-zone">
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3" id="nota">
-                    <p><span style="color:red;">Nota: </span> <span>Se recomienda un tamaño de 700x300 pixeles para evitar distorciones en la imagen original.</span> </p>
-                </div>
             </div>
             <div class="row">
-                <div class="col-lg-1 col-md-1 col-sm-1" >
+                <div class="col-lg-2 col-md-2 col-sm-2" >
                 </div>
                 <div id="selecImg" class="col-lg col-md col-sm">
                     <input type="file" name="pic" id="pic" accept="image/*" >
@@ -48,7 +45,7 @@
                         reader.onload = (function(theFile) {
                             return function(e) {
                               // Insertamos la imagen
-                             document.getElementById("file-preview-zone").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                             document.getElementById("file-preview-zone").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"style="max-width:600px;max-height:300px;"/>'].join('');
                             };
                         })(f);
 
@@ -60,10 +57,10 @@
                 </script>
             </div>
             <div class="row">
-                <div class="col-lg-1 col-md-1 col-sm-1" >
+                <div class="col-lg-2 col-md-2 col-sm-2" >
                     <label class="control-label col-lg text-left" for="content">Contenido:</label>
                 </div>
-                <div class="col-lg-11 col-md-11 col-sm-11">
+                <div class="col-lg-10 col-md-10 col-sm-10">
 
                     <div id="conteinerEditor">
 
@@ -74,6 +71,7 @@
 
             <div class="row" style="padding-top: 40px;">
               <div class="col-lg">
+                  <br>
                 <button type="submit" name='submit' value='upload' class="btn btn-default" id="btnGenerarNot">Generar Noticia</button>
               </div>
             </div>
@@ -110,7 +108,7 @@
 
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
-        
+
         $.ajax({
             url: actionForm,
             type: 'POST',

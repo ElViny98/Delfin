@@ -1,5 +1,7 @@
 <!-- Barra de búsqueda pendiente -->
-
+<div class="Imagen" >
+    <img src="<?php echo base_url('assets/img/logolargo.png');?>">
+</div>
 <div class="investigaciones-display">
     <div class="header">
         Investigaciones recientes

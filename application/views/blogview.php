@@ -5,7 +5,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h5 class=""><img src="<?php echo base_url()?>assets/img/<?= $img?>" style="height:250px; width:250px" /></h5>
+            <?php
+                if ($img==NULL){?>
+                    <img src="<?php echo base_url()?>assets/img/usuario.jpg" style="height:250px; width:250px"/>
+            <?php    }else {?>
+                    <img src="<?php echo base_url()?>assets/img/<?= $img?>" style="height:250px; width:250px"/>
+            <?php    }
+
+            ?>
         </div><!--STAYS-->
         <div class="profile-head">
             <h1 style="margin-top:80px;">
@@ -85,7 +92,7 @@
                                    <div class="row">
                                        <?php foreach ($noticias->result() as $noticia) { ?>
                                        <div class="card mb-4" style="margin-top:20px;">
-                                       <img src="<?php echo base_url()?>assets/img/<?= $noticia->img?>" style="height:300px; width:665px;" class="card-img-top" alt="Card image cap" />
+                                       <img src="<?php echo base_url()?>assets/img/<?= $noticia->img?>" style="height:300px; width:650px" class="card-img-top" alt="Card image cap" />
 
                                          <div class="card-body">
                                            <h2 class="card-title"> <?php echo $noticia->Titulo; ?></h2>

@@ -61,7 +61,6 @@ class user extends CI_Controller
           'investigaciones' =>$user_investigaciones
       );
       $this->load->view('blogview',$datos);
-      $this->load->view('helpers/footer');
     }
     public function Noticias()
     {
@@ -318,7 +317,7 @@ class user extends CI_Controller
         $id = $this->session->userdata('idUsuario');
         $data_user= $this->user_model->get_user_data($id);//Aqui
         $user_academico= $this->user_model->get_user_academico($id);
-        $user_institucion= $this->user_model->get_user_institucion($data_user->idInstitucion);
+        $user_institucion= $this->user_model->get_user_institucion($data_user->idInst);
         $data_user= $this->user_model->get_user_data($id);//porque esta otra vez?
         $paises=$this->user_model->get_countries();
         $estados=$this->user_model->get_regions($user_institucion->idPais);
@@ -335,7 +334,7 @@ class user extends CI_Controller
             'sexo'          => $data_user->Sexo,
             'img'           => $data_user->Img,
             'password'      => $data_user->Password, //news
-            'idInst'        => $data_user->idInstitucion,
+            'idInst'        => $data_user->idInst,
             'grado'         => $user_academico->Grado,
             'cuerpoA'       => $user_academico->cuerpoAcademico,
             'consolidacion' => $user_academico->consolidacionCA,
@@ -457,7 +456,7 @@ class user extends CI_Controller
 
                     else
                         $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autores'][$i].'"), '.$newId->idInvestigaciones.'), (';
-                }   
+                }
                 $query.=';';
                 $this->user_model->invAutor($query);
             }
@@ -480,7 +479,7 @@ class user extends CI_Controller
 
                     else
                         $query.='(SELECT idAutores FROM Autores WHERE Nombre = "'.$_POST['autoresNuevos'][$i].'"), '.$newId->idInvestigaciones.'), (';
-                }   
+                }
                 $query.=';';
                 $this->user_model->invAutor($query);
             }
