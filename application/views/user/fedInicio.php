@@ -16,11 +16,21 @@
             </div>
 
             <div class="ivestigacion-container">
+              <?php foreach ($Investigadores->result() as $i) {
+                echo '<li>
 
+                <div class="perfil-container">
+                <img src="https://via.placeholder.com/35">
+                    <a href="#">'.$i->Nombre." ".$i->ApPaterno." ".$i->ApMaterno.'</a>
+                </div>
+                </li>
+                ';
+                } ?>
             </div>
         </li>
         <li>
             <img src="https://via.placeholder.com/35">Investigador
+
         </li>
         <li>
             <img src="https://via.placeholder.com/35">Investigador

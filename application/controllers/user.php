@@ -491,8 +491,9 @@ class user extends CI_Controller
     function inicio()
     {
         $publicaciones = $this->user_model->publicacionesRecientes();
-        $data['Noticias'] = $publicaciones['Noticias'];
+        $data['noticias'] = $publicaciones['Noticias'];
         $data['Investigaciones'] = $publicaciones['Investigaciones'];
+        $data['Investigadores'] = $publicaciones['Investigadores'];
         $this->load->view('user/fedInicio', $data);
     }
 }
