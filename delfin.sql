@@ -11,6 +11,8 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+CREATE DATABASE Delfin;
+USE Delfin;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -28,7 +30,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `autores`
 --
 
-CREATE TABLE `autores` (
+CREATE TABLE `Autores` (
   `idAutores` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `ApPaterno` varchar(45) DEFAULT NULL,
@@ -42,7 +44,7 @@ CREATE TABLE `autores` (
 -- Estructura de tabla para la tabla `countries`
 --
 
-CREATE TABLE `countries` (
+CREATE TABLE `Countries` (
   `id` smallint(5) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(10) NOT NULL
@@ -52,7 +54,7 @@ CREATE TABLE `countries` (
 -- Volcado de datos para la tabla `countries`
 --
 
-INSERT INTO `countries` (`id`, `name`, `code`) VALUES
+INSERT INTO `Countries` (`id`, `name`, `code`) VALUES
 (1, 'Andorra', 'ad'),
 (2, 'United Arab Emirates', 'ae'),
 (3, 'Afghanistan', 'af'),
@@ -290,7 +292,7 @@ INSERT INTO `countries` (`id`, `name`, `code`) VALUES
 -- Estructura de tabla para la tabla `educacion`
 --
 
-CREATE TABLE `educacion` (
+CREATE TABLE `Educacion` (
   `idEducacion` int(11) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idInstitucion` int(11) DEFAULT NULL,
@@ -305,7 +307,7 @@ CREATE TABLE `educacion` (
 -- Estructura de tabla para la tabla `infoacademica`
 --
 
-CREATE TABLE `infoacademica` (
+CREATE TABLE `Infoacademica` (
   `id` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `Grado` varchar(15) NOT NULL,
@@ -321,7 +323,7 @@ CREATE TABLE `infoacademica` (
 -- Volcado de datos para la tabla `infoacademica`
 --
 
-INSERT INTO `infoacademica` (`id`, `idUsuario`, `Grado`, `cuerpoAcademico`, `consolidacionCA`, `perfilPROMEP`, `nivelSNI`, `areaConocimiento`, `UAcademica`) VALUES
+INSERT INTO `Infoacademica` (`id`, `idUsuario`, `Grado`, `cuerpoAcademico`, `consolidacionCA`, `perfilPROMEP`, `nivelSNI`, `areaConocimiento`, `UAcademica`) VALUES
 (1, 2, 'Dr.', 'Tecnología de información y comunicaciones aplicadas a la ingeniería de software y sistemas de información', 'Consolidado', 'Con Perfil Deseable', 'Candidato', 'Área IV: Humanidades y Ciencias de la Conducta', 'Computación');
 
 -- --------------------------------------------------------
@@ -330,7 +332,7 @@ INSERT INTO `infoacademica` (`id`, `idUsuario`, `Grado`, `cuerpoAcademico`, `con
 -- Estructura de tabla para la tabla `institucion`
 --
 
-CREATE TABLE `institucion` (
+CREATE TABLE `Institucion` (
   `idInstitucion` int(11) NOT NULL,
   `Nombre` varchar(60) DEFAULT NULL,
   `idPais` int(11) NOT NULL,
@@ -344,7 +346,7 @@ CREATE TABLE `institucion` (
 -- Volcado de datos para la tabla `institucion`
 --
 
-INSERT INTO `institucion` (`idInstitucion`, `Nombre`, `idPais`, `Pais`, `idEst`, `Estado`, `cp`) VALUES
+INSERT INTO `Institucion` (`idInstitucion`, `Nombre`, `idPais`, `Pais`, `idEst`, `Estado`, `cp`) VALUES
 (1, 'Universidad politécnica de Sinaloa', 144, 'Mexico', '2440', 'Sinaloa', '82150');
 
 -- --------------------------------------------------------
@@ -353,7 +355,7 @@ INSERT INTO `institucion` (`idInstitucion`, `Nombre`, `idPais`, `Pais`, `idEst`,
 -- Estructura de tabla para la tabla `investigaciones`
 --
 
-CREATE TABLE `investigaciones` (
+CREATE TABLE `Investigaciones` (
   `idInvestigaciones` int(11) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `Hash` varchar(255) DEFAULT NULL,
@@ -368,7 +370,7 @@ CREATE TABLE `investigaciones` (
 -- Volcado de datos para la tabla `investigaciones`
 --
 
-INSERT INTO `investigaciones` (`idInvestigaciones`, `idUsuario`, `Hash`, `Fecha`, `Titulo`, `DOI`, `Tema`, `Tipo`) VALUES
+INSERT INTO `Investigaciones` (`idInvestigaciones`, `idUsuario`, `Hash`, `Fecha`, `Titulo`, `DOI`, `Tema`, `Tipo`) VALUES
 (1, 2, 'null.pdf', '2007-11-30', 'Investigación 1', 'null', 'Caracoles', 'No sé'),
 (2, 2, 'null2.pdf', '2007-11-30', 'Investigación 2', 'null 2', 'No sé', 'No sé x2 '),
 (3, 2, 'CyLBzJjVABEDnF8KK0L7LKUS.pdf', '2018-11-22', 'Nueva', 'null', 'Informática', 'Capítulo');
@@ -379,7 +381,7 @@ INSERT INTO `investigaciones` (`idInvestigaciones`, `idUsuario`, `Hash`, `Fecha`
 -- Estructura de tabla para la tabla `mantenimiento`
 --
 
-CREATE TABLE `mantenimiento` (
+CREATE TABLE `Mantenimiento` (
   `NombreRed` varchar(60) DEFAULT NULL,
   `NombreMesa` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -390,7 +392,7 @@ CREATE TABLE `mantenimiento` (
 -- Estructura de tabla para la tabla `noticias`
 --
 
-CREATE TABLE `noticias` (
+CREATE TABLE `Noticias` (
   `idNoticias` int(11) NOT NULL,
   `idUsuarios` int(11) DEFAULT NULL,
   `Titulo` varchar(60) DEFAULT NULL,
@@ -403,7 +405,7 @@ CREATE TABLE `noticias` (
 -- Volcado de datos para la tabla `noticias`
 --
 
-INSERT INTO `noticias` (`idNoticias`, `idUsuarios`, `Titulo`, `Descripcion`, `Fecha`, `img`) VALUES
+INSERT INTO `Noticias` (`idNoticias`, `idUsuarios`, `Titulo`, `Descripcion`, `Fecha`, `img`) VALUES
 (2, 2, 'Noticia 2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.', '2018-11-05', 'Prueba'),
 (3, 2, 'Noticia 3 ', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.', '2018-11-05', 'Prueba'),
 (4, 2, 'Noticia 4', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.', '2018-11-05', 'Prueba'),
@@ -418,7 +420,7 @@ INSERT INTO `noticias` (`idNoticias`, `idUsuarios`, `Titulo`, `Descripcion`, `Fe
 -- Estructura de tabla para la tabla `recuperacion`
 --
 
-CREATE TABLE `recuperacion` (
+CREATE TABLE `Recuperacion` (
   `idUsuario` int(11) NOT NULL,
   `Token` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -429,7 +431,7 @@ CREATE TABLE `recuperacion` (
 -- Estructura de tabla para la tabla `regions`
 --
 
-CREATE TABLE `regions` (
+CREATE TABLE `Regions` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(10) NOT NULL,
@@ -440,7 +442,7 @@ CREATE TABLE `regions` (
 -- Volcado de datos para la tabla `regions`
 --
 
-INSERT INTO `regions` (`id`, `name`, `code`, `country_id`) VALUES
+INSERT INTO `Regions` (`id`, `name`, `code`, `country_id`) VALUES
 (1, 'Sant Julia de Loria', '06', 1),
 (2, 'Andorra la Vella', '07', 1),
 (3, 'La Massana', '04', 1),
@@ -4338,7 +4340,7 @@ INSERT INTO `regions` (`id`, `name`, `code`, `country_id`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `Usuarios` (
   `idUsuarios` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `ApPaterno` varchar(45) DEFAULT NULL,
@@ -4359,7 +4361,7 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuarios`, `Nombre`, `ApPaterno`, `ApMaterno`, `Correo`, `Password`, `Privilegio`, `Pais`, `Img`, `Nacimiento`, `Telefono`, `Sexo`, `idInstitucion`, `Status`) VALUES
+INSERT INTO `Usuarios` (`idUsuarios`, `Nombre`, `ApPaterno`, `ApMaterno`, `Correo`, `Password`, `Privilegio`, `Pais`, `Img`, `Nacimiento`, `Telefono`, `Sexo`, `idInstitucion`, `Status`) VALUES
 (1, 'Andrés Vinicio', 'Martínez', 'López', '2016030004@upsin.edu.mx', '202cb962ac59075b964b07152d234b70', 1, 'Mazatlán', 'null', '0000-00-00', 'null', '1998-11-30', 0, 1),
 (2, 'Rodolfo', 'Ostos', 'Robles', 'cba', 'caf1a3dfb505ffed0d024130f58c5cfa', 2, 'Mazatlán', 'null', '1998-11-30', '9812345', '2018-11-14', 1, 1);
 
@@ -4370,21 +4372,21 @@ INSERT INTO `usuarios` (`idUsuarios`, `Nombre`, `ApPaterno`, `ApMaterno`, `Corre
 --
 -- Indices de la tabla `autores`
 --
-ALTER TABLE `autores`
+ALTER TABLE `Autores`
   ADD PRIMARY KEY (`idAutores`),
   ADD KEY `Investigacion_idx` (`idInvestigacion`);
 
 --
 -- Indices de la tabla `countries`
 --
-ALTER TABLE `countries`
+ALTER TABLE `Countries`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indices de la tabla `educacion`
 --
-ALTER TABLE `educacion`
+ALTER TABLE `Educacion`
   ADD PRIMARY KEY (`idEducacion`),
   ADD KEY `Usuario_idx` (`idUsuario`),
   ADD KEY `Institucion_idx` (`idInstitucion`);
@@ -4392,40 +4394,40 @@ ALTER TABLE `educacion`
 --
 -- Indices de la tabla `infoacademica`
 --
-ALTER TABLE `infoacademica`
+ALTER TABLE `Infoacademica`
   ADD KEY `infoacademica_ibfk_1` (`idUsuario`);
 
 --
 -- Indices de la tabla `institucion`
 --
-ALTER TABLE `institucion`
+ALTER TABLE `Institucion`
   ADD PRIMARY KEY (`idInstitucion`);
 
 --
 -- Indices de la tabla `investigaciones`
 --
-ALTER TABLE `investigaciones`
+ALTER TABLE `Investigaciones`
   ADD PRIMARY KEY (`idInvestigaciones`),
   ADD KEY `Investigador_idx` (`idUsuario`);
 
 --
 -- Indices de la tabla `noticias`
 --
-ALTER TABLE `noticias`
+ALTER TABLE `Noticias`
   ADD PRIMARY KEY (`idNoticias`),
   ADD KEY `AutorNoticia_idx` (`idUsuarios`);
 
 --
 -- Indices de la tabla `regions`
 --
-ALTER TABLE `regions`
+ALTER TABLE `Regions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `country_name` (`country_id`,`name`);
 
 --
 -- Indices de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `Usuarios`
   ADD PRIMARY KEY (`idUsuarios`),
   ADD KEY `idInstitucion` (`idInstitucion`);
 
@@ -4436,49 +4438,49 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de la tabla `autores`
 --
-ALTER TABLE `autores`
+ALTER TABLE `Autores`
   MODIFY `idAutores` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `countries`
 --
-ALTER TABLE `countries`
+ALTER TABLE `Countries`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT de la tabla `educacion`
 --
-ALTER TABLE `educacion`
+ALTER TABLE `Educacion`
   MODIFY `idEducacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion`
 --
-ALTER TABLE `institucion`
+ALTER TABLE `Institucion`
   MODIFY `idInstitucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `investigaciones`
 --
-ALTER TABLE `investigaciones`
+ALTER TABLE `Investigaciones`
   MODIFY `idInvestigaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `noticias`
 --
-ALTER TABLE `noticias`
+ALTER TABLE `Noticias`
   MODIFY `idNoticias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `regions`
 --
-ALTER TABLE `regions`
+ALTER TABLE `Regions`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3889;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `Usuarios`
   MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -4488,32 +4490,32 @@ ALTER TABLE `usuarios`
 --
 -- Filtros para la tabla `autores`
 --
-ALTER TABLE `autores`
+ALTER TABLE `Autores`
   ADD CONSTRAINT `Investigacion` FOREIGN KEY (`idInvestigacion`) REFERENCES `investigaciones` (`idInvestigaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `educacion`
 --
-ALTER TABLE `educacion`
+ALTER TABLE `Educacion`
   ADD CONSTRAINT `Institucion` FOREIGN KEY (`idInstitucion`) REFERENCES `institucion` (`idInstitucion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `Usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `infoacademica`
 --
-ALTER TABLE `infoacademica`
+ALTER TABLE `Infoacademica`
   ADD CONSTRAINT `infoacademica_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`);
 
 --
 -- Filtros para la tabla `investigaciones`
 --
-ALTER TABLE `investigaciones`
+ALTER TABLE `Investigaciones`
   ADD CONSTRAINT `Investigador` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `noticias`
 --
-ALTER TABLE `noticias`
+ALTER TABLE `Noticias`
   ADD CONSTRAINT `AutorNoticia` FOREIGN KEY (`idUsuarios`) REFERENCES `usuarios` (`idUsuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
