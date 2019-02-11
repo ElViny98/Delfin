@@ -13,14 +13,14 @@ function closeNav() {
 $(document).ready(function() {
     cleanMain();
     $("#main-content").load(globalUrl + 'index.php/user/inicio');
-    
+
     $("#btnInicio").on('click', function() {
         cleanMain();
         $("#main-content").load(globalUrl + 'index.php/user/inicio');
         closeNav();
     });
 
-    $("#btnPerfil").on('click', function() { 
+    $("#btnPerfil").on('click', function() {
         cleanMain();
         $("#main-content").load(globalUrl + 'index.php/user/perfil');
         closeNav();
@@ -42,6 +42,10 @@ $(document).ready(function() {
 function nuevaInvestigacion() {
     cleanMain();
     $("#main-content").load(globalUrl + 'index.php/user/nuevaInvestigacion');
+}
+function verPerfilUser(id){
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/datos_PerfilUsuario?id='+id);
 }
 
 function nuevaNoticia() {

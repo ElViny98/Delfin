@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class user extends CI_Controller
+class User extends CI_Controller
 {
     public function __construct()
     {
@@ -22,18 +22,22 @@ class user extends CI_Controller
         {
             redirect(base_url());
         }
+
     }
     public function home(){
       $this->load->view('helpers/headerUsuario');//comentar esto para blogview 2.0
       $this->datos_PerfilUsuario();
+
     }
     public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
       //$id = $this->session->userdata('idUsuario');
-      $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
-      $user_academico = $this->user_model->get_user_academico(2);
-      $user_noticias = $this->user_model->get_user_noticias(2);
+
+      $id = $_GET['id'];
+      $data_user = $this->user_model->get_user_data($id);//porque esta otra vez?
+      $user_academico = $this->user_model->get_user_academico($id);
+      $user_noticias = $this->user_model->get_user_noticias($id);
       $user_institucion = $this->user_model->get_user_institucion($data_user->idInst);
-      $user_investigaciones=$this->user_model->getInvestigaciones(2);
+      $user_investigaciones=$this->user_model->getInvestigaciones($id);
       $datos = array(
           //'id'            => $id,
           'nombre'        => $data_user->Nombre,
@@ -58,27 +62,19 @@ class user extends CI_Controller
           'paisInst'      => $user_institucion->Pais,
           'estadoInst'    => $user_institucion->Estado,
           'ciudadInst'    => $user_institucion->cp,
-          'investigaciones' =>$user_investigaciones
+          'investigaciones' =>$user_investigaciones,
+
       );
       $this->load->view('blogview',$datos);
     }
     public function Noticias()
     {
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('altaNoticia');
-        $this->load->view('helpers/footer');
     }
 
     public function Noticias_MisNoticias(){
         $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
         $this->load->view('user/misNoticias',$datos);
-    }
-    public function editar_perfil(){
-        $id = $this->session->userdata('idUsuario');
-      $data = $this->user_model->get_user_data($id);
-      $this->load->view('helpers/headerUsuario');
-      $this->load->view('editprofile', array('data' => $data));
-      $this->load->view('helpers/footer');
     }
 
     function update_prof()
@@ -407,7 +403,7 @@ class user extends CI_Controller
 
     public function nuevaInvestigacion()
     {
-        $q = $this->user_model->autoresUsuarios($this->session->userdata('idUsuario'));
+        $q = $this->user_model->autoresUsuarios();
         if($q->num_rows() > 0)
         {
             $data['autores'] = $q;
@@ -491,8 +487,9 @@ class user extends CI_Controller
     function inicio()
     {
         $publicaciones = $this->user_model->publicacionesRecientes();
-        $data['Noticias'] = $publicaciones['Noticias'];
+        $data['noticias'] = $publicaciones['Noticias'];
         $data['Investigaciones'] = $publicaciones['Investigaciones'];
+        $data['Investigadores'] = $publicaciones['Investigadores'];
         $this->load->view('user/fedInicio', $data);
     }
 }

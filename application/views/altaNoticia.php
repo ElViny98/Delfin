@@ -1,8 +1,8 @@
 <div class="container">
-    <h3>Noticias</h3>
+    <h3>Noticia</h3>
     <hr>
 </div>
-<div class="container">
+<div class="container" style="padding:0 6% 0 6%;">
     <form class="form-horizontal" enctype="multipart/form-data" action="<?=base_url('index.php/user/datosNoticia')?>" method="post" id="form-new">
 
         <div class="form-group" >
