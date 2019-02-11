@@ -13,6 +13,6 @@
     </div>
 </div>
 
-<?php   
+<?php
     $this->load->view('helpers/footerInicio');
 ?>

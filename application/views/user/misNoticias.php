@@ -1,11 +1,11 @@
 <div class="contenidoTabla" id="divVerMisNoticias">
-	<div class="container-fluid" style="margin-bottom: 5%;">
+	<div class="container-fluid" style="margin-bottom: 3%;">
 		<div class="row">
 			<div class="col-xs-12 col-md-8 col-lg-9 col-xl-9">
 				<h2>Mis noticias</h2>
 			</div>
 			<div class="col-xs-12 col-md-4 col-lg-3 col-xl-3">
-				<a href="#" onclick="nuevaNoticia();" style="width: 100%;" class="btn btn-primary"><li class="fa fa-plus-circle"></li>&nbspRedactar</a>
+				<a href="#" onclick="nuevaNoticia()" style="width: 100%;" class="btn btn-primary"><li class="fa fa-plus-circle"></li>&nbspRedactar</a>
 			</div>
 		</div>
 	</div>

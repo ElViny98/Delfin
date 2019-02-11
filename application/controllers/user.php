@@ -32,12 +32,12 @@ class User extends CI_Controller
     public function datos_PerfilUsuario(){//acuerdense que esta funcion recibira el id del usuario que se desea visualizar su perfil
       //$id = $this->session->userdata('idUsuario');
 
-
-      $data_user = $this->user_model->get_user_data(2);//porque esta otra vez?
-      $user_academico = $this->user_model->get_user_academico(2);
-      $user_noticias = $this->user_model->get_user_noticias(2);
+      $id = $_GET['id'];
+      $data_user = $this->user_model->get_user_data($id);//porque esta otra vez?
+      $user_academico = $this->user_model->get_user_academico($id);
+      $user_noticias = $this->user_model->get_user_noticias($id);
       $user_institucion = $this->user_model->get_user_institucion($data_user->idInst);
-      $user_investigaciones=$this->user_model->getInvestigaciones(2);
+      $user_investigaciones=$this->user_model->getInvestigaciones($id);
       $datos = array(
           //'id'            => $id,
           'nombre'        => $data_user->Nombre,
@@ -69,21 +69,12 @@ class User extends CI_Controller
     }
     public function Noticias()
     {
-        $this->load->view('helpers/headerUsuario');
         $this->load->view('altaNoticia');
-        $this->load->view('helpers/footer');
     }
 
     public function Noticias_MisNoticias(){
         $datos['consulta'] = $this->user_model->misNoticias($this->session->userdata('idUsuario'));
         $this->load->view('user/misNoticias',$datos);
-    }
-    public function editar_perfil(){
-        $id = $this->session->userdata('idUsuario');
-      $data = $this->user_model->get_user_data($id);
-      $this->load->view('helpers/headerUsuario');
-      $this->load->view('editprofile', array('data' => $data));
-      $this->load->view('helpers/footer');
     }
 
     function update_prof()
@@ -412,7 +403,7 @@ class User extends CI_Controller
 
     public function nuevaInvestigacion()
     {
-        $q = $this->user_model->autoresUsuarios($this->session->userdata('idUsuario'));
+        $q = $this->user_model->autoresUsuarios();
         if($q->num_rows() > 0)
         {
             $data['autores'] = $q;

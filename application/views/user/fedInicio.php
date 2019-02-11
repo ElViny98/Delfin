@@ -2,51 +2,29 @@
 <div class="Imagen" >
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
 </div>
-<div class="investigaciones-display">
-    <div class="header">
-        Investigadores
-    </div>
-    <ul class="investigaciones-list">
-        <li>
-            <div class="img-perfil-container">
-                <img src="https://via.placeholder.com/35">
-            </div>
-            <div class="perfil-container">
-                <a href="#">Dr. Rodolfo Ostos Robles</a>
-            </div>
-
-            <div class="ivestigacion-container">
-              <?php foreach ($Investigadores->result() as $i) {
-                echo '<li>
-
-                <div class="perfil-container">
-                <img src="https://via.placeholder.com/35">
-                    <a href="#">'.$i->Nombre." ".$i->ApPaterno." ".$i->ApMaterno.'</a>
-                </div>
-                </li>
-                ';
-                } ?>
-            </div>
-        </li>
-        <li>
-            <img src="https://via.placeholder.com/35">Investigador
-
-        </li>
-        <li>
-            <img src="https://via.placeholder.com/35">Investigador
-        </li>
-    </ul>
-</div>
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-1">
 
+    </div>
+    <div class="col-lg-3" id="lista_investigaciones">
+        <div >
+            <?php foreach ($Investigadores->result() as $i) {
+              echo '
+
+              <div class="perfil-container" style="margin-top:10px;">
+              <img src="https://via.placeholder.com/35">
+                  <a href="#">'.$i->Nombre." ".$i->ApPaterno." ".$i->ApMaterno.'</a>
+              </div>
+
+              ';
+              } ?>
+        </div>
     </div>
     <div class="col-lg-8">
         <div class="container">
 
         <!-- Page Heading -->
-        <h2 class="my-4" style="text-align:center; background-color:#343A40; color:white;" id="new-container">Noticias
-        </h2>
+        <div class="" style="background-color:#343A40; height: 20px; width:100%;" id="new-container"></div>
 
         <?php
             if($noticias != null)
@@ -62,13 +40,11 @@
                     echo '
                         <div class="row">
                             <div class="col-md-7">
-                                <a href="#">
                                     <img class="img-fluid rounded mb-3 mb-md-0" src="'.base_url('assets/img/'.$n->img).'">
-                                </a>
                             </div>
                             <div class="col-md-5">
                                 <h3>'.$n->Titulo.'</h3>
-                                <p>Publicado por '.$n->Nombre.' '.$n->ApPaterno.' '.$n->ApMaterno.'</p>
+                                <p>Publicado por <a href="#" onclick="verPerfilUser('.$n->idUsuarios.')">'.$n->Nombre." ".$n->ApPaterno." ".$n->ApMaterno.'</a></p>
                                 <p>'.$n->Fecha.'</p>
                                 <p>'.$n->Descripcion.'</p>
                             </div>
