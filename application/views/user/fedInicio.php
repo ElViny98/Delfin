@@ -3,10 +3,25 @@
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
 </div>
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-lg-6">
+      <p>HELLO</p>
+      <div class="col-lg-3" id="lista_investigaciones">
+          <div >
+              <?php foreach ($investigaciones->result() as $in) {
+                echo '
 
+                <div class="perfil-container" style="margin-top:10px;">
+                <img src="https://via.placeholder.com/35">
+                    <a href="#">'.$in->Nombre." ".$in->ApPaterno." ".$in->ApMaterno." ".$in->Titulo.'</a>
+                    <a href="#" onclick="viewDocument(\''.$in->Hash.'\');"><i class="fa fa-1x fa-file " aria-hidden="true"></i></a>
+                </div>
+
+                ';
+                } ?>
+          </div>
+      </div>
     </div>
-    <div class="col-lg-3" id="lista_investigaciones">
+    <!--<div class="col-lg-3" id="lista_investigaciones">
         <div >
             <?php foreach ($Investigadores->result() as $i) {
               echo '
@@ -19,8 +34,8 @@
               ';
               } ?>
         </div>
-    </div>
-    <div class="col-lg-8">
+    </div>-->
+    <div class="col-lg-6">
         <div class="container">
 
         <!-- Page Heading -->
@@ -98,3 +113,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+  function viewDocument(hash){
+    window.open('<?php echo base_url('assets/documents/'); ?>'+hash, '_blank');
+  }
+</script>

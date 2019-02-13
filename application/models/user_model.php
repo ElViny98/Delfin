@@ -144,7 +144,7 @@ class User_model extends CI_Model
     public function publicacionesRecientes()
     {
         $queryNoticias = 'SELECT Usuarios.idUsuarios,Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Usuarios.Img, Noticias.idNoticias, Noticias.Titulo, Noticias.img ,Noticias.Descripcion,Noticias.Fecha FROM Noticias, Usuarios WHERE  Noticias.idUsuarios = Usuarios.idUsuarios ORDER BY Noticias.Fecha DESC';
-        $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios';
+        $queryInvestigaciones = 'SELECT Usuarios.Img, Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno, Investigaciones.Titulo, Investigaciones.Hash FROM Usuarios, Investigaciones WHERE Investigaciones.idUsuario = Usuarios.idUsuarios ORDER BY Investigaciones.Fecha DESC LIMIT 5';
         $queryInvestigadores = 'SELECT Usuarios.Nombre, Usuarios.ApPaterno, Usuarios.ApMaterno From Usuarios';
         return array(
             'Noticias' => $this->db->query($queryNoticias),

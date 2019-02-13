@@ -428,7 +428,7 @@ class User extends CI_Controller
             'Hash'                  => $name.'.pdf',
             'Fecha'                 => $this->input->post('fechaInv'),
             'Titulo'                => $this->input->post('titulo'),
-            'DOI'                   => 'null',
+            //'DOI'                   => 'null',
             'Tema'                  => $this->input->post('tema'),
             'Tipo'                  => $this->input->post('tipo')
         );
@@ -488,7 +488,7 @@ class User extends CI_Controller
     {
         $publicaciones = $this->user_model->publicacionesRecientes();
         $data['noticias'] = $publicaciones['Noticias'];
-        $data['Investigaciones'] = $publicaciones['Investigaciones'];
+        $data['investigaciones'] = $publicaciones['Investigaciones'];
         $data['Investigadores'] = $publicaciones['Investigadores'];
         $this->load->view('user/fedInicio', $data);
     }

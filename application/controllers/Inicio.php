@@ -80,7 +80,7 @@ class inicio extends CI_Controller {
 			  'Pais' 			=> $this->input->post('pais'),
 			  'Telefono' 		=> $this->input->post('telefono'),
               'Sexo' 			=> $this->input->post('sexo'),
-			  'idInstitucion'   => $idInstitucion,
+			  'idInst'   => $idInstitucion,
 			  'Privilegio'		=> '2',
 			  'status'			=> '1'
             );

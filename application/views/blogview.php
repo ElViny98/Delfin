@@ -96,7 +96,7 @@
 
                                              <div class="card-body">
                                                <h2 class="card-title"> <?php echo $noticia->Titulo; ?></h2>
-                                               <p class="card-text"> <p> <?php echo $noticia->Descripcion; ?> </p>
+                                               <p class="card-text"> R-ANDOMEEEEE<p> <?php echo $noticia->Descripcion; ?> </p>
                                                <a href="#" class="btn btn-primary">Read More &rarr;</a>
                                              </div>
                                              <div class="card-footer text-muted">
@@ -151,7 +151,7 @@
         </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
       function viewDocument(hash){
         window.open('<?php echo base_url('assets/documents/'); ?>'+hash, '_blank');
