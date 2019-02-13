@@ -10,7 +10,6 @@ class User extends CI_Controller
         $this->load->library(array('session', 'image_lib'));
         $this->load->helper('file');
     }
-
     public function index()
     {
         if($this->session->userdata('nivel') == 2)
@@ -149,7 +148,7 @@ class User extends CI_Controller
     }
 
     public function eliminarNoticia(){
-        $id = $this->input->post('id');
+        $id = $this->input->get('id');
         $path = 'assets/img/';
         $img = $this->user_model->getImg($id);
         $img = $img->row();
@@ -259,6 +258,7 @@ class User extends CI_Controller
         {
             $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
             $this->user_model->editarDatosNoticia($query);
+            echo "1";
         }
 
         else
@@ -276,14 +276,13 @@ class User extends CI_Controller
             {
                 $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
                 $this->user_model->editarDatosNoticia($query);
+                echo "1";
             }
             else
             {
-                echo $this->upload->display_errors();
+                echo "0";
             }
         }
-        redirect(base_url('index.php/user/Noticias_MisNoticias'));
-
     }
 
     //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.

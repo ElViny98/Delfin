@@ -31,3 +31,31 @@
 		?>
 	</div>
 </div>
+<script type="text/javascript">
+	function borrarNoticia(id){
+		var action= '<?php echo base_url('index.php/user/eliminarNoticia?id='); ?>' + id;
+		$.ajax({
+            url: action,
+            type: 'GET',
+            data: id,
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function(data) {
+                switch(data) {
+                    case '1':
+                        $("#main-content").load('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        break;
+
+                    case '0':
+                        alert('Algo salió mal. Inténtelo nuevamente en unos segundos.');
+                        break;
+
+                    default:
+                        alert('Porfavor, verifique la conexión a Internet e inténtelo de nuevo');
+                        break;
+                }
+            }
+        });
+	}
+</script>
