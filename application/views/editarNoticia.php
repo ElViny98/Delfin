@@ -118,15 +118,15 @@
     quill.clipboard.dangerouslyPasteHTML(0, '<?php echo $descripcion; ?>');
 
     $("#form-new").submit(function(event) {
+
         event.preventDefault();
-        var actionForm = '<?php echo base_url('index.php/user/editarDatosNoticia'); ?>';
+        var actionForm = '<?php echo base_url('index.php/user/editarDatosNoticia?id='.$id); ?>';
 
         var formData = new FormData();
         $.each($('input[type=file]')[0].files, function(i, files) {
             formData.append('pic', files);
         });
 
-        $.each($('img'))
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
 
@@ -140,7 +140,7 @@
             success: function(data) {
                 switch(data) {
                     case '1':
-                        location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        $("#main-content").load('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
                         break;
 
                     case '0':

@@ -119,7 +119,7 @@
             success: function(data) {
                 switch(data) {
                     case '1':
-                        //location.href('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
+                        $("#main-content").load('<?php echo base_url('index.php/user/Noticias_MisNoticias'); ?>');
                         break;
 
                     case '0':
