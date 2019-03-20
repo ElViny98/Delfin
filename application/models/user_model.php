@@ -13,7 +13,7 @@ class User_model extends CI_Model
     {
         $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
         'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
-        'Fecha'=>$datos['fecha'],'img'=>$datos['imagen']));
+        'Fecha'=>$datos['fecha']));
     }
     public function getNoticiasTodas()
     {

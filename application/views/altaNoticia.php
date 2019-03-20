@@ -14,49 +14,8 @@
                      <input type="cnombre" class="form-control" id="txtTitulo" name="txtTitulo" placeholder="Titulo">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2" >
-                    <label class="control-label col-lg text-left" for="pic">Imagen:</label>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10" >
-                    <div id="file-preview-zone">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2" >
-                </div>
-                <div id="selecImg" class="col-lg col-md col-sm">
-                    <input type="file" name="pic" id="pic" accept="image/*" >
-                </div>
-                <script type="text/javascript">
-                    function archivo(evt) {
-                      var files = evt.target.files; // FileList object
 
-                      // Obtenemos la imagen del campo "file".
-                      for (var i = 0, f; f = files[i]; i++) {
-                        //Solo admitimos imágenes.
-                        if (!f.type.match('image.*')) {
-                            continue;
-                        }
-
-                        var reader = new FileReader();
-
-                        reader.onload = (function(theFile) {
-                            return function(e) {
-                              // Insertamos la imagen
-                             document.getElementById("file-preview-zone").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"style="max-width:600px;max-height:300px;"/>'].join('');
-                            };
-                        })(f);
-
-                        reader.readAsDataURL(f);
-                      }
-                  }
-
-                  document.getElementById('pic').addEventListener('change', archivo, true);
-                </script>
-            </div>
-            <div class="row">
+        <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2" >
                     <label class="control-label col-lg text-left" for="content">Contenido:</label>
                 </div>
@@ -102,9 +61,7 @@
         var actionForm = '<?php echo base_url('index.php/user/datosNoticia'); ?>';
 
         var formData = new FormData();
-        $.each($('input[type=file]')[0].files, function(i, files) {
-            formData.append('pic', files);
-        });
+        
 
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());

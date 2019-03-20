@@ -118,33 +118,18 @@ class User extends CI_Controller
 
     public function datosNoticia()
     {
-        $this->load->library('upload');
-        $config['upload_path'] = 'assets/img/';
-        $config['allowed_types'] = 'jpg|png|jpeg';
-        $config['overwrite'] = TRUE;
-        $config['file_name'] = $this->createHash();
-        $this->upload->initialize($config);
 
-        if($this->upload->do_upload('pic'))
-        {
-            $image_path = $this->upload->data();
             $fechaActual = date('Y-m-d');
             $datos = array(
                 'id' => $this->session->userdata('idUsuario'),
     			'titulo' => $this->input->post('txtTitulo'),
                 'contenido' => $this->input->post('content'),
-                'imagen' => $image_path['file_name'],
                 'fecha' => $fechaActual
     		);
             $this->user_model->altaNoticia($datos);
             //Usado para evaluar desde javascript que todo haya ido bien
             echo '1';
-        }
-        else
-        {
-            //En caso de error esto se evaluará desde javascript
-            echo '0';
-        }
+
     }
 
     public function eliminarNoticia(){
@@ -245,44 +230,17 @@ class User extends CI_Controller
     }
     public function editarDatosNoticia()
     {
-        echo $this->input->post('pic');
         $data = array(
             'id' => $this->input->get('id'),
             'titulo' => $this->input->post('txtTitulo'),
-            'contenido' => $this->input->post('content'),
-            'imagen' => $this->input->post('pic')
+            'contenido' => $this->input->post('content')
         );
-        echo $data['imagen'];
         $query = 'UPDATE Noticias SET ';
-        if($_FILES['pic']['name'] == null)
-        {
-            $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
-            $this->user_model->editarDatosNoticia($query);
-            echo "1";
-        }
 
-        else
-        {
-            $i = $this->user_model->getImg($data['id']);
-            $i = $i->row();
-            $this->load->library('upload');
-            $config['upload_path'] = 'assets/img/';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['overwrite'] = TRUE;
-            $config['file_name'] = $i->img;
-            $this->upload->initialize($config);
-            $this->load->library('upload', $config);
-            if($this->upload->do_upload('pic'))
-            {
-                $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
-                $this->user_model->editarDatosNoticia($query);
-                echo "1";
-            }
-            else
-            {
-                echo "0";
-            }
-        }
+            $query.= 'Titulo = "'.$data['titulo'].'", Descripcion = "'.$data['contenido'].'" WHERE idNoticias = '.$data['id'];
+
+            $this->user_model->editarDatosNoticia($query);
+            echo '1';
     }
 
     //Función que crea una cadena aleatoria de 24 caracteres para el nombre de un archivo.
