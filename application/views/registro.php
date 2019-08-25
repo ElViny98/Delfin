@@ -172,7 +172,7 @@ function registrarUser(){
            }
            ,success:function(res){
                if (res=='1') {
-                   alert('Registo exitoso');
+                   alert('Registro exitoso');
                     var url = '<?php echo base_url('index.php/inicio/ingresar'); ?>';
            			var pass = CryptoJS.MD5(document.getElementById('txtContra').value);
                     var emailC=$('#txtCorreoR').val();

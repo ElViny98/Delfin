@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Delfín</title>
+		<title>TICA</title>
 		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap.js');?>"></script>
 		<script src="<?php echo base_url('assets/js/bootstrap-dialog.min.js');?>"></script>

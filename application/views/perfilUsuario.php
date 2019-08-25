@@ -10,7 +10,7 @@
         				<span aria-hidden="true">&times;</span>
         				</button>
         			</div>
-                    <form class="form-horizontal" enctype="multipart/form-data" action="<?php echo base_url('index.php/user/upload_img');?>" method="post">
+                    <form class="form-horizontal">
             		<div class="modal-body">
                         <center>
                             <div id="file-preview-zone-user">
@@ -22,12 +22,11 @@
                         </div>
 
             		</div>
-
+                    </form>
             		<div class="modal-footer">
                     	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCerrar">Cancelar</button>
-                    	<button type="submit" class="btn btn-primary" id="btnAceptar">Aceptar</button>
+                    	<button type="button" class="btn btn-primary" id="btnAceptar">Aceptar</button>
             		</div>
-                    </form>
                     <script type="text/javascript">
                         function archivo(evt) {
                           var files = evt.target.files; // FileList object
@@ -98,9 +97,9 @@
             <div class="profile-img" id="UserPhoto">
                 <?php
                     if ($img==NULL){?>
-                        <img src="<?php echo base_url()?>assets/img/usuario.jpg" />
+                        <img id="imgProfile" src="<?php echo base_url()?>assets/img/usuario.jpg" />
                 <?php    }else {?>
-                        <img src="<?php echo base_url()?>assets/img/<?= $img?>" />
+                        <img id="imgProfile" src="<?php echo base_url()?>assets/img/<?= $img?>" />
                 <?php    }
 
                 ?>
@@ -296,7 +295,7 @@
                                                 <p><?php echo $nombre; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar">
-                                                <input type="cnombre" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre" value="<?php echo $nombre ?>">
+                                                <input type="name" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre" value="<?php echo $nombre ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -307,7 +306,7 @@
                                                 <p><?php echo $apaterno; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar2">
-                                                <input type="cnombre" class="form-control" id="txtPaterno" name="txtPaterno" placeholder="Apellido Paterno" value="<?php echo $apaterno ?>">
+                                                <input type="name" class="form-control" id="txtPaterno" name="txtPaterno" placeholder="Apellido Paterno" value="<?php echo $apaterno ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -318,7 +317,7 @@
                                                 <p><?php echo $amaterno; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar3">
-                                                <input type="cnombre" class="form-control" id="txtMaterno" name="txtMaterno" placeholder="Apellido Materno" value="<?php echo $amaterno ?>">
+                                                <input type="name" class="form-control" id="txtMaterno" name="txtMaterno" placeholder="Apellido Materno" value="<?php echo $amaterno ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -373,7 +372,7 @@
                                                 <p><?php echo $telefono; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar7">
-                                                <input type="cnombre" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $telefono ?>">
+                                                <input type="name" class="form-control" id="txtTelefono" name="txtTelefono" placeholder="Telefono" onkeypress="return event.charCode >= 48 && event.charCode <= 57" value="<?php echo $telefono ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -384,7 +383,7 @@
                                                 <p><?php echo $correo; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar8">
-                                                <input type="cnombre" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Correo" value="<?php echo $correo ?>">
+                                                <input type="email" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Correo" value="<?php echo $correo ?>">
                                             </div>
                                         </div>
                             </div>
@@ -416,7 +415,7 @@
                                                 <p><?php echo $cuerpoA; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar10">
-                                                <input type="cnombre" class="form-control" id="txtCuerpoA" name="txtCuerpoA" placeholder="Cuerpo Académico" value="<?php echo $cuerpoA ?>">
+                                                <input type="name" class="form-control" id="txtCuerpoA" name="txtCuerpoA" placeholder="Cuerpo Académico" value="<?php echo $cuerpoA ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -554,7 +553,7 @@
                                                 <p><?php echo $ciudadInst; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar19">
-                                                <input type="cnombre" class="form-control" id="txtCiudadInst" name="txtCiudadInst" readonly="readonly" value="<?php echo $ciudadInst ?>">
+                                                <input type="name" class="form-control" id="txtCiudadInst" name="txtCiudadInst" readonly="readonly" value="<?php echo $ciudadInst ?>">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -565,7 +564,7 @@
                                                 <p><?php echo $unidad; ?></p>
                                             </div>
                                             <div class="col-md-6" style="display:none;" id="paraEditar21">
-                                                <input type="cnombre" class="form-control" id="txtUnidad" name="txtUnidad" value="<?php echo $unidad ?>">
+                                                <input type="name" class="form-control" id="txtUnidad" name="txtUnidad" value="<?php echo $unidad ?>">
                                             </div>
                                         </div>
 
@@ -677,7 +676,7 @@
    inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
   }
  })
-  if(!alert('Alert For your User!')){window.location.reload();}
+  if(!alert('Datos se han Modificado!')){window.location.reload();}
 
  }
 
@@ -691,7 +690,7 @@
         {
             document.getElementById('cPswd').focus();
             document.getElementById('cPswd').value="";
-            document.getElementById('err').innerHTML="Passwords are Not Matching";
+            document.getElementById('err').innerHTML="Contraseñas no concuerdan!";
             return;
         }
         else {
@@ -716,4 +715,23 @@
         }
     });
 
+    $('#btnAceptar').on('click',function(){
+        var data = new FormData();
+        jQuery.each(jQuery('#userPhoto')[0].files, function(i, file) {
+            data.append('userPhoto', file);
+        });
+        $.ajax({
+            method: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,            
+            url: "<?php echo base_url('index.php/user/upload_img');?>",
+            data: data,
+            success: function(imageName) {
+                $('#imgProfile').attr('src', "<?php echo base_url()?>assets/img/"+imageName);
+                
+                $("#photoUserModal").modal('hide');
+            }
+        })
+    })
 </script>

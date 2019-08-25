@@ -36,7 +36,7 @@
           </div>
       </form>
       <div class="col-lg footer-copyright text-center py-3">
-            © 2018
+      © Copyright 2018-2019 tica.com.mx - Todos los Derechos Reservados
       </div>
     </footer>
     <!-- Footer -->

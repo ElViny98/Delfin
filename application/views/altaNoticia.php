@@ -27,7 +27,18 @@
 
                 </div>
             </div>
+            <!-- you: para que pueda subir una imagen representativa de la noticia-->
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2" >
+                    <label class="control-label col-lg text-left" for="imagen">Picture: </label>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10">
 
+                    
+
+                </div>
+            </div>
+            <!--end of you-->
             <div class="row" style="padding-top: 40px;">
               <div class="col-lg">
                   <br>
@@ -65,7 +76,7 @@
 
         formData.append('content', getQuillHTML(quill.getContents()));
         formData.append('txtTitulo', $("#txtTitulo").val());
-
+        formData.append('imagen', $("#imagen").val());//you
         $.ajax({
             url: actionForm,
             type: 'POST',

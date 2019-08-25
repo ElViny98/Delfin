@@ -12,8 +12,8 @@ class User_model extends CI_Model
     public function altaNoticia($datos)
     {
         $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
-        'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
-        'Fecha'=>$datos['fecha']));
+        'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'], 
+        'img'=>$datos['image'],'Fecha'=>$datos['fecha']));
     }
     public function getNoticiasTodas()
     {
@@ -53,7 +53,7 @@ class User_model extends CI_Model
     }
     public function get_user_institucion($id)
     {
-        $q = $this->db->select('*')->from('Inst')->where('idInstitucion',$id)->get();
+        $q = $this->db->select('*')->from('inst')->where('idInstitucion',$id)->get();
         return $q->row();
     }
     //fin de datos Perfil usuario

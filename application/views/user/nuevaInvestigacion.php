@@ -103,14 +103,13 @@
             ';
         }
     ?>
-    console.log('Something');
 
     $("#formInv").submit(function(event) {
         event.preventDefault();
         var autores = $("#autoresInv").val().split(',');
         var aut = compareArr(autores, auxAut);
         var formData = new FormData(document.getElementById('formInv'));
-        var aut = compareArr(autores, auxAut); //aut tiene los 'nuevos' autores
+        var aut = compareArr(autores, auxAut); 
         formData.append('archivoInv', document.getElementById('archivoInv').files[0])
 
         aut.forEach(function(x) {
@@ -129,7 +128,8 @@
             contentType: false,
             cache: false,
             success: function(ans) {
-                alert(ans)
+                alert("Investigacion registrada exitosamente!");
+                location.href = '<?php echo base_url('index.php/user/'); ?>';
             }
         })
 
