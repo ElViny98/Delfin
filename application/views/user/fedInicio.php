@@ -3,8 +3,7 @@
     <img src="<?php echo base_url('assets/img/logolargo.png');?>">
 </div>
 <div class="row">
-    <div class="col-lg-6">
-      <p>HELLO</p>
+    <div class="col-lg-4">
       <div class="col-lg-3" id="lista_investigaciones">
           <div >
               <?php foreach ($investigaciones->result() as $in) {
@@ -35,7 +34,7 @@
               } ?>
         </div>
     </div>-->
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         <div class="container">
 
         <!-- Page Heading -->
@@ -54,10 +53,7 @@
 
                     echo '
                         <div class="row">
-                            <div class="col-md-7">
-                                    <img class="img-fluid rounded mb-3 mb-md-0" src="'.base_url('assets/img/'.$n->img).'">
-                            </div>
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <h3>'.$n->Titulo.'</h3>
                                 <p>Publicado por <a href="#" onclick="verPerfilUser('.$n->idUsuarios.')">'.$n->Nombre." ".$n->ApPaterno." ".$n->ApMaterno.'</a></p>
                                 <p>'.$n->Fecha.'</p>
