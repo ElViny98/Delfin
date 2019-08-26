@@ -57,3 +57,8 @@ function modificarNoticia(index) {
     cleanMain();
     $("#main-content").load(globalUrl + 'index.php/user/editarNoticia?id=' + index);
 }
+
+function modificarInvestigacion(index) {
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/editarInvestigacion?id=' + index);
+}

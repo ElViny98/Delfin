@@ -58,7 +58,7 @@
                 [ { 'font': [] } ],
                 [ 'bold', 'italic', 'underline', 'strike' ],
                 [ 'link' ],
-                [ 'image', 'code-block' ],
+                [ 'code-block' ],
                 [ { list: 'ordered' }, { list: 'bullet' } ],
                 [ { align: [] } ]
             ]

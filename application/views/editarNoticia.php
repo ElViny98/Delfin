@@ -43,7 +43,7 @@
                 [{ header: [1, 2, 3, false] }],
                 [ { 'font': [] } ],
                 [ 'bold', 'italic', 'underline' ],
-                [ 'image', 'code-block' ],
+                [ 'code-block' ],
                 [ { list: 'ordered' }, { list: 'bullet' } ],
                 [ { align: [] } ]
             ]

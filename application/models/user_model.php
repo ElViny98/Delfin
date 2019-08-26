@@ -169,5 +169,18 @@ class User_model extends CI_Model
     }
     //reciente 07/02/2019
 
+    public function getInvestigacion($id) {
+        return $this->db->query('SELECT * FROM Investigaciones WHERE idInvestigaciones = '.$id)->result();
+    }
+
+    //Retorna los autores correspondientes a la investigación con el id asociado
+    public function getAutoresInv($id) {
+        return $this->db->query('SELECT autores.Nombre FROM autores, autoresinv WHERE autoresinv.idInvestigacion = '. $id .' AND autoresinv.`Nombre` = autores.idAutores;');
+    }
+
+    public function updateInv($invData) {
+        $this->db->replace('investigaciones', $invData);
+    }
+
 }
 ?>

@@ -34,7 +34,8 @@
 <script type="text/javascript">
 	function borrarNoticia(id){
 		var action= '<?php echo base_url('index.php/user/eliminarNoticia?id='); ?>' + id;
-		$.ajax({
+		if(confirm('¿Seguro que desea eliminar el registro? Esta acción no se puede deshacer.')) {
+			$.ajax({
             url: action,
             type: 'GET',
             data: id,
@@ -57,5 +58,6 @@
                 }
             }
         });
+		}
 	}
 </script>

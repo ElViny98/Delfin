@@ -122,13 +122,14 @@ class User extends CI_Controller
     }
     public function eliminarNoticia(){
         $id = $this->input->get('id');
-        $path = 'assets/img/';
-        $img = $this->user_model->getImg($id);
-        $img = $img->row();
-        $del = $path.$img->img;
-        //Si ocurre un error durante el borrado de la imagen se detiene la ejecución.
-        if(!unlink($del))
-            return;
+        //Las noticias no llevarán imágenes, esta parte quedará sin uso.
+        // $path = 'assets/img/';
+        // $img = $this->user_model->getImg($id);
+        // $img = $img->row();
+        // $del = $path.$img->img;
+        // //Si ocurre un error durante el borrado de la imagen se detiene la ejecución.
+        // if(!unlink($del))
+        //     return;
         if($this->user_model->eliminar($id))
             echo "1";
         else
@@ -329,8 +330,26 @@ class User extends CI_Controller
         else
             $this->load->view('user/nuevaInvestigacion');
     }
-    public function editarInvestigacion(){
-        //NADA AQUI
+    public function editarInvestigacion()
+    {
+        $data['investigacion'] = $this->user_model->getInvestigacion($this->input->get('id'));
+        $data['autores'] = $this->user_model->getAutoresInv($this->input->get('id'));
+        $data['id'] = $this->input->get('id');
+        $this->load->view('user/editarInvestigacion', $data);
+    }
+
+    public function editarInv()
+    {
+        print_r($_POST);
+        $invData = array(
+            'Tipo'              => $this->input->post('tipo'),
+            'Titulo'            => $this->input->post('titulo'),
+            'Fecha'             => $this->input->post('fechaInv'),
+            'Tema'              => $this->input->post('tema'),
+            'Hash'              => $this->input->post('hash'),
+            'idInvestigaciones' => $this->input->post('id')
+        );
+        $this->user_model->updateInv($invData);
     }
     public function registrarInv()
     {

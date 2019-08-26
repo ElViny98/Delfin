@@ -22,7 +22,7 @@
                         <a href="'.base_url('index.php/user/investigacion?id='.$r->idInvestigaciones).'" class="link-new">'.$r->Titulo.'</a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
-                        <a href="'.base_url('index.php/user/editarInvestigacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbspEditar</a>
+                        <button onclick="modificarInvestigacion('.$r->idInvestigaciones.');" style="width: 100%;" class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbspEditar</button>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <a href="'.base_url('index.php/user/eliminarInvesitacion?id='.$r->idInvestigaciones).'" style="width: 100%;" class="btn btn-danger"><i class="fa fa-times"></i>&nbspEiminar</a>
