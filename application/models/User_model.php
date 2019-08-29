@@ -12,8 +12,8 @@ class User_model extends CI_Model
     public function altaNoticia($datos)
     {
         $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
-        'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'],
-        'Fecha'=>$datos['fecha']));
+        'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'], 
+        'img'=>$datos['image'],'Fecha'=>$datos['fecha']));
     }
     public function getNoticiasTodas()
     {
@@ -43,12 +43,12 @@ class User_model extends CI_Model
     //Jalar datos de los usuarios para perfil
     public function get_user_data($id)
     {
-        $q = $this->db->select('*')->from('usuarios')->where('idUsuarios',$id)->get();
+        $q = $this->db->select('*')->from('Usuarios')->where('idUsuarios',$id)->get();
         return $q->row();
     }
     public function get_user_academico($id)
     {
-        $q = $this->db->select('*')->from('infoacademica')->where('idUsuario',$id)->get();
+        $q = $this->db->select('*')->from('Infoacademica')->where('idUsuario',$id)->get();
         return $q->row();
     }
     public function get_user_institucion($id)
@@ -168,6 +168,19 @@ class User_model extends CI_Model
         $this->db->insert('Autores', $data);
     }
     //reciente 07/02/2019
+
+    public function getInvestigacion($id) {
+        return $this->db->query('SELECT * FROM Investigaciones WHERE idInvestigaciones = '.$id)->result();
+    }
+
+    //Retorna los autores correspondientes a la investigación con el id asociado
+    public function getAutoresInv($id) {
+        return $this->db->query('SELECT autores.Nombre FROM autores, autoresinv WHERE autoresinv.idInvestigacion = '. $id .' AND autoresinv.`Nombre` = autores.idAutores;');
+    }
+
+    public function updateInv($invData) {
+        $this->db->replace('investigaciones', $invData);
+    }
 
 }
 ?>
