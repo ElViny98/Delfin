@@ -4,14 +4,19 @@
 </div>
 <div class="row">
     <div class="col-lg-4">
-      <div class="col-lg-3" id="lista_investigaciones">
+    <div class="col-lg-12">
+        <h4>Investigaciones recientes</h4>
+    </div>
+    <hr/>
+      <div class="col-lg-12" id="lista_investigaciones">
           <div >
               <?php foreach ($investigaciones->result() as $in) {
                 echo '
 
                 <div class="perfil-container" style="margin-top:10px;">
-                <img src="https://via.placeholder.com/35">
-                    <a href="#">'.$in->Nombre." ".$in->ApPaterno." ".$in->ApMaterno." ".$in->Titulo.'</a>
+                <img src="http://tica.com.mx/assets/img/'. $in->Img.'" width="35px" height="35px">
+                    <a href="#">'.$in->Nombre." ".$in->ApPaterno." ".$in->ApMaterno.'</a>
+                    <p>'.$in->Titulo.'</p>
                     <a href="#" onclick="viewDocument(\''.$in->Hash.'\');"><i class="fa fa-1x fa-file " aria-hidden="true"></i></a>
                 </div>
 

@@ -674,9 +674,16 @@
    data: { name: nom, appaterno: apa, apmaterno:ama, sexo: sex, fechanaci:fec, pais:pai, telefono:tel, correo: cor,
    grado: gra, cuerp: cue, consolidacion: con, promep: pro, Sni: sni, area: are,
    inst: ins, unidad: uni, idpaisinst: idpaI, paisinst: paI, estado: est, ciudad: ciu
+  },
+  success: function(res) {
+      console.log(res);
   }
  })
-  if(!alert('Datos se han Modificado!')){window.location.reload();}
+  if(!alert('Datos modificados correctamente')){
+    cleanMain();
+    $("#main-content").load(globalUrl + 'index.php/user/perfil');
+    closeNav();
+  }
 
  }
 

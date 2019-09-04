@@ -44,7 +44,7 @@ class iniciar extends CI_Model
 
     public function getNoticia($id)
     {
-        $sql = 'SELECT * FROM noticias WHERE idNoticias = '.$id.';';
+        $sql = 'SELECT * FROM Noticias WHERE idNoticias = '.$id.';';
         $query = $this->db->query($sql);
         return $query->row();
     }

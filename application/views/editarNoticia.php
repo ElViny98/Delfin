@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Noticias</h3>
+    <h3>Actualizar noticia</h3>
     <hr>
 </div>
 <div class="container">

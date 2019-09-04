@@ -113,7 +113,6 @@ class User extends CI_Controller
                 'id' => $this->session->userdata('idUsuario'),
     			'titulo' => $this->input->post('txtTitulo'),
                 'contenido' => $this->input->post('content'),
-                'imagen'   => $this->input->post('image'),//you
                 'fecha' => $fechaActual
     		);
             $this->user_model->altaNoticia($datos);

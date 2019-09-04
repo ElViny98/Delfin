@@ -155,7 +155,8 @@ class inicio extends CI_Controller {
 				$userData = array(
 					'idUsuario'	=> $data->idUsuarios,
 					'nombre'	=> $data->Nombre. ' '. $data->ApPaterno. ' '. $data->ApMaterno,
-					'nivel'		=> $data->Privilegio
+					'nivel'		=> $data->Privilegio,
+					'img'		=> $data->Img
 				);
 				$this->session->set_userdata($userData);
 				echo $data->Privilegio;
@@ -169,7 +170,8 @@ class inicio extends CI_Controller {
 				$userData = array(
 					'idUsuario'	=> $data->idUsuarios,
 					'nombre'	=> $data->Nombre. ' '. $data->ApPaterno. ' '. $data->ApMaterno,
-					'nivel'		=> $data->Privilegio
+					'nivel'		=> $data->Privilegio,
+					'img'		=> $data->Img
 				);
 				$this->session->set_userdata($userData);
 				echo $data->Privilegio;

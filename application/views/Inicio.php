@@ -1,5 +1,7 @@
-    <div class="Imagen" >
-        <img src="<?php echo base_url('assets/img/logolargo.png');?>">
+    <div class="row">
+        <div class="col-6" style="margin-top: 20px;"><a href="#"><img alt="" src="<?php echo base_url('assets/img/logolargo.png');?>" width="100%"></a></div>
+        <div class="col-6"><center><a alt="Cuerpo académico" href="http://tica.com.mx/TICOFICIAL/html/"><img alt="Cuerpo académico" src="<?php echo base_url('assets/img/logo.png');?>"></a></center></div>
+
     </div>
 
     <div class="container">
@@ -21,16 +23,11 @@
 
                 echo '
                     <div class="row">
-                        <div class="col-md-7">
-                            <a href="#">
-                                <img class="img-fluid rounded mb-3 mb-md-0" src="'.base_url('assets/img/'.$n->img).'">
-                            </a>
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             <h3>'.$n->Titulo.'</h3>
                             <p>'.word_limiter($n->Descripcion, 50).'</p>
-                            <a class="btn btn-primary" href="'.base_url('index.php/inicio/noticia?id='.$n->idNoticias).'">Continuar leyendo</a>
                         </div>
+                        <div class="col-3 offset-9"><a class="btn btn-primary" href="'.base_url('index.php/inicio/noticia?id='.$n->idNoticias).'" width="100%">Continuar leyendo</a></div>
                     </div>
                     <hr>
                 ';

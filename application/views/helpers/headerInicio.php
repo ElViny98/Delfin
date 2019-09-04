@@ -37,10 +37,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</li>
 			</ul>
 
-			<form class="form-inline my-2 my-lg-0">
+			<!-- <form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" id="txtBuscar" type="buscar" placeholder="Buscar" aria-label="Buscar">
 				<button id="btnBuscar" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
+			</form> -->
 		</div>
 	</nav>
 

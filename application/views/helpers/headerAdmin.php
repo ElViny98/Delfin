@@ -135,7 +135,7 @@
 	</div>
 	<div id="nav-content" class="nav-container">
 		<div class="navbar nav-user">
-			<img src="https://via.placeholder.com/50" style="margin: 5px 5px;">
+			<img src="http://tica.com.mx/assets/img/<?php echo $this->session->userdata('img'); ?>" style="margin: 5px 5px;" height="50px" width="50px">
 			<div class="user-name">
 				<?php echo $this->session->userdata('nombre'); ?>
 			</div>

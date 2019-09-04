@@ -13,7 +13,7 @@ class User_model extends CI_Model
     {
         $this->db->insert('Noticias',array('idUsuarios'=> $datos['id'],
         'Titulo'=>$datos['titulo'],'Descripcion'=>$datos['contenido'], 
-        'img'=>$datos['image'],'Fecha'=>$datos['fecha']));
+        'img'=>NULL,'Fecha'=>$datos['fecha']));
     }
     public function getNoticiasTodas()
     {
@@ -29,9 +29,9 @@ class User_model extends CI_Model
 
     public function update_prf($id, $data, $dataca)
     {
-        $this->db->where('idUsuarios', $id);
         $this->db->update('Usuarios', $data);
-        $this->db->update('infoAcademica', $dataca);
+        $this->db->where('idUsuario', $id);
+        $this->db->update('Infoacademica', $dataca);
     }
     public function update_pass($query)
     {
@@ -175,7 +175,7 @@ class User_model extends CI_Model
 
     //Retorna los autores correspondientes a la investigación con el id asociado
     public function getAutoresInv($id) {
-        return $this->db->query('SELECT autores.Nombre FROM autores, autoresinv WHERE autoresinv.idInvestigacion = '. $id .' AND autoresinv.`Nombre` = autores.idAutores;');
+        return $this->db->query('SELECT Autores.Nombre FROM Autores, Autoresinv WHERE Autoresinv.idInvestigacion = '. $id .' AND Autoresinv.`Nombre` = Autores.idAutores;');
     }
 
     public function updateInv($invData) {

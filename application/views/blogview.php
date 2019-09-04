@@ -95,12 +95,11 @@
                                            {
                                                foreach ($noticias->result() as $noticia) { ?>
                                                <div class="card mb-4" style="margin-top:20px; margin-left:6%;width:650px;padding-top:20px;">
-                                               <center><img src="<?php echo base_url()?>assets/img/<?= $noticia->img?>" style="height:250px; width:600px" class="card-img-top" /></center>
 
                                                  <div class="card-body">
                                                    <h2 class="card-title"> <?php echo $noticia->Titulo; ?></h2>
                                                    <p class="card-text"> <p> <?php echo $noticia->Descripcion; ?> </p>
-                                                   <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                                                   <a href="#" class="btn btn-primary">Continuar leyendo &rarr;</a>
                                                  </div>
                                                  <div class="card-footer text-muted">
                                                    <?php echo $noticia->Fecha;?>
@@ -130,7 +129,7 @@
                                                    <div class="row">
                                                      <div class="col-md-8">
                                                        <h2 class="card-title"> <?php echo $investigacion->Titulo; ?></h2>
-                                                       <p class="card-text"> <p> <?php echo $investigacion->tipo; ?> </p>
+                                                       <p class="card-text"> <p> <?php echo $investigacion->Tipo; ?> </p>
                                                        <p class="card-text"> <p> <?php echo $investigacion->Tema; ?> </p>
                                                      </div>
                                                      <div class="col-md-3" style="padding:2%;">
